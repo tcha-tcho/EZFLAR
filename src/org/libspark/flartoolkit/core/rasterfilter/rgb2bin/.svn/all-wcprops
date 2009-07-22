@@ -1,0 +1,23 @@
+K 25
+svn:wc:ra_dav:version-url
+V 104
+/codeshare/!svn/ver/13/FLARManager/deploy/v01_FP9/src/org/libspark/flartoolkit/core/rasterfilter/rgb2bin
+END
+FLARRasterFilter_BitmapDataThreshold.as
+K 25
+svn:wc:ra_dav:version-url
+V 144
+/codeshare/!svn/ver/13/FLARManager/deploy/v01_FP9/src/org/libspark/flartoolkit/core/rasterfilter/rgb2bin/FLARRasterFilter_BitmapDataThreshold.as
+END
+FLARRasterFilter_ARToolkitThreshold.as
+K 25
+svn:wc:ra_dav:version-url
+V 143
+/codeshare/!svn/ver/13/FLARManager/deploy/v01_FP9/src/org/libspark/flartoolkit/core/rasterfilter/rgb2bin/FLARRasterFilter_ARToolkitThreshold.as
+END
+IFLARRasterFilter_RgbToBin.as
+K 25
+svn:wc:ra_dav:version-url
+V 134
+/codeshare/!svn/ver/13/FLARManager/deploy/v01_FP9/src/org/libspark/flartoolkit/core/rasterfilter/rgb2bin/IFLARRasterFilter_RgbToBin.as
+END

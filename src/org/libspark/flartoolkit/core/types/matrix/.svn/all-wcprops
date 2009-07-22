@@ -1,0 +1,23 @@
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/codeshare/!svn/ver/13/FLARManager/deploy/v01_FP9/src/org/libspark/flartoolkit/core/types/matrix
+END
+IFLARDoubleMatrix.as
+K 25
+svn:wc:ra_dav:version-url
+V 117
+/codeshare/!svn/ver/13/FLARManager/deploy/v01_FP9/src/org/libspark/flartoolkit/core/types/matrix/IFLARDoubleMatrix.as
+END
+FLARDoubleMatrix33.as
+K 25
+svn:wc:ra_dav:version-url
+V 118
+/codeshare/!svn/ver/13/FLARManager/deploy/v01_FP9/src/org/libspark/flartoolkit/core/types/matrix/FLARDoubleMatrix33.as
+END
+FLARDoubleMatrix34.as
+K 25
+svn:wc:ra_dav:version-url
+V 118
+/codeshare/!svn/ver/13/FLARManager/deploy/v01_FP9/src/org/libspark/flartoolkit/core/types/matrix/FLARDoubleMatrix34.as
+END

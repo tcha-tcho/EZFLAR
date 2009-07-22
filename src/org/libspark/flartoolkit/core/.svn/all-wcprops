@@ -1,0 +1,53 @@
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/codeshare/!svn/ver/13/FLARManager/deploy/v01_FP9/src/org/libspark/flartoolkit/core
+END
+FLARCode.as
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/codeshare/!svn/ver/13/FLARManager/deploy/v01_FP9/src/org/libspark/flartoolkit/core/FLARCode.as
+END
+FLARSquareDetector.as
+K 25
+svn:wc:ra_dav:version-url
+V 105
+/codeshare/!svn/ver/13/FLARManager/deploy/v01_FP9/src/org/libspark/flartoolkit/core/FLARSquareDetector.as
+END
+FLARVec.as
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/codeshare/!svn/ver/13/FLARManager/deploy/v01_FP9/src/org/libspark/flartoolkit/core/FLARVec.as
+END
+FLARSquare.as
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/codeshare/!svn/ver/13/FLARManager/deploy/v01_FP9/src/org/libspark/flartoolkit/core/FLARSquare.as
+END
+FLARMat.as
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/codeshare/!svn/ver/13/FLARManager/deploy/v01_FP9/src/org/libspark/flartoolkit/core/FLARMat.as
+END
+IFLARSquareDetector.as
+K 25
+svn:wc:ra_dav:version-url
+V 106
+/codeshare/!svn/ver/13/FLARManager/deploy/v01_FP9/src/org/libspark/flartoolkit/core/IFLARSquareDetector.as
+END
+FLARVersion.as
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/codeshare/!svn/ver/13/FLARManager/deploy/v01_FP9/src/org/libspark/flartoolkit/core/FLARVersion.as
+END
+FLARSquareStack.as
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/codeshare/!svn/ver/13/FLARManager/deploy/v01_FP9/src/org/libspark/flartoolkit/core/FLARSquareStack.as
+END

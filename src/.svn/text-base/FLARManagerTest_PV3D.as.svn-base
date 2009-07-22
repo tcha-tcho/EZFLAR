@@ -1,0 +1,81 @@
+package {
+	import com.transmote.flar.FLARCameraSource;
+	import com.transmote.flar.FLARLoaderSource;
+	import com.transmote.flar.FLARManager;
+	import com.transmote.flar.FLARMarkerEvent;
+	import com.transmote.flar.FLARPattern;
+	import com.transmote.utils.time.FramerateDisplay;
+	
+	import examples.SimpleCubes;
+	
+	import flash.display.Sprite;
+	import flash.events.Event;
+	
+	/**
+	 * standard FLARToolkit Papervision3D example, with our friends the Cubes.
+	 * code is borrowed heavily from Saqoosha, Mikko Haapoja, and Squidder.
+	 * http://saqoosha.net/en/flartoolkit/start-up-guide/
+	 * http://www.mikkoh.com/blog/?p=182
+	 * http://www.squidder.com/2009/03/06/flar-how-to-multiple-instances-of-multiple-markers/#more-285
+	 * 
+	 * @author	Eric Socolofsky
+	 * @url		http://transmote.com/flar
+	 */
+	[SWF(width="640", height="480", frameRate="30", backgroundColor="#FFFFFF")]
+	public class FLARManagerTest_PV3D extends Sprite {
+		private static const CAMERA_PARAMS_PATH:String = "../resources/flar/FLARparams.dat";
+		private static const PATTERN_PATH:String = "../resources/flar/patterns/";
+		private static const PATTERN_RESOLUTION:uint = 16;
+		
+		private var patterns:Array;//:Vector.<FLARPattern>;
+		private var flarManager:FLARManager;
+		private var flarLoader:FLARLoaderSource;
+		private var simpleCubes:SimpleCubes;
+		
+		public function FLARManagerTest_PV3D () {
+			this.init();
+		}
+		
+		private function init () :void {
+			// build list of FLARPatterns for FLARToolkit to detect
+			this.patterns = new Array();//Vector.<FLARPattern>();
+			this.patterns.push(new FLARPattern(PATTERN_PATH+"FLARPatt01.patt", PATTERN_RESOLUTION));
+			this.patterns.push(new FLARPattern(PATTERN_PATH+"FLARPatt04.patt", PATTERN_RESOLUTION));
+			this.patterns.push(new FLARPattern(PATTERN_PATH+"FLARPatt05.patt", PATTERN_RESOLUTION));
+			
+			// use Camera (default)
+			this.flarManager = new FLARManager(CAMERA_PARAMS_PATH, patterns);
+			this.addChild(FLARCameraSource(this.flarManager.flarSource));
+			
+			// begin listening for FLARMarkerEvents
+			this.flarManager.addEventListener(FLARMarkerEvent.MARKER_ADDED, this.onMarkerAdded);
+			this.flarManager.addEventListener(FLARMarkerEvent.MARKER_UPDATED, this.onMarkerUpdated);
+			this.flarManager.addEventListener(FLARMarkerEvent.MARKER_REMOVED, this.onMarkerRemoved);
+			
+			var framerateDisplay:FramerateDisplay = new FramerateDisplay();
+			this.addChild(framerateDisplay);
+			
+			this.flarManager.addEventListener(Event.INIT, this.onFlarManagerInited);
+		}
+		
+		private function onFlarManagerInited (evt:Event) :void {
+			this.simpleCubes = new SimpleCubes(this.patterns.length, this.flarManager.cameraParams,
+												this.stage.stageWidth, this.stage.stageHeight);
+			this.addChild(this.simpleCubes);
+		}
+		
+		private function onMarkerAdded (evt:FLARMarkerEvent) :void {
+			//trace("["+evt.marker.patternId+"] added");
+			this.simpleCubes.addMarker(evt.marker);
+		}
+		
+		private function onMarkerUpdated (evt:FLARMarkerEvent) :void {
+			//trace("["+evt.marker.patternId+"] updated");
+		}
+		
+		private function onMarkerRemoved (evt:FLARMarkerEvent) :void {
+			//trace("["+evt.marker.patternId+"] removed");
+			this.simpleCubes.removeMarker(evt.marker);
+		}
+	}
+}

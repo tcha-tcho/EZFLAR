@@ -1,0 +1,32 @@
+package com.transmote.flar {
+	import flash.events.Event;
+
+	/**
+	 * event with notification of a change in an active FLARMarker.
+	 * contains a reference to the changed marker.
+	 * 
+	 * @author	Eric Socolofsky
+	 * @url		http://transmote.com/flar
+	 */
+	public class FLARMarkerEvent extends Event {
+		public static const MARKER_ADDED:String = "markerAdded";
+		public static const MARKER_UPDATED:String = "markerUpdated";
+		public static const MARKER_REMOVED:String = "markerRemoved";
+		
+		private var _marker:FLARMarker;
+		
+		
+		public function FLARMarkerEvent (type:String, marker:FLARMarker, bubbles:Boolean=false, cancelable:Boolean=false) {
+			super(type, bubbles, cancelable);
+			this._marker = marker;
+		}
+		
+		public function get marker () :FLARMarker {
+			return this._marker;
+		}
+		
+		public override function clone () :Event {
+			return new FLARMarkerEvent(this.type, this.marker, this.bubbles, this.cancelable);
+		}
+	}
+}

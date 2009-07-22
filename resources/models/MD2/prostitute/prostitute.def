@@ -1,0 +1,7 @@
+//Prostitude (1321)
+definemodel "highres/monsters/prostitute.md2" 1.9 0
+definemodelskin 0 "highres/monsters/prostitute.pcx"
+definemodelanim "stand01" "stand02" 6 0
+definemodelframe "stand01" 1321 1321
+definemodelframe "stand02" 1322 1322
+

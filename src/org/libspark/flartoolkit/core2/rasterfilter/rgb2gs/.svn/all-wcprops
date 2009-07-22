@@ -1,0 +1,23 @@
+K 25
+svn:wc:ra_dav:version-url
+V 104
+/codeshare/!svn/ver/13/FLARManager/deploy/v01_FP9/src/org/libspark/flartoolkit/core2/rasterfilter/rgb2gs
+END
+NyARRasterFilter_RgbAve.java
+K 25
+svn:wc:ra_dav:version-url
+V 133
+/codeshare/!svn/ver/13/FLARManager/deploy/v01_FP9/src/org/libspark/flartoolkit/core2/rasterfilter/rgb2gs/NyARRasterFilter_RgbAve.java
+END
+NyARRasterFilter_RgbMul.java
+K 25
+svn:wc:ra_dav:version-url
+V 133
+/codeshare/!svn/ver/13/FLARManager/deploy/v01_FP9/src/org/libspark/flartoolkit/core2/rasterfilter/rgb2gs/NyARRasterFilter_RgbMul.java
+END
+NyARRasterFilter_RgbOr.java
+K 25
+svn:wc:ra_dav:version-url
+V 132
+/codeshare/!svn/ver/13/FLARManager/deploy/v01_FP9/src/org/libspark/flartoolkit/core2/rasterfilter/rgb2gs/NyARRasterFilter_RgbOr.java
+END

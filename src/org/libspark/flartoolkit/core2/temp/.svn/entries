@@ -1,0 +1,52 @@
+8
+
+dir
+34
+http://transmote.com/codeshare/FLARManager/deploy/v01_FP9/src/org/libspark/flartoolkit/core2/temp
+http://transmote.com/codeshare
+
+
+
+2009-03-28T22:18:34.221137Z
+13
+ericsoco
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+7f038713-2549-0410-8939-82037612515d
+
+NyARRasterFilter_Edge.java
+file
+
+
+
+
+2009-05-21T00:05:34.000000Z
+d436af95a48f88902b2546000961b2fc
+2009-03-28T22:18:34.221137Z
+13
+ericsoco
+
+NyARLabeling_ARToolKit_X2.java
+file
+
+
+
+
+2009-05-21T00:05:34.000000Z
+c3d830dfd4d3326df1de6fb6ac5efa49
+2009-03-28T22:18:34.221137Z
+13
+ericsoco
+

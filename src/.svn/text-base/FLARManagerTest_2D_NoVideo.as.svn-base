@@ -1,0 +1,92 @@
+package {
+	import com.transmote.flar.FLARCameraSource;
+	import com.transmote.flar.FLARLoaderSource;
+	import com.transmote.flar.FLARManager;
+	import com.transmote.flar.FLARMarkerEvent;
+	import com.transmote.flar.FLARPattern;
+	import com.transmote.utils.time.FramerateDisplay;
+	
+	import examples.MarkerOutliner;
+	
+	import flash.display.Sprite;
+	import flash.events.Event;
+	
+	/**
+	 * FLARManagerTest_2D_NoVideo draws an outline around all detected markers,
+	 * but uses a file loaded at runtime (via flash.display.Loader) instead of the camera.
+	 * this can be useful for testing FLARToolkit apps without a camera.
+	 * 
+	 * @author	Eric Socolofsky
+	 * @url		http://transmote.com/flar
+	 */
+	[SWF(width="640", height="480", frameRate="30", backgroundColor="#FFFFFF")]
+	public class FLARManagerTest_2D_NoVideo extends Sprite {
+		private static const CAMERA_PARAMS_PATH:String = "../resources/flar/FLARparams.dat";
+		private static const PATTERN_PATH:String = "../resources/flar/patterns/";
+		private static const PATTERN_RESOLUTION:uint = 16;
+		
+		private var patterns:Array;//Vector.<FLARPattern>;
+		private var flarManager:FLARManager;
+		private var flarLoader:FLARLoaderSource;
+		private var markerOutliner:MarkerOutliner;
+		
+		public function FLARManagerTest_2D_NoVideo () {
+			this.init();
+		}
+		
+		private function init () :void {
+			// build list of FLARPatterns for FLARToolkit to detect
+			this.patterns = new Array();//Vector.<FLARPattern>();
+			this.patterns.push(new FLARPattern(PATTERN_PATH+"FLARPatt01.patt", PATTERN_RESOLUTION));
+			this.patterns.push(new FLARPattern(PATTERN_PATH+"FLARPatt04.patt", PATTERN_RESOLUTION));
+			this.patterns.push(new FLARPattern(PATTERN_PATH+"FLARPatt05.patt", PATTERN_RESOLUTION));
+			
+			// a FLARLoaderSource can load a SWF or image file to use as the source for marker detection.
+			// this can be useful for testing FLARToolkit apps without a camera.
+			this.flarLoader = new FLARLoaderSource("../resources/flar/patterns/patternSim.swf", this.stage.stageWidth, this.stage.stageHeight);
+			this.flarManager = new FLARManager(CAMERA_PARAMS_PATH, patterns, this.flarLoader);
+			this.addChild(this.flarLoader);
+			
+			// begin listening for FLARMarkerEvents
+			this.flarManager.addEventListener(FLARMarkerEvent.MARKER_ADDED, this.onMarkerAdded);
+			this.flarManager.addEventListener(FLARMarkerEvent.MARKER_UPDATED, this.onMarkerUpdated);
+			this.flarManager.addEventListener(FLARMarkerEvent.MARKER_REMOVED, this.onMarkerRemoved);
+			
+			var framerateDisplay:FramerateDisplay = new FramerateDisplay();
+			this.addChild(framerateDisplay);
+			
+			// MarkerOutliner is a simple class that draws an outline
+			// around the edge of detected markers.
+			this.markerOutliner = new MarkerOutliner();
+			this.addChild(this.markerOutliner);
+		}
+		
+		private function onMarkerAdded (evt:FLARMarkerEvent) :void {
+			//trace("["+evt.marker.patternId+"] added");
+			this.markerOutliner.drawOutline(evt.marker, this.flarManager.flarSource.downsampleRatio, 8, this.getColorByPatternId(evt.marker.patternId));
+		}
+		
+		private function onMarkerUpdated (evt:FLARMarkerEvent) :void {
+			//trace("["+evt.marker.patternId+"] updated");
+			this.markerOutliner.drawOutline(evt.marker, this.flarManager.flarSource.downsampleRatio, 1, this.getColorByPatternId(evt.marker.patternId));
+		}
+		
+		private function onMarkerRemoved (evt:FLARMarkerEvent) :void {
+			//trace("["+evt.marker.patternId+"] removed");
+			this.markerOutliner.drawOutline(evt.marker, this.flarManager.flarSource.downsampleRatio, 4, this.getColorByPatternId(evt.marker.patternId));
+		}
+		
+		private function getColorByPatternId (patternId:int) :Number {
+			switch (patternId) {
+				case 0:
+					return 0x47b200;
+				case 1:
+					return 0x990000;
+				case 2:
+					return 0xFF7F00;
+				default:
+					return 0x000000;
+			}
+		}
+	}
+}
