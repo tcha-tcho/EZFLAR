@@ -6,11 +6,9 @@ package {
 
 	import org.papervision3d.objects.primitives.Plane;
 	import org.papervision3d.materials.MovieMaterial;
-	import org.papervision3d.materials.VideoStreamMaterial;
 	
 	import org.papervision3d.objects.DisplayObject3D;
 	
-
 	public class SWFconstructor extends MovieClip {
 		private var _loader:Loader = new Loader();
 		private var _universe:DisplayObject3D = new DisplayObject3D();

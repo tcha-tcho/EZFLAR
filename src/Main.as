@@ -15,7 +15,7 @@ package {
 			/*_symbols.push(new Array("patt2.hiro","test.flv"));// 0*/
 			/*_symbols.push(new Array("patt.hiro","cube"));// 0*/
 			_symbols.push([["patt.hiro", "empty"]]);// 0
-			_symbols.push([["patt2.hiro", "test.swf"],["myswf"]]);// 1
+			_symbols.push([["patt2.hiro", "eiffel/models/eiffel.dae"],["mydae"]]);// 1
 			/*_symbols.push(new Array("patt2.hiro","eiffel/models/eiffel.dae", "eiffel/images/eiffel2.png"));// 0*/
 			/*_symbols.push(new Array("patt2.hiro","MD2/horse/horse.md2", "MD2/horse/horse.jpg"));// 0*/
 			
@@ -38,7 +38,7 @@ package {
 			_ezflar.onAdded(function(marker:FLARMarkerEvent):void {
 				/*trace(">>>>>>>>>>>>> adicionado: " + marker.marker.patternId );*/
 				_ezflar.object(0,"scale",-0.2,"mypicture2");
-				_ezflar.object(1,"scale",-0.2,"myswf");
+				_ezflar.object(1,"scale",0.1,"mydae");
 				});
 			_ezflar.onUpdated(function(marker:FLARMarkerEvent):void {
 				/*trace("["+ marker.marker.patternId+"]>>" +

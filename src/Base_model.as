@@ -1,6 +1,5 @@
 package {
 	//to the dae models
-	import org.papervision3d.objects.parsers.DAE;
 	import org.papervision3d.objects.parsers.MD2;
 	//to flar
 	import com.transmote.flar.FLARMarker;
@@ -12,8 +11,6 @@ package {
 	import org.libspark.flartoolkit.core.param.FLARParam;
 	import org.libspark.flartoolkit.pv3d.FLARCamera3D;
 	import org.papervision3d.lights.PointLight3D;
-	import org.papervision3d.materials.utils.MaterialsList;
-	import org.papervision3d.materials.BitmapFileMaterial;
 	import org.papervision3d.objects.DisplayObject3D;
 	import org.papervision3d.render.LazyRenderEngine;
 	import org.papervision3d.scenes.Scene3D;
@@ -28,10 +25,17 @@ package {
 	import org.papervision3d.events.InteractiveScene3DEvent;
 	import SWFconstructor;
 	import FLVconstructor;
+	import DAEconstructor;
+	
+	
+	//it shouldnt be here
+	import org.papervision3d.materials.utils.MaterialsList;	
+	import org.papervision3d.materials.BitmapFileMaterial;
+	
+	
 
 	public class Base_model extends Sprite {//Or BasicView
 		//to use models dae
-	private var _mCollada:DAE;
 	private var _mMD2:MD2;
 	private static const MODELSPATH:String = "../resources/models/";
 	private var _universe:DisplayObject3D;
@@ -158,52 +162,17 @@ package {
 
 						case "FLV" ://*.flv
 						var container : DisplayObject3D = new DisplayObject3D();
-						var flv:FLVconstructor = new FLVconstructor(url);
-						var front_videomaterial:VideoStreamMaterial = flv.getVideoMaterial();
-						var front_plane:Plane;
-						front_plane = new Plane(front_videomaterial, 640, 480, 4, 4);
-						front_plane.scale = 0.3;
-						this._universe = new DisplayObject3D();
-						this._universe.z = 3;
-						if(objName != null){
-							this._universe.name = objName
-						}else{
-							this._universe.name = "universe"
-						}
-						this._universe.rotationY = 0;
-						this._universe.rotationZ = -90;
-						this._universe.addChild(front_plane);
-						container.addChild( this._universe );
+						var flv:FLVconstructor = new FLVconstructor(patternId, url, url2, objName);
+						container.addChild( flv.object );
 						this._scene3D.addChild(container);
 						return container;
 						break;
 
 						case "DAE" : //*.dae
 						var container : DisplayObject3D = new DisplayObject3D();
-						this._mCollada = new DAE( true, "myCollada", true);//last true is the loop in the constructor
-						if (url2 != null){
-							var materialDAE:BitmapFileMaterial = new BitmapFileMaterial(url2, true); 
-							materialDAE.doubleSided = true;
-							var materialList:MaterialsList = new MaterialsList();
-							materialList.addMaterial(materialDAE);
-							this._mCollada.load(url, materialList);					
-						} else {
-							this._mCollada.load(url);
-						}
-						this._mCollada.rotationZ = 270;
-						this._mCollada.scale = 0.5;
-						this._universe = new DisplayObject3D();
-						this._universe.z = 50;				
-						if(objName != null){
-							this._universe.name = objName
-						}else{
-							this._universe.name = "universe"
-						}
-						this._universe.addChild(this._mCollada);
-						container.addChild( this._universe );
+						var dae:DAEconstructor = new DAEconstructor(patternId, url, url2, objName);
+						container.addChild( dae.object );
 						this._scene3D.addChild(container);
-						//TODO: make collada animation support
-						this._mCollada.play();
 						return container;
 						break;
 
