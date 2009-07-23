@@ -29,11 +29,6 @@ package {
 	import SWFconstructor;
 	import FLVconstructor;
 
-	//flash dont do deep copies
-	import flash.utils.ByteArray;
-	import flash.net.registerClassAlias;
-    
-
 	public class Base_model extends Sprite {//Or BasicView
 		//to use models dae
 	private var _mCollada:DAE;
@@ -65,7 +60,7 @@ package {
 	public function Base_model (objects:Array, numPatterns:uint, cameraParams:FLARParam, viewportWidth:Number, viewportHeight:Number) {
 		this._objects = objects;
 		this._numPatterns = numPatterns;
-		this.init(_numPatterns);
+		this.init();
 		this.initPapervisionEnvironment(cameraParams, viewportWidth, viewportHeight);
 	}
 
@@ -74,300 +69,303 @@ package {
 		var objectsToAdd:Array = new Array();
 		for (var i:int = 0; i < _objectsToAdd.length; i++){
 			objectsToAdd.push(_objectsToAdd[i])
-		}
-		var url:String = new String();
-		var url2:String = new String();
-		if (_objects[marker.patternId][1] != null){
-				url = MODELSPATH + _objects[marker.patternId][1];
-			} else {
-				url = null;
 			}
-			if (_objects[marker.patternId][2] != null){
-				url2 = MODELSPATH + _objects[marker.patternId][2];
-			} else {
-				url2 = null;
-		}
-		objectsToAdd.push(new Array(marker.patternId, url, url2))
-		// associate container with corresponding marker
-		var i:int = 0;
-		var len:int = objectsToAdd.length;
-	    while(i < len) {
-			if(objectsToAdd[i][0] == marker.patternId){
-				this._markersByPatternId.push(new Array (objectsToAdd[i][0], marker, placeModels(objectsToAdd[i][0], objectsToAdd[i][1], objectsToAdd[i][2])));
+			//trace("marker: " + marker.patternId + "::" + _objects[marker.patternId][0][1] + "::" +_objects[marker.patternId][0][2] + "::" + _objects[marker.patternId][1]);
+			objectsToAdd.push([constructURL([marker.patternId, _objects[marker.patternId][0][1], _objects[marker.patternId][0][2]]),_objects[marker.patternId][1]]);
+				// associate container with corresponding marker
+			var i:int = 0;
+			var len:int = objectsToAdd.length;
+			while(i < len) {
+				if(objectsToAdd[i][0][0] == marker.patternId){
+					this._markersByPatternId.push(new Array (objectsToAdd[i][0][0], marker, placeModels(objectsToAdd[i][0][0], objectsToAdd[i][0][1], objectsToAdd[i][0][2], objectsToAdd[i][1])));
+				}
+				i++;
 			}
-	        i++;
-	    }
-		//trace(" ::: ADDED on " + marker.patternId + ": length: " + objectsToAdd.length + " ::::::::: still on scene: " + this._scene3D.numChildren);
-	}
-	public function removeMarker (marker:FLARMarker) :void {
-		//trace(":::::::::::::::: removi: " + marker.patternId);
-		// find and remove marker
-		var markerList:Array = new Array();
-		for (var i:int = 0; i < this._markersByPatternId.length; i++){
-			markerList.push(this._markersByPatternId[i])
+			trace(" ::: ADDED on " + marker.patternId + ": length: " + objectsToAdd.length + " ::::::::: still on scene: " + this._scene3D.numChildren);
 		}
-		var markerList2:Array = new Array;
-		for (var i:int = 0; i < this._markersByPatternId.length; i++ ) {
-			if (markerList[i][0] == marker.patternId){
-				this._scene3D.removeChild(markerList[i][2]);
-			} else {
-				markerList2.push(markerList[i])
-			}
-	    }
-		this._markersByPatternId = new Array();
-		for (var i:int = 0; i < markerList2.length; i++){
-			this._markersByPatternId.push(markerList2[i]);
-		}
-		//trace(" ::: REMOVED on " + marker.patternId + ": length: " + markerList.length + " ::::::::: still on scene: " + this._scene3D.numChildren);
-	}
-	private function updateModels () :void {
-		// update all Models containers according to the transformation matrix in their associated FLARMarkers
-		var i:int = 0;
-		var len:int = this._markersByPatternId.length;
-	    while(i < len) {
-		if(_changes != null){
-			if (_changes[3] == true && _changes[0] == this._markersByPatternId[i][0]){
-				this._markersByPatternId[i][2].getChildByName("universe")[_changes[1]] = _changes[2];
-				_changes[3] = false;
-			};
-		}
-			this._markersByPatternId[i][2].transform = FLARPVGeomUtils.translateFLARMatrixToPVMatrix(this._markersByPatternId[i][1].transformMatrix);
-	        i++;
-	    }
-	}
-	private function init (numPatterns:uint) :void {
-		this._markersByPatternId = new Array();
-		}
-
-		private function initPapervisionEnvironment (cameraParams:FLARParam, viewportWidth:Number, viewportHeight:Number) :void {
-			this._scene3D = new Scene3D();
-			this._camera3D = new FLARCamera3D(cameraParams);
-			this._viewport3D = new Viewport3D(viewportWidth, viewportHeight);
-			this.addChild(this._viewport3D);
-			this._renderEngine = new LazyRenderEngine(this._scene3D, this._camera3D, this._viewport3D);
-
-			this._pointLight3D = new PointLight3D();
-			this._pointLight3D.x = 1000;
-			this._pointLight3D.y = 1000;
-			this._pointLight3D.z = -1000;
-
-			this.addEventListener(Event.ENTER_FRAME, this.onEnterFrame);
-		}
-
-		private function onEnterFrame (evt:Event) :void {
-			this.updateModels();
-			this._renderEngine.render();
-		}
-		private function placeModels(patternId:int, url:String = null, url2:String = null):DisplayObject3D{
-			/*var ModelID:int = patternId % 5;*/
-				var _format:String = url.toString();
-				_format = _format.substring(_format.length - 3,_format.length).toUpperCase();
-				switch (_format){
-					//TODO: take of all the formats to external packages!
-					case "SWF" ://*.swf
-					var container : DisplayObject3D = new DisplayObject3D();
-					var skinMaterial:MovieClip = new SWFconstructor(url);
-					var front_material:MovieMaterial = new MovieMaterial(skinMaterial, true);
-					front_material.interactive = true;
-					front_material.animated = true;
-					front_material.doubleSided = true;
-					var front_plane:Plane;
-					front_plane = new Plane(front_material, 640, 480, 4, 4);
-					front_plane.scale = 0.5;
-					this._universe = new DisplayObject3D();
-					this._universe.z = 3;
-					this._universe.name = "universe"
-						this._universe.rotationY = 0;
-					this._universe.rotationZ = -90;
-					this._universe.addChild(front_plane);
-					container.addChild( this._universe );
-					this._scene3D.addChild(container);
-					return container;
-					break;
-
-					case "FLV" ://*.flv
-					var container : DisplayObject3D = new DisplayObject3D();
-					var flv:FLVconstructor = new FLVconstructor(url);
-					var front_videomaterial:VideoStreamMaterial = flv.getVideoMaterial();
-					var front_plane:Plane;
-					front_plane = new Plane(front_videomaterial, 640, 480, 4, 4);
-					front_plane.scale = 0.3;
-					this._universe = new DisplayObject3D();
-					this._universe.z = 3;
-					this._universe.name = "universe"
-						this._universe.rotationY = 0;
-					this._universe.rotationZ = -90;
-					this._universe.addChild(front_plane);
-					container.addChild( this._universe );
-					this._scene3D.addChild(container);
-					return container;
-					break;
-
-					case "DAE" : //*.dae
-					var container : DisplayObject3D = new DisplayObject3D();
-					this._mCollada = new DAE( true, "myCollada", true);//last true is the loop in the constructor
-					if (url2 != null){
-						var materialDAE:BitmapFileMaterial = new BitmapFileMaterial(url2, true); 
-						materialDAE.doubleSided = true;
-						var materialList:MaterialsList = new MaterialsList();
-						materialList.addMaterial(materialDAE);
-						this._mCollada.load(url, materialList);					
+		public function removeMarker (marker:FLARMarker) :void {
+			//trace(":::::::::::::::: removi: " + marker.patternId);
+			// find and remove marker
+			var markerList:Array = new Array();
+			for (var i:int = 0; i < this._markersByPatternId.length; i++){
+				markerList.push(this._markersByPatternId[i])
+				}
+				var markerList2:Array = new Array;
+				for (var i:int = 0; i < this._markersByPatternId.length; i++ ) {
+					if (markerList[i][0] == marker.patternId){
+						this._scene3D.removeChild(markerList[i][2]);
 					} else {
-						this._mCollada.load(url);
+						markerList2.push(markerList[i])
+						}
 					}
-					this._mCollada.rotationZ = 270;
-					this._mCollada.scale = 0.5;
-					this._universe = new DisplayObject3D();
-					this._universe.z = 50;				
-					this._universe.name = "universe"
+					this._markersByPatternId = new Array();
+					for (var i:int = 0; i < markerList2.length; i++){
+						this._markersByPatternId.push(markerList2[i]);
+					}
+					trace(" ::: REMOVED on " + marker.patternId + ": length: " + markerList.length + " ::::::::: still on scene: " + this._scene3D.numChildren);
+				}
+				private function updateModels () :void {
+					// update all Models containers according to the transformation matrix in their associated FLARMarkers
+					var i:int = 0;
+					var len:int = this._markersByPatternId.length;
+					while(i < len) {
+						if(_changes[0] == true){
+							if (_changes[1] == this._markersByPatternId[i][0]){
+								this._markersByPatternId[i][2].getChildByName(_changes[4])[_changes[2]] = _changes[3];
+							};
+						}
+						this._markersByPatternId[i][2].transform = FLARPVGeomUtils.translateFLARMatrixToPVMatrix(this._markersByPatternId[i][1].transformMatrix);
+						i++;
+					}
+					_changes[0] = false;
+				}
+				private function init () :void {
+					this._markersByPatternId = new Array();
+					_changes[0] = false;
+				}
+
+				private function initPapervisionEnvironment (cameraParams:FLARParam, viewportWidth:Number, viewportHeight:Number) :void {
+					this._scene3D = new Scene3D();
+					this._camera3D = new FLARCamera3D(cameraParams);
+					this._viewport3D = new Viewport3D(viewportWidth, viewportHeight);
+					this.addChild(this._viewport3D);
+					this._renderEngine = new LazyRenderEngine(this._scene3D, this._camera3D, this._viewport3D);
+
+					this._pointLight3D = new PointLight3D();
+					this._pointLight3D.x = 1000;
+					this._pointLight3D.y = 1000;
+					this._pointLight3D.z = -1000;
+
+					this.addEventListener(Event.ENTER_FRAME, this.onEnterFrame);
+				}
+
+				private function onEnterFrame (evt:Event) :void {
+					this.updateModels();
+					this._renderEngine.render();
+				}
+				private function placeModels(patternId:int, url:String = null, url2:String = null, objName:String = null):DisplayObject3D{
+					var _format:String = url.toString();
+					_format = _format.substring(_format.length - 3,_format.length).toUpperCase();
+					switch (_format){
+						//TODO: take of all the formats to external packages!
+						case "SWF" ://*.swf
+						var container : DisplayObject3D = new DisplayObject3D();
+						var swf:SWFconstructor = new SWFconstructor(patternId, url, url2, objName)
+						container.addChild( swf.object );
+						this._scene3D.addChild(container);
+						return container;
+						break;
+
+						case "FLV" ://*.flv
+						var container : DisplayObject3D = new DisplayObject3D();
+						var flv:FLVconstructor = new FLVconstructor(url);
+						var front_videomaterial:VideoStreamMaterial = flv.getVideoMaterial();
+						var front_plane:Plane;
+						front_plane = new Plane(front_videomaterial, 640, 480, 4, 4);
+						front_plane.scale = 0.3;
+						this._universe = new DisplayObject3D();
+						this._universe.z = 3;
+						if(objName != null){
+							this._universe.name = objName
+						}else{
+							this._universe.name = "universe"
+						}
+						this._universe.rotationY = 0;
+						this._universe.rotationZ = -90;
+						this._universe.addChild(front_plane);
+						container.addChild( this._universe );
+						this._scene3D.addChild(container);
+						return container;
+						break;
+
+						case "DAE" : //*.dae
+						var container : DisplayObject3D = new DisplayObject3D();
+						this._mCollada = new DAE( true, "myCollada", true);//last true is the loop in the constructor
+						if (url2 != null){
+							var materialDAE:BitmapFileMaterial = new BitmapFileMaterial(url2, true); 
+							materialDAE.doubleSided = true;
+							var materialList:MaterialsList = new MaterialsList();
+							materialList.addMaterial(materialDAE);
+							this._mCollada.load(url, materialList);					
+						} else {
+							this._mCollada.load(url);
+						}
+						this._mCollada.rotationZ = 270;
+						this._mCollada.scale = 0.5;
+						this._universe = new DisplayObject3D();
+						this._universe.z = 50;				
+						if(objName != null){
+							this._universe.name = objName
+						}else{
+							this._universe.name = "universe"
+						}
 						this._universe.addChild(this._mCollada);
-					container.addChild( this._universe );
-					this._scene3D.addChild(container);
-					//TODO: make collada animation support
-					this._mCollada.play();
-					return container;
-					break;
+						container.addChild( this._universe );
+						this._scene3D.addChild(container);
+						//TODO: make collada animation support
+						this._mCollada.play();
+						return container;
+						break;
 
-					case "MD2" ://*.md2
-					var container : DisplayObject3D = new DisplayObject3D();
-					this._mMD2 = new MD2();
-					if (url2 != null){
-						var materialMD2:BitmapFileMaterial = new BitmapFileMaterial(url2, true); 
-						materialMD2.doubleSided = false;
-						this._mMD2.load(url, materialMD2);
-					} else {
-						this._mMD2.load(url);
-					};
-					//TODO: MD2 animations support
-					//__player = new MD2(materialMD2, "assets/supermale.md2", 12);
-					//__playerControler = new AbstractController(); 
-					//__player.addController(__playerControler);
-					//__playerControler.play();    
-					//__mainHolder.addChild(__player);    
+						case "MD2" ://*.md2
+						var container : DisplayObject3D = new DisplayObject3D();
+						this._mMD2 = new MD2();
+						if (url2 != null){
+							var materialMD2:BitmapFileMaterial = new BitmapFileMaterial(url2, true); 
+							materialMD2.doubleSided = false;
+							this._mMD2.load(url, materialMD2);
+						} else {
+							this._mMD2.load(url);
+						};
+						//TODO: MD2 animations support
+						//__player = new MD2(materialMD2, "assets/supermale.md2", 12);
+						//__playerControler = new AbstractController(); 
+						//__player.addController(__playerControler);
+						//__playerControler.play();    
+						//__mainHolder.addChild(__player);    
 
-					this._mMD2.rotationZ = 270;
-					this._mMD2.scale = 2;
-					this._universe = new DisplayObject3D();
-					this._universe.z = 50;
-					this._universe.name = "universe"
+						this._mMD2.rotationZ = 270;
+						this._mMD2.scale = 2;
+						this._universe = new DisplayObject3D();
+						this._universe.z = 50;
+						if(objName != null){
+							this._universe.name = objName
+						}else{
+							this._universe.name = "universe"
+						}
 						this._universe.addChild(this._mMD2);
-					container.addChild( this._universe );
-					this._scene3D.addChild(container);
-					return container;
-					break;
+						container.addChild( this._universe );
+						this._scene3D.addChild(container);
+						return container;
+						break;
 
-					case "UBE" ://cube
-					var container : DisplayObject3D = new DisplayObject3D();
-					var cube:Cube;
-					if (url2 != null){
-						var cubeMaterial:BitmapFileMaterial = new BitmapFileMaterial(url2, true);
-						cubeMaterial.doubleSided = true;
-						var materialList:MaterialsList = new MaterialsList();
-						materialList.addMaterial(cubeMaterial, 'all');
-						cube = new Cube(materialList);
-					} else {
-						var materialList:MaterialsList = new MaterialsList();
-						materialList.addMaterial(new WireframeMaterial(0xffff00), 'all');
-						cube = new Cube(materialList);
-					}
-					cube.scale = 0.1;
-					this._universe = new DisplayObject3D();
-					this._universe.z = 30;
-					this._universe.name = "universe"
+						case "UBE" ://cube
+						var container : DisplayObject3D = new DisplayObject3D();
+						var cube:Cube;
+						if (url2 != null){
+							var cubeMaterial:BitmapFileMaterial = new BitmapFileMaterial(url2, true);
+							cubeMaterial.doubleSided = true;
+							var materialList:MaterialsList = new MaterialsList();
+							materialList.addMaterial(cubeMaterial, 'all');
+							cube = new Cube(materialList);
+						} else {
+							var materialList:MaterialsList = new MaterialsList();
+							materialList.addMaterial(new WireframeMaterial(0xffff00), 'all');
+							cube = new Cube(materialList);
+						}
+						cube.scale = 0.1;
+						this._universe = new DisplayObject3D();
+						this._universe.z = 30;
+						if(objName != null){
+							this._universe.name = objName
+						}else{
+							this._universe.name = "universe"
+						}
 						this._universe.addChild(cube);
-					container.addChild( this._universe );
-					this._scene3D.addChild(container);
-					return container;
-					break;
+						container.addChild( this._universe );
+						this._scene3D.addChild(container);
+						return container;
+						break;
 
-					case "URE" ://picture
-					var container : DisplayObject3D = new DisplayObject3D();
-					var front_plane:Plane;
-					if (url2 != null){
-						var pictureMaterial:BitmapFileMaterial = new BitmapFileMaterial(url2, true);
-						pictureMaterial.doubleSided = true;
-						front_plane = new Plane(pictureMaterial, 640, 480, 4, 4);
-					} else {
+						case "URE" ://picture
+						var container : DisplayObject3D = new DisplayObject3D();
+						var front_plane:Plane;
+						if (url2 != null){
+							var pictureMaterial:BitmapFileMaterial = new BitmapFileMaterial(url2, true);
+							pictureMaterial.doubleSided = true;
+							front_plane = new Plane(pictureMaterial, 640, 480, 4, 4);
+						} else {
+							var wfm:WireframeMaterial = new WireframeMaterial(0xffff00);
+							wfm.doubleSided = true;
+							front_plane = new Plane(wfm);
+						}
+						front_plane.scale = 0.5;
+						this._universe = new DisplayObject3D();
+						this._universe.z = 3;
+						if(objName != null){
+							this._universe.name = objName
+						}else{
+							this._universe.name = "universe"
+						}
+						this._universe.rotationY = 0;
+						this._universe.rotationZ = -90;
+						this._universe.addChild(front_plane);
+						container.addChild( this._universe );
+						this._scene3D.addChild(container);
+						return container;
+						break;
+
+						case "IRE"://wire
+						var container : DisplayObject3D = new DisplayObject3D();
+						var wire:Plane;
 						var wfm:WireframeMaterial = new WireframeMaterial(0xffff00);
 						wfm.doubleSided = true;
-						front_plane = new Plane(wfm);
+						wire = new Plane(wfm);
+						wire.scale = 0.16;
+						this._universe = new DisplayObject3D();
+						this._universe.z = 1;
+						if(objName != null){
+							this._universe.name = objName
+						}else{
+							this._universe.name = "universe"
+						}
+						this._universe.rotationY = 0;
+						this._universe.rotationZ = -90;
+						this._universe.addChild(wire);
+						container.addChild( this._universe );
+						this._scene3D.addChild(container);
+						return container;
+						break;
+
+						case "PTY" :
+						var container : DisplayObject3D = new DisplayObject3D();
+						var emptyContainer : DisplayObject3D = new DisplayObject3D();							
+						_universe = new DisplayObject3D();
+						_universe.z = 50;
+						if(objName != null){
+							_universe.name = objName;
+						} else {
+							_universe.name = "universe";
+						}
+						container.addChild( this._universe );
+						this._scene3D.addChild(container);
+						return container;
+						break;
+
+						default :
+						trace(_format + " WE CANT USE THIS ;( PLS, USE: *.swf, *.flv, *.dae, *.md2, cube, picture, wire or empty... DONT FORGET TO PUT IN RESOURCES/MODELS FOLDER");
+						var container : DisplayObject3D = new DisplayObject3D();
+						return container;					
+						break;
 					}
-					front_plane.scale = 0.5;
-					this._universe = new DisplayObject3D();
-					this._universe.z = 3;
-					this._universe.name = "universe"
-						this._universe.rotationY = 0;
-					this._universe.rotationZ = -90;
-					this._universe.addChild(front_plane);
-					container.addChild( this._universe );
-					this._scene3D.addChild(container);
-					return container;
-					break;
-
-					case "IRE"://wire
-					var container : DisplayObject3D = new DisplayObject3D();
-					var wire:Plane;
-					var wfm:WireframeMaterial = new WireframeMaterial(0xffff00);
-					wfm.doubleSided = true;
-					wire = new Plane(wfm);
-					wire.scale = 0.16;
-					this._universe = new DisplayObject3D();
-					this._universe.z = 1;
-					this._universe.name = "universe"
-						this._universe.rotationY = 0;
-					this._universe.rotationZ = -90;
-					this._universe.addChild(wire);
-					container.addChild( this._universe );
-					this._scene3D.addChild(container);
-					return container;
-					break;
-
-
-					//TODO: make support to empty containers to add models later
-					case "PTY" :
-					var container : DisplayObject3D = new DisplayObject3D();
-					_universe = new DisplayObject3D();
-					_universe.z = 50;
-					_universe.name = "universe";
-					container.addChild( this._universe );
-					this._scene3D.addChild(container);
-					return container;
-					break;
-
-					default :
-					trace(_format + " IS A WRONG FORMAT!: PLS, USE: *.swf, *.flv, *.dae, *.md2, cube, picture, wire or empty... IN THE MODELS FOLDER");
-					var container : DisplayObject3D = new DisplayObject3D();
-					return container;					
-					break;
+				}
+				public function changeObjectProperty(marker:uint, propertyToChange:String, newValue:Number, thisName:String):void{
+					_changes[0] = true;//prevent to process twice
+					_changes[1] = marker;
+					_changes[2] = propertyToChange;
+					_changes[3] = newValue;
+					_changes[4] = thisName;
+					
+				}
+				public function addModelToStage(set1:Array, set2:Array = null):void {
+					this._objectsToAdd.push([constructURL(set1), set2])
+					}
+					
+					
+				public function constructURL(income:Array):Array{
+						var url1:String = new String();
+						var url2:String = new String();
+						if (income[1] != null){
+							url1 = MODELSPATH + income[1];
+						} else {
+							url1 = null;
+						}
+						if (income[2] != null){
+							url2 = MODELSPATH + income[2];
+						} else {
+							url2 = null;
+						}
+						return [income[0],url1,url2]
+					}
 				}
 			}
-			public function changeObjectProperty(marker:uint, propertyToChange:String, newValue:Number):void{
-				_changes[0] = marker;
-				_changes[1] = propertyToChange;
-				_changes[2] = newValue;
-				_changes[3] = true;//avoid repeat changes every frame
-			}
-			public function addModelToStage(markerID:int, pathToModel:String, secondPath:String):void {
-				var url:String = new String();
-				var url2:String = new String();
-				if (pathToModel != null){
-					url = MODELSPATH + pathToModel;
-				} else {
-					url = null;
-				}
-				if (secondPath != null){
-					url2 = MODELSPATH + secondPath;
-				} else {
-					url2 = null;
-				}
-				this._objectsToAdd.push(new Array(markerID, url, url2))
-				}
-				
-				function clone(source:Object):*{
-				    var myBA:ByteArray = new ByteArray();
-				    myBA.writeObject(source);
-				    myBA.position = 0;
-				    return(myBA.readObject());
-				}
-			}
-		}

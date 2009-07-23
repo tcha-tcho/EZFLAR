@@ -54,6 +54,8 @@ package {
 			// build list of FLARPatterns for FLARToolkit to detect
 			this.patterns = new Array();
 			for (var i:int = 0; i < _objects.length; i++) {
+				if(_objects[i][0][2] == undefined){_objects[i][0][2] = null}
+				if(_objects[i][1] == undefined){_objects[i][1] = null}
 				this.patterns.push(new FLARPattern(PATTERN_PATH+ _objects[i][0][0], PATTERN_RESOLUTION));
 			}
 
@@ -65,7 +67,8 @@ package {
 			this.flarManager.addEventListener(FLARMarkerEvent.MARKER_ADDED, this.onMarkerAdded);
 			this.flarManager.addEventListener(FLARMarkerEvent.MARKER_UPDATED, this.onMarkerUpdated);
 			this.flarManager.addEventListener(FLARMarkerEvent.MARKER_REMOVED, this.onMarkerRemoved);
-			this.flarManager.addEventListener(Event.INIT, this.onFlarManagerInited);			
+			this.flarManager.addEventListener(Event.INIT, this.onFlarManagerInited);
+			trace("EZFLAR 0.1(beta) is running!  :)\n keep calm and look busy!\n");		
 		}
 		public function mirror():void{
 			this.scaleX = -1;
@@ -127,9 +130,8 @@ package {
 		public function onRemoved(func:Function):void{
 			_funcRemoved = func;
 		}
-		public function object(set1:Array, set2:Array = null):void {
-			//set 1 = marker:uint, propertyToChange:String, newValue:Number, set 2 = WithThisName
-			this.base_model.changeObjectProperty(set1, set2);
+		public function object(marker:int, propertyToChange:String, newValue:Number, thisName:String = "universe"):void {
+			this.base_model.changeObjectProperty(marker, propertyToChange, newValue, thisName);
 		}
 		public function addModelTo(set1:Array, set2:Array = null):void{
 			this.base_model.addModelToStage(set1, set2);

@@ -1,10 +1,10 @@
 package {
-	import Objects;
+	import EZflar;
 	import flash.display.Sprite;
 	import com.transmote.flar.FLARMarkerEvent;	
 		
 	public class Main extends Sprite {
-		private var _objects:Objects;
+		private var _ezflar:EZflar;
 		private var _symbols:Array = new Array();
 		
 		public function Main() {
@@ -14,32 +14,33 @@ package {
 			/*_symbols.push(new Array("patt2.hiro","test.swf"));// 0*/
 			/*_symbols.push(new Array("patt2.hiro","test.flv"));// 0*/
 			/*_symbols.push(new Array("patt.hiro","cube"));// 0*/
-			_symbols.push(["patt.hiro", "empty"],["myempty"]);// 0
-			_symbols.push(["patt2.hiro", "cube"],["mycube"]);// 1
+			_symbols.push([["patt.hiro", "empty"]]);// 0
+			_symbols.push([["patt2.hiro", "test.swf"],["myswf"]]);// 1
 			/*_symbols.push(new Array("patt2.hiro","eiffel/models/eiffel.dae", "eiffel/images/eiffel2.png"));// 0*/
 			/*_symbols.push(new Array("patt2.hiro","MD2/horse/horse.md2", "MD2/horse/horse.jpg"));// 0*/
 			
 			//TODO: place 2 models in the same symbol...
 			//TODO: handle loading models and no camera message...
-			_objects = new Objects(_symbols/*, 320, 270*/);
+			_ezflar = new EZflar(_symbols/*, 320, 270*/);
 			
-			stage.addChild(_objects);
-			_objects.viewFrameRate();
+			stage.addChild(_ezflar);
+			_ezflar.viewFrameRate();
 			
-			_objects.onStarted(function():void {
-				_objects.addModelTo([0,"picture", "imagem1.jpg"],["mypicture"]);
-				_objects.addModelTo([0,"wire"],["mywire"]);
-				/*_objects.addModelTo([0,"picture", "imagem2.jpg"],["mypicture2"]);*/
+			_ezflar.onStarted(function():void {
+				_ezflar.addModelTo([0,"picture", "imagem2.jpg"],["mypicture2"]);
+				_ezflar.addModelTo([0,"wire"]);
+				/*_ezflar.addModelTo([0,"picture", "imagem2.jpg"],["mypicture2"]);*/
 				
 				trace(">>>>>>>>>>>>> inicio");
-				_objects.mirror();
-				/*_objects.moveTo(640,0);*/
+				_ezflar.mirror();
+				/*_ezflar.moveTo(640,0);*/
 				});
-			_objects.onAdded(function(marker:FLARMarkerEvent):void {
+			_ezflar.onAdded(function(marker:FLARMarkerEvent):void {
 				/*trace(">>>>>>>>>>>>> adicionado: " + marker.marker.patternId );*/
-				/*_objects.object(0,"scale",0.2);*/				
+				_ezflar.object(0,"scale",-0.2,"mypicture2");
+				_ezflar.object(1,"scale",-0.2,"myswf");
 				});
-			_objects.onUpdated(function(marker:FLARMarkerEvent):void {
+			_ezflar.onUpdated(function(marker:FLARMarkerEvent):void {
 				/*trace("["+ marker.marker.patternId+"]>>" +
 					  "X:" + marker.x() + " || " +
 					  "Y:" + marker.y() + " || " +
@@ -49,7 +50,7 @@ package {
 					  "RZ:" + marker.rotationZ() + " || "
 				);*/				
 				});
-			_objects.onRemoved(function(marker:FLARMarkerEvent):void {
+			_ezflar.onRemoved(function(marker:FLARMarkerEvent):void {
 				/*trace(">>>>>>>>>>>>> removido: " + marker.marker.patternId);*/
 				});
 		}

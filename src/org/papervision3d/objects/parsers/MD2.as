@@ -1,5 +1,7 @@
-package org.papervision3d.objects.parsers {	import org.papervision3d.Papervision3D;	
-	import flash.events.Event;
+package org.papervision3d.objects.parsers {
+	import org.papervision3d.Papervision3D;	
+
+	import flash.events.Event;
 	import flash.events.ProgressEvent;
 	import flash.net.URLLoader;
 	import flash.net.URLLoaderDataFormat;
@@ -9,7 +11,10 @@ package org.papervision3d.objects.parsers {	import org.papervision3d.Papervisio
 	
 	import org.papervision3d.core.animation.IAnimatable;	
 	import org.papervision3d.core.animation.IAnimationProvider;
-	import org.papervision3d.core.animation.clip.AnimationClip3D;		import org.papervision3d.core.controller.IControllerProvider;	import org.papervision3d.core.controller.IObjectController;		import org.papervision3d.core.animation.key.LinearCurveKey3D;	
+	import org.papervision3d.core.animation.clip.AnimationClip3D;	
+	import org.papervision3d.core.controller.IControllerProvider;
+	import org.papervision3d.core.controller.IObjectController;	
+	import org.papervision3d.core.animation.key.LinearCurveKey3D;	
 	import org.papervision3d.core.animation.curve.Curve3D;	
 	import org.papervision3d.core.animation.channel.geometry.VerticesChannel3D;	
 	import org.papervision3d.core.animation.channel.Channel3D;	
@@ -77,12 +82,41 @@ package org.papervision3d.objects.parsers {	import org.papervision3d.Papervisio
 			_autoPlay = autoPlay;
 		}
 		
-		/**		 * Gets / sets the animation controller.		 * 		 * @see org.papervision3d.core.controller.AnimationController		 */		public function set animation(value : AnimationController) : void		{			_animation = value;		}		
+		/**
+		 * Gets / sets the animation controller.
+		 * 
+		 * @see org.papervision3d.core.controller.AnimationController
+		 */
+		public function set animation(value : AnimationController) : void
+		{
+			_animation = value;
+		}
+		
 		public function get animation() : AnimationController
 		{
 			return _animation;
 		}
-				/**		 * Gets / sets all controlllers.		 * 		 * @return	Array of controllers.		 * 		 * @see org.papervision3d.core.controller.IObjectController		 * @see org.papervision3d.core.controller.AnimationController		 * @see org.papervision3d.core.controller.MorphController		 * @see org.papervision3d.core.controller.SkinController		 */		public function set controllers(value : Array) : void		{			_controllers = value;		}				public function get controllers() : Array		{			return _controllers;			}		
+		
+		/**
+		 * Gets / sets all controlllers.
+		 * 
+		 * @return	Array of controllers.
+		 * 
+		 * @see org.papervision3d.core.controller.IObjectController
+		 * @see org.papervision3d.core.controller.AnimationController
+		 * @see org.papervision3d.core.controller.MorphController
+		 * @see org.papervision3d.core.controller.SkinController
+		 */
+		public function set controllers(value : Array) : void
+		{
+			_controllers = value;
+		}
+		
+		public function get controllers() : Array
+		{
+			return _controllers;	
+		}
+		
 		/**
 		 * Pauses the animation.
 		 */ 
@@ -192,12 +226,15 @@ package org.papervision3d.objects.parsers {	import org.papervision3d.Papervisio
 		 */ 
 		public override function project(parent:DisplayObject3D, renderSessionData:RenderSessionData):Number
 		{
-			// update controllers			if(_controllers)			{
+			// update controllers
+			if(_controllers)
+			{
 				for each(var controller:IObjectController in _controllers)
 				{
 					controller.update();
 				}
-			}			
+			}
+			
 			return super.project(parent, renderSessionData);
 		}
 		
