@@ -9,9 +9,11 @@ package com.tchatcho.constructors {
 	import org.papervision3d.objects.DisplayObject3D;
 
 	public class PICTUREconstructor extends Plane {
+		private var _ldr:LoadingEZFLAR = new LoadingEZFLAR();
 		private var _universe:DisplayObject3D = new DisplayObject3D();
 		private var _front_plane:Plane;
 		public function PICTUREconstructor(patternId:int, url:String = null, url2:String = null, objName:String = null) {
+			startLoader();
 			if (url2 != null){
 				var pictureMaterial:BitmapFileMaterial = new BitmapFileMaterial(url2, true);
 				pictureMaterial.doubleSided = true;
@@ -32,11 +34,14 @@ package com.tchatcho.constructors {
 					}
 					this._universe.rotationY = 0;
 					this._universe.rotationZ = -90;
-					this._universe.addChild(_front_plane);
 
 				}
+				public function startLoader():void{
+					this._universe.addChild(_ldr.ldrObject);
+				}
 				public function loaderComplete(evt:Event):void{
-					trace("PICTURELoader: Complete");
+					this._universe.removeChild(_ldr.ldrObject);
+					this._universe.addChild(_front_plane);
 				}
 				public function get object():DisplayObject3D{
 					return this._universe;

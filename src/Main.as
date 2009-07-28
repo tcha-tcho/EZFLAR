@@ -15,30 +15,34 @@ package {
 			/*_symbols.push(new Array("patt2.hiro","test.swf"));// 0*/
 			/*_symbols.push(new Array("patt2.hiro","test.flv"));// 0*/
 			/*_symbols.push(new Array("patt.hiro","cube"));// 0*/
-			_symbols.push([["patt.hiro", "empty"]]);// 0
-			_symbols.push([["patt2.hiro", "wire"],["mypicture"]]);// 1
+			_symbols.push([["patt.hiro", "testedaniel/baleia.dae", "testedaniel/texturafinal.jpg"],["mybaleia"]]);// 0
+			_symbols.push([["patt2.hiro", "picture", "imagem1.jpg"]]);// 1
 			/*_symbols.push(new Array("patt2.hiro","eiffel/models/eiffel.dae", "eiffel/images/eiffel2.png"));// 0*/
 			/*_symbols.push(new Array("patt2.hiro","MD2/horse/horse.md2", "MD2/horse/horse.jpg"));// 0*/
 			
-			//TODO: fixbug place 2 models in the same symbol...
-			//TODO: handle loading models and no camera message...
 			_ezflar = new EZflar(_symbols/*, 320, 270*/);
-			/*_ezflar.noCameraMessage("VC nao tem camera");*/
+			_ezflar.customizeNoCam("Precisamos de uma webcam", 0xFFFFFF, 0xCCCCCC);
 			stage.addChild(_ezflar);
 			_ezflar.viewFrameRate();
 			_ezflar.mirror();
 			
 			
 			_ezflar.onStarted(function():void {
-				/*_ezflar.addModelTo([0,"picture", "imagem2.jpg"],["mypicture2"]);*/
-				/*_ezflar.addModelTo([0,"wire"]);*/
+				//_ezflar.addModelTo([0,"picture", "imagem1.jpg"],["myimage"]);
+				//_ezflar.addModelTo([0,"cube"],["mycube"]);
+				/*_ezflar.addModelTo([1,"wire"], ["mywire"]);*/
+				/*_ezflar.addModelTo([1,"cube"], ["thecube"]);*/
 				trace(">>>>>>>>>>>>> inicio");
 				/*_ezflar.moveTo(640,0);*/
 				});
 			_ezflar.onAdded(function(marker:FLARMarkerEvent):void {
 				/*trace(">>>>>>>>>>>>> adicionado: " + marker.marker.patternId );*/
-				/*_ezflar.object(0,"scale",0.1,"mypicture2");*/
-				_ezflar.object(1,"scale",0.8,"mypicture");
+				/*_ezflar.object(0,"rotationX", 90, "mybaleia");*/
+				_ezflar.object(1,"scale",2,"thecube");
+				/*_ezflar.object(1,"scale",2);*/
+				_ezflar.object(1,"rotationX",45,"mytest");
+				/*_ezflar.object(1,"scale",0.2, "mypicture2");*/
+				
 				});
 			_ezflar.onUpdated(function(marker:FLARMarkerEvent):void {
 				/*trace("["+ marker.marker.patternId+"]>>" +

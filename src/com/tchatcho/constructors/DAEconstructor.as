@@ -5,12 +5,15 @@ package com.tchatcho.constructors {
 	import org.papervision3d.events.FileLoadEvent;
 	import flash.events.Event;
 	import org.papervision3d.objects.DisplayObject3D;
+	import com.tchatcho.constructors.LoadingEZFLAR;
 	
 	public class DAEconstructor extends DAE {
+		private var _ldr:LoadingEZFLAR = new LoadingEZFLAR();
 		private var _universe:DisplayObject3D = new DisplayObject3D();
 		private var _mCollada:DAE;
 		public function DAEconstructor(patternId:int, url:String = null, url2:String = null, objName:String = null) {
 
+			startLoader();
 
 			this._mCollada = new DAE( true, "dae", true);//last true is the loop in the constructor
 			if (url2 != null){
@@ -34,15 +37,18 @@ package com.tchatcho.constructors {
 				this._universe.name = "universe"
 			}
 
-			this._universe.addChild(this._mCollada);
 
 			//TODO: make collada animation support
 			this._mCollada.play();
 
 
 			}
+			public function startLoader():void{
+				this._universe.addChild(_ldr.ldrObject);
+			}
 			public function loaderComplete(evt:Event):void{
-				trace("DAELoader: Complete");
+				this._universe.removeChild(_ldr.ldrObject);
+				this._universe.addChild(this._mCollada);
 			}
 			public function get object():DisplayObject3D{
 				return this._universe;

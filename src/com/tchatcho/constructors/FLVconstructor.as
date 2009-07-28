@@ -9,14 +9,18 @@ package com.tchatcho.constructors {
 
 	import org.papervision3d.objects.primitives.Plane;	
 	import org.papervision3d.objects.DisplayObject3D;
+	import com.tchatcho.constructors.LoadingEZFLAR;
 
 	public class FLVconstructor extends Video {
+		private var _ldr:LoadingEZFLAR = new LoadingEZFLAR();
 		private var _video:Video;
 		private var _stream:NetStream;
 		private var _connection:NetConnection;
 		private var _universe:DisplayObject3D = new DisplayObject3D();
-
+		private var _front_plane:Plane;
+		
 		public function FLVconstructor(patternId:int, url:String = null, url2:String = null, objName:String = null) {
+			startLoader();
 
 			// Create a NetConnection. 2-way _connection not necessary: connect to null
 			_connection = new NetConnection();
@@ -41,9 +45,8 @@ package com.tchatcho.constructors {
 			front__videomaterial.doubleSided = true;
 
 			var front__videomaterial:VideoStreamMaterial = front__videomaterial;
-			var front_plane:Plane;
-			front_plane = new Plane(front__videomaterial, 640, 480, 4, 4);
-			front_plane.scale = 0.3;
+			_front_plane = new Plane(front__videomaterial, 640, 480, 4, 4);
+			_front_plane.scale = 0.3;
 			this._universe = new DisplayObject3D();
 			this._universe.z = 3;
 			if(objName != null){
@@ -53,12 +56,15 @@ package com.tchatcho.constructors {
 					}
 					this._universe.rotationY = 0;
 					this._universe.rotationZ = -90;
-					this._universe.addChild(front_plane);
 
+				}
+				public function startLoader():void{
+					this._universe.addChild(_ldr.ldrObject);
 				}
 				public function loaderComplete(evt:NetStatusEvent):void{
 					if (evt.info.code == "NetStream.Play.Start"){
-						trace("FLVLoader: Startin Streaming");
+						this._universe.removeChild(_ldr.ldrObject);
+						this._universe.addChild(_front_plane);
 					}
 				}
 				public function get object():DisplayObject3D{

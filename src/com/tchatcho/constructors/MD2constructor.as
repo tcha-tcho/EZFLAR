@@ -5,12 +5,15 @@ package com.tchatcho.constructors {
 	import flash.events.Event;
 
 	import org.papervision3d.objects.DisplayObject3D;
+	import com.tchatcho.constructors.LoadingEZFLAR;
 
 	public class MD2constructor extends MD2 {
+		private var _ldr:LoadingEZFLAR = new LoadingEZFLAR();
 		private var _universe:DisplayObject3D = new DisplayObject3D();
 		private var _mMD2:MD2;
 		public function MD2constructor(patternId:int, url:String = null, url2:String = null, objName:String = null) {
 
+			startLoader();
 
 			this._mMD2 = new MD2();
 			if (url2 != null){
@@ -36,11 +39,14 @@ package com.tchatcho.constructors {
 				}else{
 					this._universe.name = "universe"
 					}
-					this._universe.addChild(this._mMD2);
 
 				}
+				public function startLoader():void{
+					this._universe.addChild(_ldr.ldrObject);
+				}
 				public function loaderComplete(evt:Event):void{
-					trace("MD2Loader: Complete");
+					this._universe.removeChild(_ldr.ldrObject);
+					this._universe.addChild(this._mMD2);
 				}
 				public function get object():DisplayObject3D{
 					return this._universe;

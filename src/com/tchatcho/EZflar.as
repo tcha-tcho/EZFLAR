@@ -12,12 +12,11 @@ package com.tchatcho {
 	import com.tchatcho.Base_model;
 	import flash.media.Camera;
 	import flash.events.*;
-    
-	
+    import com.tchatcho.NoCamera;
+
 	//to handle objects from outside
 	import com.transmote.flar.FLARMarker;
 	import org.papervision3d.objects.DisplayObject3D;
-
 
 	[SWF(width="640", height="480", frameRate="30", backgroundColor="#FFFFFF")]
 	public class EZflar extends Sprite {
@@ -33,8 +32,15 @@ package com.tchatcho {
 		private var _objects:Array;
 		private var _width:int;
 		private var _height:int;
-
-
+		private var _frameRate:Number;
+		private var _downSampleRatio:Number;
+		private var _isMirrored:Boolean = false;
+		private var _noCamMessage:String = "Sorry ;( ... we need a cam";
+		private var _noCamColorTxt:uint = 0x00FF00;
+		private var _noCamColorBackground = 0xCCFFCC;
+		private var _nocam:NoCamera;				
+		
+		
 		private var _funcStarted:Function;
 		private var _funcAdded:Function;
 		private var _funcUpdated:Function;
@@ -48,14 +54,16 @@ package com.tchatcho {
 								 mirror:Boolean = true){
 			_width = width;
 			_height = height;
+			_frameRate = frameRate;
+			_downSampleRatio = downSampleRatio;
 			_objects = objects;
-			_camSource = new FLARCameraSource(width, height, frameRate, downSampleRatio)
 			this.init();
 		}
 
 		private function init () :void {
 			trace("EZFLAR 0.1(beta) is running!  :)\n keep calm and look busy!\n");	
 			if(Camera.names.length > 0) {
+				_camSource = new FLARCameraSource(_width, _height, _frameRate, _downSampleRatio)
 				// build list of FLARPatterns for FLARToolkit to detect
 				this.patterns = new Array();
 				for (var i:int = 0; i < _objects.length; i++) {
@@ -74,13 +82,34 @@ package com.tchatcho {
 				this.flarManager.addEventListener(FLARMarkerEvent.MARKER_REMOVED, this.onMarkerRemoved);
 				this.flarManager.addEventListener(Event.INIT, this.onFlarManagerInited);
 			} else {
-				//TODO: render nocam.swf, and test if this initiate the cam twice
-				trace("you need a cam");
+				_nocam = new NoCamera(_width,_height, _noCamMessage, _noCamColorTxt, _noCamColorBackground);				
+				addChild(_nocam)
+				if(this._isMirrored == false){
+					this.mirror();
+				}
 			}
 		}
+		public function customizeNoCam(message:String, colorTxt:uint, colorBackground:uint):void{
+			_noCamMessage = message;
+			_noCamColorTxt = colorTxt;
+			_noCamColorBackground = colorBackground;
+			if(Camera.names.length < 1){
+				removeChild(_nocam)
+				_nocam = new NoCamera(_width,_height, _noCamMessage, _noCamColorTxt, _noCamColorBackground);
+				addChild(_nocam)
+			}
+			
+		}
 		public function mirror():void{
-			this.scaleX = -1;
-			this.x = _width;				
+			if(this._isMirrored == false){
+				this.scaleX = -1;
+				this.x = _width;
+				this._isMirrored = true;
+			} else {
+				this.scaleX = 1;
+				this.x = 0;
+				this._isMirrored = false;
+			}
 		};
 		public function moveTo(x:Number = 640, y:Number = -1):void{
 			this.x = x;

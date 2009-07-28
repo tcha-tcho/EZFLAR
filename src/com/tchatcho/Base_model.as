@@ -93,118 +93,118 @@ package com.tchatcho {
 					var i:int = 0;
 					var len:int = this._markersByPatternId.length;
 					while(i < len) {
-						if(_changes[0] == true){
-							if (_changes[1] == this._markersByPatternId[i][0]){
-								this._markersByPatternId[i][2].getChildByName(_changes[4])[_changes[2]] = _changes[3];
-							};
+						//TODO: better the applying of changes in update
+						if(_changes.length > 0){
+							for (var s:int = 0; s < _changes.length; s++){
+								if(_changes[s][4] == true){//prevent apply the changes twice
+									if (_changes[s][0] == this._markersByPatternId[i][0]){
+										if(this._markersByPatternId[i][2].getChildByName(_changes[s][3]) != null){//TODO: Fix that! sometimes the object is not in the stage
+											this._markersByPatternId[i][2].getChildByName(_changes[s][3])[_changes[s][1]] = _changes[s][2];
+										};
+									};
+								};
+							_changes[s][4] = false;
+							}
 						}
-						this._markersByPatternId[i][2].transform = FLARPVGeomUtils.translateFLARMatrixToPVMatrix(this._markersByPatternId[i][1].transformMatrix);
-						i++;
+					this._markersByPatternId[i][2].transform = FLARPVGeomUtils.translateFLARMatrixToPVMatrix(this._markersByPatternId[i][1].transformMatrix);
+					i++;
+				}
+			}
+			private function init () :void {
+				this._markersByPatternId = new Array();
+			}
+
+			private function initPapervisionEnvironment (cameraParams:FLARParam, viewportWidth:Number, viewportHeight:Number) :void {
+				this._scene3D = new Scene3D();
+				this._camera3D = new FLARCamera3D(cameraParams);
+				this._viewport3D = new Viewport3D(viewportWidth, viewportHeight);
+				this.addChild(this._viewport3D);
+				this._renderEngine = new LazyRenderEngine(this._scene3D, this._camera3D, this._viewport3D);
+
+				this._pointLight3D = new PointLight3D();
+				this._pointLight3D.x = 1000;
+				this._pointLight3D.y = 1000;
+				this._pointLight3D.z = -1000;
+
+				this.addEventListener(Event.ENTER_FRAME, this.onEnterFrame);
+			}
+
+			private function onEnterFrame (evt:Event) :void {
+				this.updateModels();
+				this._renderEngine.render();
+			}
+			private function placeModels(patternId:int, url:String = null, url2:String = null, objName:String = null):DisplayObject3D{
+				var _format:String = url.toString();
+				_format = _format.substring(_format.length - 3,_format.length).toUpperCase();
+				switch (_format){
+					case "SWF" ://*.swf
+					var swf:SWFconstructor = new SWFconstructor(patternId, url, url2, objName)
+						return containerReady(swf.object);
+					break;
+
+					case "FLV" ://*.flv
+					var flv:FLVconstructor = new FLVconstructor(patternId, url, url2, objName);
+					return containerReady(flv.object);
+					break;
+
+					case "DAE" : //*.dae
+					var dae:DAEconstructor = new DAEconstructor(patternId, url, url2, objName);
+					return containerReady(dae.object);
+					break;
+
+					case "MD2" ://*.md2
+					var md2:MD2constructor = new MD2constructor(patternId, url, url2, objName);
+					return containerReady(md2.object);
+					break;
+
+					case "UBE" ://cube
+					var cube:CUBEconstructor = new CUBEconstructor(patternId, url, url2, objName);
+					return containerReady(cube.object);
+					break;
+
+					case "URE" ://picture
+					var picture:PICTUREconstructor = new PICTUREconstructor(patternId, url, url2, objName);
+					return containerReady(picture.object);
+					break;
+
+					case "IRE"://wire
+					var wire:WIREconstructor = new WIREconstructor(patternId, url, url2, objName);
+					return containerReady(wire.object);
+					break;
+
+					case "PTY" ://empty
+					var container:DisplayObject3D = new DisplayObject3D();
+					var _universe:DisplayObject3D = new DisplayObject3D();
+					_universe.z = 50;
+					if(objName != null){
+						_universe.name = objName;
+					} else {
+						_universe.name = "universe";
 					}
-					_changes[0] = false;
-				}
-				private function init () :void {
-					this._markersByPatternId = new Array();
-					_changes[0] = false;
-				}
-
-				private function initPapervisionEnvironment (cameraParams:FLARParam, viewportWidth:Number, viewportHeight:Number) :void {
-					this._scene3D = new Scene3D();
-					this._camera3D = new FLARCamera3D(cameraParams);
-					this._viewport3D = new Viewport3D(viewportWidth, viewportHeight);
-					this.addChild(this._viewport3D);
-					this._renderEngine = new LazyRenderEngine(this._scene3D, this._camera3D, this._viewport3D);
-
-					this._pointLight3D = new PointLight3D();
-					this._pointLight3D.x = 1000;
-					this._pointLight3D.y = 1000;
-					this._pointLight3D.z = -1000;
-
-					this.addEventListener(Event.ENTER_FRAME, this.onEnterFrame);
-				}
-
-				private function onEnterFrame (evt:Event) :void {
-					this.updateModels();
-					this._renderEngine.render();
-				}
-				private function placeModels(patternId:int, url:String = null, url2:String = null, objName:String = null):DisplayObject3D{
-					var _format:String = url.toString();
-					_format = _format.substring(_format.length - 3,_format.length).toUpperCase();
-					switch (_format){
-						case "SWF" ://*.swf
-						var swf:SWFconstructor = new SWFconstructor(patternId, url, url2, objName)
-							return containerReady(swf.object);
-						break;
-
-						case "FLV" ://*.flv
-						var flv:FLVconstructor = new FLVconstructor(patternId, url, url2, objName);
-						return containerReady(flv.object);
-						break;
-
-						case "DAE" : //*.dae
-						var dae:DAEconstructor = new DAEconstructor(patternId, url, url2, objName);
-						return containerReady(dae.object);
-						break;
-
-						case "MD2" ://*.md2
-						var md2:MD2constructor = new MD2constructor(patternId, url, url2, objName);
-						return containerReady(md2.object);
-						break;
-
-						case "UBE" ://cube
-						var cube:CUBEconstructor = new CUBEconstructor(patternId, url, url2, objName);
-						return containerReady(cube.object);
-						break;
-
-						case "URE" ://picture
-						var picture:PICTUREconstructor = new PICTUREconstructor(patternId, url, url2, objName);
-						return containerReady(picture.object);
-						break;
-
-						case "IRE"://wire
-						var wire:WIREconstructor = new WIREconstructor(patternId, url, url2, objName);
-						return containerReady(wire.object);
-						break;
-
-						case "PTY" ://empty
-						var container:DisplayObject3D = new DisplayObject3D();
-						var _universe:DisplayObject3D = new DisplayObject3D();
-						_universe.z = 50;
-						if(objName != null){
-							_universe.name = objName;
-						} else {
-							_universe.name = "universe";
-						}
-						container.addChild( _universe );
-						this._scene3D.addChild(container);
-						return container;
-						break;
-
-						default ://wrong format
-						trace(_format + " WE CANT USE THIS ;( PLS, USE: *.swf, *.flv, *.dae, *.md2, cube, picture, wire or empty... DONT FORGET TO PUT IN RESOURCES/MODELS FOLDER");
-						var container : DisplayObject3D = new DisplayObject3D();
-						return container;					
-						break;
-					}
-				}
-				private function containerReady(object:DisplayObject3D):DisplayObject3D{
-					var container : DisplayObject3D = new DisplayObject3D();
-					container.addChild( object );
+					container.addChild( _universe );
 					this._scene3D.addChild(container);
 					return container;
-				}
-				public function changeObjectProperty(marker:uint, propertyToChange:String, newValue:Number, thisName:String):void{
-					_changes[0] = true;//prevent to process twice
-					_changes[1] = marker;
-					_changes[2] = propertyToChange;
-					_changes[3] = newValue;
-					_changes[4] = thisName;
+					break;
 
+					default ://wrong format
+					trace(_format + " WE CANT USE THIS ;( PLS, USE: *.swf, *.flv, *.dae, *.md2, cube, picture, wire or empty... DONT FORGET TO PUT IN RESOURCES/MODELS FOLDER");
+					var container : DisplayObject3D = new DisplayObject3D();
+					return container;					
+					break;
+				}
+			}
+			private function containerReady(object:DisplayObject3D):DisplayObject3D{
+				var container : DisplayObject3D = new DisplayObject3D();
+				container.addChild( object );
+				this._scene3D.addChild(container);
+				return container;
+			}
+			public function changeObjectProperty(marker:int, propertyToChange:String, newValue:Number, thisName:String):void{
+				_changes.push([marker, propertyToChange, newValue, thisName, true])
 				}
 				public function addModelToStage(set1:Array, set2:Array = null):void {
 					this._objectsToAdd.push([constructURL(set1), set2])
 					}
-
 
 					public function constructURL(income:Array):Array{
 						var url1:String = new String();
