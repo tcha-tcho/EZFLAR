@@ -1,3 +1,6 @@
+/**
+ * @Author tcha-tcho
+ */
 package com.tchatcho.constructors {
 	import org.papervision3d.objects.parsers.DAE;
 	import org.papervision3d.materials.BitmapFileMaterial;

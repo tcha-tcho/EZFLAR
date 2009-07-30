@@ -1,3 +1,6 @@
+/**
+ * @Author tcha-tcho
+ */
 package com.tchatcho.constructors {
 	import org.papervision3d.objects.primitives.Cube;
 
@@ -9,10 +12,8 @@ package com.tchatcho.constructors {
 	import org.papervision3d.materials.WireframeMaterial;
 	import com.tchatcho.constructors.LoadingEZFLAR;
 	
-	
 	//TODO: handle clicks in objects
 	//import org.papervision3d.events.InteractiveScene3DEvent;
-	
 
 	public class CUBEconstructor extends DisplayObject3D {
 		private var _ldr:LoadingEZFLAR = new LoadingEZFLAR();

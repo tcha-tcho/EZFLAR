@@ -1,3 +1,6 @@
+/**
+ * @Author tcha-tcho
+ */
 package com.tchatcho.constructors {
 	import flash.display.MovieClip;
 	import flash.display.Loader;
@@ -5,9 +8,7 @@ package com.tchatcho.constructors {
 	import flash.events.Event;
 	import org.papervision3d.objects.primitives.Plane;
 	import org.papervision3d.materials.MovieMaterial;
-
 	import org.papervision3d.objects.DisplayObject3D;
-
 	import com.tchatcho.constructors.LoadingEZFLAR;
 
 	public class SWFconstructor extends MovieClip {

@@ -1,3 +1,6 @@
+/**
+ * @Author tcha-tcho
+ */
 package com.tchatcho.constructors {
 	import org.papervision3d.objects.primitives.Plane;
 	import org.papervision3d.materials.WireframeMaterial;

@@ -1,3 +1,20 @@
+/* 
+ * EZFLAR v. 0.1 (beta)
+ * http://www.ezflar.com
+ * Copyright 2009, tcha-tcho
+ * --------------------------------------------------------------------------------
+ * EZFLAR is based in the Example developed by Eric Socolofsky in FLARManager.
+ * This sofware attempt to wrap 3 great codes to provide a quick way to work:
+ * FLARManager(c), developed by Eric Socolofsky
+ * FLARToolkit(c), developed by Saqoosha as part of the Libspark project.
+ * PaperVision3D(c), developed by PV3D team
+ *
+ * Bla bla bla bla this is under GPL... bla bla
+ *
+ *	http://www.tcha-tcho.com
+ *  hey! fork this at http://www.github.com/
+ * 
+ */
 package com.tchatcho {
 	import com.transmote.flar.FLARCameraSource;
 	import com.transmote.flar.FLARLoaderSource;
@@ -17,11 +34,15 @@ package com.tchatcho {
 	//to handle objects from outside
 	import com.transmote.flar.FLARMarker;
 	import org.papervision3d.objects.DisplayObject3D;
+	
+	//TODO: Loading all code, loading each model working
 
 	[SWF(width="640", height="480", frameRate="30", backgroundColor="#FFFFFF")]
 	public class EZflar extends Sprite {
-		private static const CAMERA_PARAMS_PATH:String = "../resources/flar/FLARparams.dat";
-		private static const PATTERN_PATH:String = "../resources/flar/patterns/";
+		//defaults paths to assets inside resources folder
+		private static const PATH_TO_MODELS:String = "models/";
+		private static const CAMERA_PARAMS_PATH:String = "flar/FLARparams.dat";
+		private static const PATTERN_PATH:String = "flar/patterns/";
 		private static const PATTERN_RESOLUTION:uint = 16;
 
 		private var patterns:Array;
@@ -38,8 +59,8 @@ package com.tchatcho {
 		private var _noCamMessage:String = "Sorry ;( ... we need a cam";
 		private var _noCamColorTxt:uint = 0x00FF00;
 		private var _noCamColorBackground = 0xCCFFCC;
-		private var _nocam:NoCamera;				
-		
+		private var _nocam:NoCamera;
+		private var _pathToResources:String = new String();
 		
 		private var _funcStarted:Function;
 		private var _funcAdded:Function;
@@ -57,11 +78,14 @@ package com.tchatcho {
 			_frameRate = frameRate;
 			_downSampleRatio = downSampleRatio;
 			_objects = objects;
-			this.init();
 		}
-
+		public function initializer(theStage:*, newPath:String = "./resources/"):void{
+			this._pathToResources = newPath;
+			this.init();
+			theStage.addChild(this);
+		};
 		private function init () :void {
-			trace("EZFLAR 0.1(beta) is running!  :)\n keep calm and look busy!\n");	
+			trace("EZFLAR 0.1(beta) is running!  :)\n keep calm and look busy!\n");
 			if(Camera.names.length > 0) {
 				_camSource = new FLARCameraSource(_width, _height, _frameRate, _downSampleRatio)
 				// build list of FLARPatterns for FLARToolkit to detect
@@ -69,11 +93,11 @@ package com.tchatcho {
 				for (var i:int = 0; i < _objects.length; i++) {
 					if(_objects[i][0][2] == undefined){_objects[i][0][2] = null}
 					if(_objects[i][1] == undefined){_objects[i][1] = null}
-					this.patterns.push(new FLARPattern(PATTERN_PATH+ _objects[i][0][0], PATTERN_RESOLUTION));
+					this.patterns.push(new FLARPattern(_pathToResources + PATTERN_PATH+ _objects[i][0][0], PATTERN_RESOLUTION));
 				}
 
 				// use Camera (default)
-				this.flarManager = new FLARManager(CAMERA_PARAMS_PATH, patterns,_camSource);
+				this.flarManager = new FLARManager(_pathToResources + CAMERA_PARAMS_PATH, patterns,_camSource);
 				this.addChild(FLARCameraSource(this.flarManager.flarSource));
 
 				// begin listening for FLARMarkerEvents
@@ -126,7 +150,9 @@ package com.tchatcho {
 				this.patterns.length,
 				this.flarManager.cameraParams,
 				_width,
-				_height);
+				_height,
+				_pathToResources,
+				PATH_TO_MODELS);
 			this.addChild(this.base_model);
 			if (_funcStarted != null){
 				_funcStarted();
@@ -171,6 +197,11 @@ package com.tchatcho {
 		}
 		public function addModelTo(set1:Array, set2:Array = null):void{
 			this.base_model.addModelToStage(set1, set2);
+		}
+		public function getModel(onMarker:int,thisName:String = "universe"):Array{
+			var arrToReturn:Array = new Array();
+			arrToReturn = this.base_model.getModelByName(onMarker,thisName);
+			return arrToReturn
 		}
 	}
 }

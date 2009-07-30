@@ -1,3 +1,6 @@
+/**
+ * @Author tcha-tcho
+ */
 package com.tchatcho.constructors {
 	import flash.display.MovieClip;
 	import flash.display.Sprite;

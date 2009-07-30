@@ -1,3 +1,7 @@
+/**
+ * @Author tcha-tcho
+ */
+
 package com.tchatcho {
 	import flash.display.Sprite;
    	import flash.text.TextField;
@@ -6,9 +10,6 @@ package com.tchatcho {
 	import flash.filters.BitmapFilter;
 	import flash.filters.BitmapFilterQuality;
 	import flash.filters.DropShadowFilter
-
-//    import flash.text.TextFieldAutoSize;
-
     
 	/*import flash.display.*;*/
 	/*import flash.net.URLRequest;*/
@@ -16,7 +17,6 @@ package com.tchatcho {
 	public class NoCamera extends Sprite {
 		/*private static const LOADINGPATH:String = "../resources/flar/nocam.swf";*/
 		
-//        private var bgColor:uint      = 0xCCCCCC;
         private var borderColor:uint  = 0xFFFFFF;
         private var borderSize:uint   = 4;
         private var cornerRadius:uint = 30;
@@ -58,7 +58,7 @@ package com.tchatcho {
             
 			
 			addChild(noCamMsg)
-			
+			//TODO: add support to no cam with a swf, PC problems(im a mac)
 			/*var ldr:Loader = new Loader();
 			var urlReq:URLRequest = new URLRequest(LOADINGPATH);
 			ldr.load(urlReq);
