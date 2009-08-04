@@ -192,16 +192,17 @@ package com.tchatcho {
 		public function onRemoved(func:Function):void{
 			_funcRemoved = func;
 		}
-		public function object(marker:int, propertyToChange:String, newValue:Number, thisName:String = "universe"):void {
-			this.base_model.changeObjectProperty(marker, propertyToChange, newValue, thisName);
-		}
 		public function addModelTo(set1:Array, set2:Array = null):void{
 			this.base_model.addModelToStage(set1, set2);
 		}
-		public function getModel(onMarker:int,thisName:String = "universe"):Array{
+		public function getObject(onMarker:int,thisName:String = "universe"):*{
 			var arrToReturn:Array = new Array();
-			arrToReturn = this.base_model.getModelByName(onMarker,thisName);
-			return arrToReturn
+			arrToReturn = this.base_model.getObjectByName(onMarker,thisName);
+			if(arrToReturn.length == 1){
+				return arrToReturn[0];
+			}else{
+				return arrToReturn;
+			};
 		}
 	}
 }
