@@ -22,7 +22,7 @@ package {
 		private var _symbols:Array = new Array();
 		
 		public function Main() {
-			p{color:gray;}. _symbols will take all your markers and models and work with this in couples... ezflar can handle a lot of formats for you, so enjoy  :)   you can also create names for your models to group or to access this models for your names later. Look how to do that in "myoptionalname". The markers will be access by your numbers, so remember that: begin with 0
+			pre. _symbols will take all your markers and models and work with this in couples... ezflar can handle a lot of formats for you, so enjoy  :)   you can also create names for your models to group or to access this models for your names later. Look how to do that in "myoptionalname". The markers will be access by your numbers, so remember that: begin with 0
 			_symbols.push([["EZFLAR0.pat", "swffilename.swf"],["myoptionalname"]]);//0
 			_symbols.push([["EZFLAR1.pat", "flvfilename.flv"]]);//1
 			_symbols.push([["EZFLAR2.pat", "daefilename.dae", "OPTIONALtexture.jpg"]]);//2
