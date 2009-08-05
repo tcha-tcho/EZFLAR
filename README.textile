@@ -1,28 +1,28 @@
 h2. So f*** EZ
 
 Ok, download the package of thinks and put this on your frame:
-<pre>
+<code>
 	import com.tchatcho.EZflar;//tcha-tcho.com \n import com.transmote.flar.FLARMarkerEvent;		
 	private var _ezflar:EZflar;
 	private var _symbols:Array = new Array();
 	_symbols.push([["EZFLAR.pat", "cube"]]);//0
 	_ezflar = new EZflar(_symbols);
 	_ezflar.initializer(stage);
-</pre>
+</code>
 
 
 h2. A little bit of more
 
 initiate your code
-<pre>
+<code>
 	import com.tchatcho.EZflar;
 	import com.transmote.flar.FLARMarkerEvent;	
 	var _ezflar:EZflar;
 	var _symbols:Array = new Array();
-</pre>
+</code>
 
 _symbols will take all your markers and models and work with this in couples... ezflar can handle a lot of formats for you, so enjoy  :)   you can also create names for your models to group or to access this models for your names later. Look how to do that in "myoptionalname". The markers will be access by your numbers, so remember that: begin with 0
-<pre>
+<code>
 	_symbols.push([["EZFLAR0.pat", "swffilename.swf"],["myoptionalname"]]);//0
 	_symbols.push([["EZFLAR1.pat", "flvfilename.flv"]]);//1
 	_symbols.push([["EZFLAR2.pat", "daefilename.dae", "OPTIONALtexture.jpg"]]);//2
@@ -31,41 +31,41 @@ _symbols will take all your markers and models and work with this in couples... 
 	_symbols.push([["EZFLAR5.pat", "cube", "OPTIONALtexture.jpg"]]);//5
 	_symbols.push([["EZFLAR6.pat", "wire"]]);//6
 	_symbols.push([["EZFLAR7.pat", "empty"]]);//7
-</pre>
+</code>
 
 now its time to build our AR
 optionally you can give: size, framerate and etc.
-<pre>
+<code>
 	_ezflar = new EZflar(_symbols);
-</pre>
+</code>
 
 lets begin! you can put your AR in any DisplayObject, like MovieClip or in this case "stage"
 if your resources folder is in other place than your swf folder then you can give this
 path in another argument in a string
-<pre>
+<code>
 	_ezflar.initializer(stage);
-</pre>
+</code>
 
 when ezflar dont find a camera he gonna show a message  :)
 you can customize this message for your language and etc.
 the second color is the font color, the last is the background
-<pre>
+<code>
 	_ezflar.customizeNoCam("Precisamos de uma webcam", 0xFFFFFF, 0xCCCCCC);
-</pre>
+</code>
 
 checkout how your software are responding your changes with a framerate
-<pre>
+<code>
 	_ezflar.viewFrameRate();
-</pre>
+</code>
 
 is a little annoying to play with AR with the webcam going to the wrong way
 you can mirror the image, and de-mirror when you want
-<pre>
+<code>
 	_ezflar.mirror();
-</pre>
+</code>
 
 this will make somethink when your app start
-<pre>
+<code>
 	_ezflar.onStarted(function():void {
 		trace("hey! im alive!");
 
@@ -74,20 +74,20 @@ this will make somethink when your app start
 		_ezflar.addModelTo([1,"wire"]);//1 is the number of the _symbols remember?
 		_ezflar.addModelTo([0,"cube", "OPTIONALtexture.jpg"], ["thecube"]);//here you can give names too
 	});
-</pre>
+</code>
 
 and you have methods ready to work when markers are showed to the cam
-<pre>
+<code>
 	_ezflar.onAdded(function(marker:FLARMarkerEvent):void {
 		//hey! remember the names you gave?? you can pick models and change it!
 		_ezflar.getObject(0,"myoptionalname").rotationX = 90;
 		_ezflar.getObject(0,"thecube").rotationZ = 270;
 		_ezflar.getObject(3);//if you dont have a name he gonna take all without a name :P
 	});
-</pre>
+</code>
 
 this will be used in each frame rendered
-<pre>
+<code>
 	_ezflar.onUpdated(function(marker:FLARMarkerEvent):void {
 		//he returns this marker that you can use to look where the markers are and etc.
 		trace("["+ marker.marker.patternId+"]>>" +
@@ -99,9 +99,9 @@ this will be used in each frame rendered
 		"RZ:" + marker.rotationZ() + " || "
 		);
 	});
-</pre>
+</code>
 play around with ezflar... we are in beta now and a lot of work to do.. pls help us :)
-<pre>
+<code>
 	_ezflar.onRemoved(function(marker:FLARMarkerEvent):void {
 	});
-</pre>
+</code>
