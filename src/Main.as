@@ -37,6 +37,7 @@ package {
 				});
 			_ezflar.onAdded(function(marker:FLARMarkerEvent):void {
 				/*trace(">>>>>>>>>>>>> adicionado: " + marker.marker.patternId );*/
+				_ezflar.getObject(0,"mybaleia").rotationX = 90;
 				_ezflar.object(0,"rotationX", 90, "mybaleia");
 				/*_ezflar.object(1,"scale",2,"thecube");*/
 				/*_ezflar.object(1,"scale",2);*/
