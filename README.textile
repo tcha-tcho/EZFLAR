@@ -1,8 +1,9 @@
-h2. So f*** EZ
+h2. The EZest way
 
 Ok, download the package of thinks and put this on your frame:
 <pre>
-	import com.tchatcho.EZflar;//tcha-tcho.com \n import com.transmote.flar.FLARMarkerEvent;		
+	import com.tchatcho.EZflar;//tcha-tcho.com
+	import com.transmote.flar.FLARMarkerEvent;		
 	private var _ezflar:EZflar;
 	private var _symbols:Array = new Array();
 	_symbols.push([["EZFLAR.pat", "cube"]]);//0
