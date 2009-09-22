@@ -10,11 +10,16 @@ package com.tchatcho.constructors {
 	import org.papervision3d.materials.MovieMaterial;
 	import org.papervision3d.objects.DisplayObject3D;
 	import com.tchatcho.constructors.LoadingEZFLAR;
+	
+	import flash.events.EventDispatcher;
+	import flash.events.Event;
 
 	import flash.media.Sound;
 	import flash.net.URLRequest;
 	import flash.media.SoundChannel;
 	import flash.media.SoundTransform;
+	
+	import com.tchatcho.constructors.MP3Events;
 
 	public class MP3constructor extends MovieClip {
 		private var _ldr:LoadingEZFLAR = new LoadingEZFLAR();
@@ -25,12 +30,11 @@ package com.tchatcho.constructors {
 		private var _snd:Sound = new Sound();
 		private var _channel:SoundChannel = new SoundChannel();
 		private var _soundTrans:SoundTransform = new SoundTransform();
-		//private var _imInPlay:Boolean = new Boolean()
-
+		private var _mp3events:MP3Events = new MP3Events();
 
 		public function MP3constructor(patternId:int, url:String = null, url2:String = null, objName:String = null) {
 			startLoader();
-
+			
 
 			var request2:URLRequest=new URLRequest("com/tchatcho/constructors/soundicon.swf");
 			_loader.load(request2);
@@ -53,6 +57,7 @@ package com.tchatcho.constructors {
 			_soundTrans.volume = 1;
 			_channel.soundTransform = _soundTrans;
 			
+			_mp3events.addEventListener(MP3Events.STOPSOUND, stopTheSound)
 
 			if(objName != null){
 				this._universe.name = objName
@@ -73,7 +78,11 @@ package com.tchatcho.constructors {
 				public function get object():DisplayObject3D{
 					return this._universe;
 				}
-
+				
+				public function stopTheSound(event:Event):void{
+					trace("caraalllhoooooo");
+					
+				}
 				//TODO: enable 3d emulation sound!
 				/*_ezflar.onUpdated(function(marker:FLARMarkerEvent):void {
 				_model = _ezflar.getModel(0, "gloss")[0];

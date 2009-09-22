@@ -25,8 +25,8 @@ package com.tchatcho {
 	import com.tchatcho.constructors.PICTUREconstructor;
 	import com.tchatcho.constructors.WIREconstructor;
 	import com.tchatcho.constructors.MP3constructor;
-
-
+	import com.tchatcho.constructors.MP3Events;
+	
 	public class Base_model extends Sprite {//Or BasicView
 
 		//initiate global vars
@@ -45,6 +45,8 @@ package com.tchatcho {
 	private var _newCount:Date;
 	private var _oldCount:Date;
 	private var _firstLock:Boolean;
+	
+	private var _mp3events:MP3Events;
 
 	public function Base_model (objects:Array, numPatterns:uint, cameraParams:FLARParam, viewportWidth:Number, viewportHeight:Number, pathToResources:String, modelsPath:String) {
 		this._objects = objects;
@@ -75,7 +77,6 @@ package com.tchatcho {
 			_firstLock = false;
 		}
 		public function removeMarker (marker:FLARMarker) :void {
-	
 			// find and remove marker
 			_newCount = new Date();
 			if((_newCount.getTime() - _oldCount.getTime()) > 0){//prevent inconsistences
@@ -93,6 +94,7 @@ package com.tchatcho {
 					}
 					this._markersByPatternId = markerList2;
 				};
+				_mp3events.dispatchMP3 = true;
 			}
 			private function updateModels () :void {
 				// update all Models containers according to the transformation matrix in their associated FLARMarkers
@@ -175,6 +177,7 @@ package com.tchatcho {
 					
 					case "MP3" ://*.mp3
 					var mp3:MP3constructor = new MP3constructor(patternId, url, url2, objName)
+					_mp3events = new MP3Events();
 					return containerReady(mp3.object);
 					break;
 
