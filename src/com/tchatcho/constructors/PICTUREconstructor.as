@@ -17,13 +17,13 @@ package com.tchatcho.constructors {
 		private var _front_plane:Plane;
 		public function PICTUREconstructor(patternId:int, url:String = null, url2:String = null, objName:String = null) {
 			startLoader();
-			if (url2 != null){
-				var pictureMaterial:BitmapFileMaterial = new BitmapFileMaterial(url2, true);
+			if (url != null){
+				var pictureMaterial:BitmapFileMaterial = new BitmapFileMaterial(url, true);
 				pictureMaterial.doubleSided = true;
 				pictureMaterial.addEventListener( FileLoadEvent.LOAD_COMPLETE , loaderComplete );
 				_front_plane = new Plane(pictureMaterial, 640, 480, 4, 4);
 			} else {
-				trace("YOU DO IT WRONG! :P, pls use picture like this:....push([['yourpattern', 'picture', 'yourimage.jpg'],['a_optional_name']]);");
+				trace("YOU DO IT WRONG! :P, pls use picture like this:....push([['yourpattern', 'yourimage.jpg'],['a_optional_name']]);");
 				var wfm:WireframeMaterial = new WireframeMaterial(0xffff00);
 				wfm.doubleSided = true;
 				_front_plane = new Plane(wfm);

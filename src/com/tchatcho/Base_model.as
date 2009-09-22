@@ -15,7 +15,7 @@ package com.tchatcho {
 	import org.papervision3d.render.LazyRenderEngine;
 	import org.papervision3d.scenes.Scene3D;
 	import org.papervision3d.view.Viewport3D;
-
+	
 	//to construct models
 	import com.tchatcho.constructors.SWFconstructor;
 	import com.tchatcho.constructors.FLVconstructor;
@@ -24,6 +24,7 @@ package com.tchatcho {
 	import com.tchatcho.constructors.CUBEconstructor;
 	import com.tchatcho.constructors.PICTUREconstructor;
 	import com.tchatcho.constructors.WIREconstructor;
+	import com.tchatcho.constructors.MP3constructor;
 
 
 	public class Base_model extends Sprite {//Or BasicView
@@ -74,6 +75,7 @@ package com.tchatcho {
 			_firstLock = false;
 		}
 		public function removeMarker (marker:FLARMarker) :void {
+	
 			// find and remove marker
 			_newCount = new Date();
 			if((_newCount.getTime() - _oldCount.getTime()) > 0){//prevent inconsistences
@@ -128,7 +130,7 @@ package com.tchatcho {
 				switch (_format){
 					case "SWF" ://*.swf
 					var swf:SWFconstructor = new SWFconstructor(patternId, url, url2, objName)
-						return containerReady(swf.object);
+					return containerReady(swf.object);
 					break;
 
 					case "FLV" ://*.flv
@@ -151,12 +153,32 @@ package com.tchatcho {
 					return containerReady(cube.object);
 					break;
 
-					case "URE" ://picture
+					case "JPG" ://picture jpg
 					var picture:PICTUREconstructor = new PICTUREconstructor(patternId, url, url2, objName);
 					return containerReady(picture.object);
 					break;
 
-					case "IRE"://wire
+					case "PEG" ://picture jpeg
+					var picture:PICTUREconstructor = new PICTUREconstructor(patternId, url, url2, objName);
+					return containerReady(picture.object);
+					break;
+
+					case "GIF" ://picture gif
+					var picture:PICTUREconstructor = new PICTUREconstructor(patternId, url, url2, objName);
+					return containerReady(picture.object);
+					break;
+
+					case "PNG" ://picture png
+					var picture:PICTUREconstructor = new PICTUREconstructor(patternId, url, url2, objName);
+					return containerReady(picture.object);
+					break;
+					
+					case "MP3" ://*.mp3
+					var mp3:MP3constructor = new MP3constructor(patternId, url, url2, objName)
+					return containerReady(mp3.object);
+					break;
+
+					case "IRE" ://wire
 					var wire:WIREconstructor = new WIREconstructor(patternId, url, url2, objName);
 					return containerReady(wire.object);
 					break;
