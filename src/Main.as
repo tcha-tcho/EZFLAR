@@ -10,13 +10,13 @@ package {
 		public function Main() {
 			//*.swf, *.flv, *.dae, *.md2, cube, picture, wire or empty
 			/*_symbols.push(new Array("patt.hiro","Scout/modelo.DAE"));// 0*/
-			/*_symbols.push(new Array("patt.hiro","fdsfd.fds"));// formato errado*/
+			/*_symbols.push(new Array("p	att.hiro","fdsfd.fds"));// formato errado*/
 			/*_symbols.push(new Array("patt.hiro","MD2/horse/horse.md2","MD2/horse/horse.jpg"));// 0*/
 			/*_symbols.push(new Array("patt2.hiro","test.swf"));// 0*/
 			/*_symbols.push(new Array("patt2.hiro","test.flv"));// 0*/
 			/*_symbols.push(new Array("patt.hiro","cube"));// 0*/
 			_symbols.push([["patt.hiro", "testedaniel/baleia3.dae", "testedaniel/texturafinal.jpg"],["mybaleia"]]);// 0
-			_symbols.push([["patt2.hiro", "picture", "imagem1.jpg"]]);// 1
+			_symbols.push([["patt2.hiro", "empty"]]);// 1
 			/*_symbols.push(new Array("patt2.hiro","eiffel/models/eiffel.dae", "eiffel/images/eiffel2.png"));// 0*/
 			/*_symbols.push(new Array("patt2.hiro","MD2/horse/horse.md2", "MD2/horse/horse.jpg"));// 0*/
 			_ezflar = new EZflar(_symbols/*, 320, 270*/);
@@ -29,7 +29,7 @@ package {
 			_ezflar.onStarted(function():void {
 				/*_ezflar.addModelTo([0,"picture", "imagem1.jpg"],["myimage"]);*/
 				/*_ezflar.addModelTo([0,"cube"],["mycube"]);*/
-				_ezflar.addModelTo([1,"wire"], ["mywire"]);
+				_ezflar.addModelTo([0,"wire"], ["mywire"]);
 				_ezflar.addModelTo([1,"cube"], ["thecube"]);
 				trace(_ezflar.getModel(0, "mywire"));
 				trace(">>>>>>>>>>>>> inicio");

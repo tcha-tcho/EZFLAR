@@ -30,9 +30,9 @@ package com.tchatcho.constructors {
 		private var _snd:Sound = new Sound();
 		private var _channel:SoundChannel = new SoundChannel();
 		private var _soundTrans:SoundTransform = new SoundTransform();
-		private var _mp3events:MP3Events = new MP3Events();
+		// private var mp3events:MP3Events = new MP3Events();
 
-		public function MP3constructor(patternId:int, url:String = null, url2:String = null, objName:String = null) {
+		public function MP3constructor(patternId:int, mp3events:MP3Events, url:String = null, url2:String = null, objName:String = null) {
 			startLoader();
 			
 
@@ -57,7 +57,12 @@ package com.tchatcho.constructors {
 			_soundTrans.volume = 1;
 			_channel.soundTransform = _soundTrans;
 			
-			_mp3events.addEventListener(MP3Events.STOPSOUND, stopTheSound)
+			mp3events.addEventListener(MP3Events.STOPSOUND, stopTheSound)
+			
+			function stopTheSound(event:Event):void{
+				_channel.stop();
+				
+			}
 
 			if(objName != null){
 				this._universe.name = objName
@@ -79,10 +84,7 @@ package com.tchatcho.constructors {
 					return this._universe;
 				}
 				
-				public function stopTheSound(event:Event):void{
-					trace("caraalllhoooooo");
-					
-				}
+
 				//TODO: enable 3d emulation sound!
 				/*_ezflar.onUpdated(function(marker:FLARMarkerEvent):void {
 				_model = _ezflar.getModel(0, "gloss")[0];

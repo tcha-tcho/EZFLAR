@@ -46,7 +46,7 @@ package com.tchatcho {
 	private var _oldCount:Date;
 	private var _firstLock:Boolean;
 	
-	private var _mp3events:MP3Events;
+	private var mp3events:MP3Events = new MP3Events();
 
 	public function Base_model (objects:Array, numPatterns:uint, cameraParams:FLARParam, viewportWidth:Number, viewportHeight:Number, pathToResources:String, modelsPath:String) {
 		this._objects = objects;
@@ -94,7 +94,7 @@ package com.tchatcho {
 					}
 					this._markersByPatternId = markerList2;
 				};
-				_mp3events.dispatchMP3 = true;
+				mp3events.dispatchMP3 = true;
 			}
 			private function updateModels () :void {
 				// update all Models containers according to the transformation matrix in their associated FLARMarkers
@@ -176,8 +176,7 @@ package com.tchatcho {
 					break;
 					
 					case "MP3" ://*.mp3
-					var mp3:MP3constructor = new MP3constructor(patternId, url, url2, objName)
-					_mp3events = new MP3Events();
+					var mp3:MP3constructor = new MP3constructor(patternId, mp3events, url, url2, objName);
 					return containerReady(mp3.object);
 					break;
 
