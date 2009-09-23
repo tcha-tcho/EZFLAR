@@ -1,3 +1,6 @@
+/**
+* @Author tcha-tcho and alexfreitas
+*/
 package com.tchatcho.constructors {
 	import flash.events.EventDispatcher;
 	import flash.events.Event;

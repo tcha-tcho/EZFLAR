@@ -1,5 +1,5 @@
 /**
-* @Author tcha-tcho
+* @Author tcha-tcho and alexfreitas
 */
 package com.tchatcho.constructors {
 	import flash.display.MovieClip;
@@ -70,7 +70,7 @@ package com.tchatcho.constructors {
 					this._universe.name = "universe"
 					}
 					this._universe.rotationY = 0;
-					this._universe.rotationZ = -90;
+					this._universe.rotationZ = 180;
 
 				}
 				public function startLoader():void{
@@ -84,7 +84,6 @@ package com.tchatcho.constructors {
 					return this._universe;
 				}
 				
-
 				//TODO: enable 3d emulation sound!
 				/*_ezflar.onUpdated(function(marker:FLARMarkerEvent):void {
 				_model = _ezflar.getModel(0, "gloss")[0];

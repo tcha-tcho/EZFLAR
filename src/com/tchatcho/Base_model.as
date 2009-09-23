@@ -24,6 +24,7 @@ package com.tchatcho {
 	import com.tchatcho.constructors.CUBEconstructor;
 	import com.tchatcho.constructors.PICTUREconstructor;
 	import com.tchatcho.constructors.WIREconstructor;
+	import com.tchatcho.constructors.TWITTERconstructor;
 	import com.tchatcho.constructors.MP3constructor;
 	import com.tchatcho.constructors.MP3Events;
 	
@@ -130,6 +131,7 @@ package com.tchatcho {
 				var _format:String = url.toString();
 				_format = _format.substring(_format.length - 3,_format.length).toUpperCase();
 				switch (_format){
+					
 					case "SWF" ://*.swf
 					var swf:SWFconstructor = new SWFconstructor(patternId, url, url2, objName)
 					return containerReady(swf.object);
@@ -183,6 +185,11 @@ package com.tchatcho {
 					case "IRE" ://wire
 					var wire:WIREconstructor = new WIREconstructor(patternId, url, url2, objName);
 					return containerReady(wire.object);
+					break;
+
+					case "TER" ://twitter
+					var twitter:TWITTERconstructor = new TWITTERconstructor(patternId, url, url2, objName);
+					return containerReady(twitter.object);
 					break;
 
 					case "PTY" ://empty

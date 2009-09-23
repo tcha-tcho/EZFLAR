@@ -58,7 +58,7 @@ package com.tchatcho.constructors {
 					this._universe.name = "universe"
 					}
 					this._universe.rotationY = 0;
-					this._universe.rotationZ = -90;
+					this._universe.rotationZ = 180;
 
 				}
 				public function startLoader():void{
