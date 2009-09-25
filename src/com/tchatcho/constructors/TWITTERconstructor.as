@@ -34,6 +34,8 @@ package com.tchatcho.constructors {
 			startLoader();
 			var cleanURL:String = url2.split("/").pop();
 			trace("accessing twitter of " + cleanURL);
+			
+			//TODO: acess timeline instead user account: http://twitter.com/statuses/public_timeline.xml
 			if (url2 == null) {
 				_myXMLloader.load(new URLRequest("http://www.twitter.com/users/ezflar"))
 			} else {
