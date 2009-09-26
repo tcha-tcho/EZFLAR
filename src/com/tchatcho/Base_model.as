@@ -28,6 +28,7 @@ package com.tchatcho {
 	import com.tchatcho.constructors.MP3constructor;
 	import com.tchatcho.constructors.MP3Events;
 	import com.tchatcho.constructors.TXT40constructor;
+	import com.tchatcho.constructors.URLconstructor;
 	
 	public class Base_model extends Sprite {//Or BasicView
 
@@ -201,6 +202,11 @@ package com.tchatcho {
 					case "EXT" ://txt15chars
 					var txt:TXT40constructor = new TXT40constructor(patternId, url, url2, objName);
 					return containerReady(txt.object);
+					break;
+
+					case "URL" ://navigate to url
+					var nturl:URLconstructor = new URLconstructor(patternId, url, url2, objName);
+					return containerReady(nturl.object);
 					break;
 
 					case "PTY" ://empty
