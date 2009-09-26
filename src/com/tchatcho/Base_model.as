@@ -27,6 +27,7 @@ package com.tchatcho {
 	import com.tchatcho.constructors.TWITTERconstructor;
 	import com.tchatcho.constructors.MP3constructor;
 	import com.tchatcho.constructors.MP3Events;
+	import com.tchatcho.constructors.TXT40constructor;
 	
 	public class Base_model extends Sprite {//Or BasicView
 
@@ -191,6 +192,16 @@ package com.tchatcho {
 					var twitter:TWITTERconstructor = new TWITTERconstructor(patternId, url, url2, objName);
 					return containerReady(twitter.object);
 					break;
+					
+					case "TXT" ://txt15chars
+					var txt:TXT40constructor = new TXT40constructor(patternId, url, url2, objName);
+					return containerReady(txt.object);
+					break;
+
+					case "EXT" ://txt15chars
+					var txt:TXT40constructor = new TXT40constructor(patternId, url, url2, objName);
+					return containerReady(txt.object);
+					break;
 
 					case "PTY" ://empty
 					var _universe:DisplayObject3D = new DisplayObject3D();
@@ -213,7 +224,7 @@ package com.tchatcho {
 			}
 			private function containerReady(object:DisplayObject3D):DisplayObject3D{
 				var container:DisplayObject3D = new DisplayObject3D();//i dont know why we need a container, :(
-				container.addChild(object)
+				container.addChild(object);
 				this._scene3D.addChild(container);
 				return container;
 			}

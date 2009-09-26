@@ -46,9 +46,11 @@ package com.tchatcho.constructors {
 			front_material.interactive = true;
 			front_material.animated = true;
 			front_material.doubleSided = true;
-			_front_plane = new Plane(front_material, 640, 480, 4, 4);
-			_front_plane.scale = 0.5;
+			_front_plane = new Plane(front_material, 640, 640, 4, 4);
+			_front_plane.scale = 0.3;
 			this._universe.z = 3;
+			this._universe.x = -55;
+			this._universe.y = -55;
 			
 			var request:URLRequest=new URLRequest(url);
 			_snd.load(request);
@@ -70,7 +72,7 @@ package com.tchatcho.constructors {
 					this._universe.name = "universe"
 					}
 					this._universe.rotationY = 0;
-					this._universe.rotationZ = 180;
+					this._universe.rotationZ = -90;
 
 				}
 				public function startLoader():void{

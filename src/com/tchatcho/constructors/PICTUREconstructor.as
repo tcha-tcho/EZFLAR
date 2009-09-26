@@ -21,14 +21,14 @@ package com.tchatcho.constructors {
 				var pictureMaterial:BitmapFileMaterial = new BitmapFileMaterial(url, true);
 				pictureMaterial.doubleSided = true;
 				pictureMaterial.addEventListener( FileLoadEvent.LOAD_COMPLETE , loaderComplete );
-				_front_plane = new Plane(pictureMaterial, 640, 480, 4, 4);
+				_front_plane = new Plane(pictureMaterial, 500, 500, 4, 4);
 			} else {
 				trace("YOU DO IT WRONG! :P, pls use picture like this:....push([['yourpattern', 'yourimage.jpg'],['a_optional_name']]);");
 				var wfm:WireframeMaterial = new WireframeMaterial(0xffff00);
 				wfm.doubleSided = true;
 				_front_plane = new Plane(wfm);
 			}
-			_front_plane.scale = 0.5;
+			_front_plane.scale = 0.3;
 			this._universe.z = 3;
 			if(objName != null){
 				this._universe.name = objName
@@ -36,7 +36,7 @@ package com.tchatcho.constructors {
 					this._universe.name = "universe"
 					}
 					this._universe.rotationY = 0;
-					this._universe.rotationZ = 180;
+					this._universe.rotationZ = -90;
 
 				}
 				public function startLoader():void{

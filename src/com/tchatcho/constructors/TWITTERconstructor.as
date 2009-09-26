@@ -55,14 +55,14 @@ package com.tchatcho.constructors {
 			front_material.doubleSided = true;
 			_front_plane = new Plane(front_material, 640, 480, 4, 4);
 			_front_plane.scale = 0.5;
-			this._universe.z = 3;
+			this._universe.z = 22;
 			if(objName != null){
 				this._universe.name = objName
 				}else{
 					this._universe.name = "universe"
 					}
 					this._universe.rotationY = 0;
-					this._universe.rotationZ = 180;
+					this._universe.rotationZ = -90;
 					this._universe.y = -50;
 
 				}

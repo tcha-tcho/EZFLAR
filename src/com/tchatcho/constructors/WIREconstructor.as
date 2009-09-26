@@ -29,7 +29,7 @@ package com.tchatcho.constructors {
 					this._universe.name = "universe"
 					}
 					this._universe.rotationY = 0;
-					this._universe.rotationZ = 180;
+					this._universe.rotationZ = -90;
 					//TODO: implement loader handler to Wire
 					loaderComplete("Wire.complete");
 					
