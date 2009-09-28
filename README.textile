@@ -28,12 +28,19 @@ _symbols will take all your markers and models and work with this in couples... 
 	_symbols.push([["EZFLAR1.pat", "flvfilename.flv"]]);//1
 	_symbols.push([["EZFLAR2.pat", "daefilename.dae", "OPTIONALtexture.jpg"]]);//2
 	_symbols.push([["EZFLAR3.pat", "md2filename.md2", "OPTIONALtexture.jpg"]]);//3
-	_symbols.push([["EZFLAR4.pat", "picture", "picturename.jpg"]]);//4
-	_symbols.push([["EZFLAR5.pat", "cube", "OPTIONALtexture.jpg"]]);//5
-	_symbols.push([["EZFLAR6.pat", "wire"]]);//6
-	_symbols.push([["EZFLAR7.pat", "empty"]]);//7
+	_symbols.push([["EZFLAR4.pat", "picturename.jpg"]]);//4
+	_symbols.push([["EZFLAR5.pat", "picturename.jpeg"]]);//5
+	_symbols.push([["EZFLAR6.pat", "picturename.png"]]);//6
+	_symbols.push([["EZFLAR7.pat", "picturename.gif"]]);//7
+	_symbols.push([["EZFLAR8.pat", "audioname.mp3"]]);//8
+	_symbols.push([["EZFLAR9.pat", "text", "here goes my text up to 40 chars"]]);//9
+	_symbols.push([["EZFLAR10.pat", "twitter", "nameoflogin"]]);//10
+	_symbols.push([["EZFLAR11.pat", "url", "http//www.myexample.com"]]);//11
+	_symbols.push([["EZFLAR12.pat", "cube", "OPTIONALtexture.jpg"]]);//12
+	_symbols.push([["EZFLAR13.pat", "wire"]]);//13
+	_symbols.push([["EZFLAR14.pat", "empty"]]);//14
 </pre>
-
+<i>Note about twitter: im a ruby developer, i dont know much about AS3. Connect Twitter from a external server need some adjustments in cross domain think. I made this by usin a rails server... someone can help me with this cross domain issues?</i>
 now its time to build our AR
 optionally you can give: size, framerate and etc.
 <pre>

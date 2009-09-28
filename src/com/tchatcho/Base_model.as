@@ -82,7 +82,7 @@ package com.tchatcho {
 		public function removeMarker (marker:FLARMarker) :void {
 			// find and remove marker
 			_newCount = new Date();
-			if((_newCount.getTime() - _oldCount.getTime()) > 0){//prevent inconsistences
+			if((_newCount.getTime() - _oldCount.getTime()) > 40){//prevent inconsistences
 				var markerList:Array = new Array();
 			var markerList2:Array = new Array;
 			for (var i:int = 0; i < this._markersByPatternId.length; i++){
