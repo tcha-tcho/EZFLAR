@@ -7,7 +7,7 @@ Ok, download the package of thinks and put this on your frame:
 	private var _ezflar:EZflar;
 	private var _symbols:Array = new Array();
 	_symbols.push([["EZFLAR.pat", "cube"]]);//0
-	_ezflar = new EZflar(_symbols);
+	_ezflar = new EZflar( _symbols );
 	_ezflar.initializer(stage);
 </pre>
 
