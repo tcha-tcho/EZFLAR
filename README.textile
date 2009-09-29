@@ -41,7 +41,8 @@ _symbols will take all your markers and models and work with this in couples... 
 	_symbols.push([["EZFLAR14.pat", "empty"]]);//14
 </pre>
 <i>Note about twitter: im a ruby developer, i dont know much about AS3. Connect Twitter from a external server need some adjustments in cross domain think. I made this by usin a rails server... someone can help me with this cross domain issues?</i>
-now its time to build our AR
+
+Now its time to build our AR
 optionally you can give: size, framerate and etc.
 <pre>
 	_ezflar = new EZflar(_symbols);
