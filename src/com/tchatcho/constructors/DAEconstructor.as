@@ -2,12 +2,15 @@
  * @Author tcha-tcho
  */
 package com.tchatcho.constructors {
-	import org.papervision3d.objects.parsers.DAE;
+	import Papervision3D_2_1_920;
+	import ASCollada;
+/*	import org.papervision3d.objects.parsers.DAE;
 	import org.papervision3d.materials.BitmapFileMaterial;
 	import org.papervision3d.materials.utils.MaterialsList;
 	import org.papervision3d.events.FileLoadEvent;
-	import flash.events.Event;
 	import org.papervision3d.objects.DisplayObject3D;
+*/
+	import flash.events.Event;
 	import com.tchatcho.constructors.LoadingEZFLAR;
 	
 	public class DAEconstructor extends DAE {

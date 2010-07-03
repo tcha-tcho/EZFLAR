@@ -2,11 +2,12 @@
  * @Author tcha-tcho
  */
 package com.tchatcho.constructors {
-	import org.papervision3d.objects.primitives.Plane;
+	import Papervision3D_2_1_920;
+/*	import org.papervision3d.objects.primitives.Plane;
 	import org.papervision3d.materials.WireframeMaterial;
-
 	import org.papervision3d.materials.BitmapFileMaterial;
 	import org.papervision3d.events.FileLoadEvent;
+*/
 	import flash.events.Event;
 
 	import org.papervision3d.objects.DisplayObject3D;

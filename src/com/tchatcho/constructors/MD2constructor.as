@@ -2,12 +2,13 @@
  * @Author tcha-tcho
  */
 package com.tchatcho.constructors {
-	import org.papervision3d.objects.parsers.MD2;
+	import Papervision3D_2_1_920;
+/*	import org.papervision3d.objects.parsers.MD2;
 	import org.papervision3d.materials.BitmapFileMaterial;
 	import org.papervision3d.events.FileLoadEvent;
-	import flash.events.Event;
-
 	import org.papervision3d.objects.DisplayObject3D;
+*/	import flash.events.Event;
+
 	import com.tchatcho.constructors.LoadingEZFLAR;
 
 	public class MD2constructor extends MD2 {

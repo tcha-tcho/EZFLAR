@@ -6,10 +6,11 @@ package com.tchatcho.constructors {
 	import flash.display.Loader;
 	import flash.net.URLRequest;
 	import flash.events.Event;
-	import org.papervision3d.objects.primitives.Plane;
+	import Papervision3D_2_1_920;
+/*	import org.papervision3d.objects.primitives.Plane;
 	import org.papervision3d.materials.MovieMaterial;
 	import org.papervision3d.objects.DisplayObject3D;
-	import com.tchatcho.constructors.LoadingEZFLAR;
+*/	import com.tchatcho.constructors.LoadingEZFLAR;
 	
 	import flash.events.EventDispatcher;
 	import flash.events.Event;

@@ -2,14 +2,13 @@
  * @Author tcha-tcho
  */
 package com.tchatcho.constructors {
-	import org.papervision3d.objects.primitives.Cube;
-
+	import Papervision3D_2_1_920;
+/*	import org.papervision3d.objects.primitives.Cube;
 	import org.papervision3d.materials.BitmapFileMaterial;
 	import org.papervision3d.materials.utils.MaterialsList;
-
 	import org.papervision3d.objects.DisplayObject3D;
-	
 	import org.papervision3d.materials.WireframeMaterial;
+*/	
 	import com.tchatcho.constructors.LoadingEZFLAR;
 	
 	//TODO: handle clicks in objects

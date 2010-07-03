@@ -8,11 +8,11 @@ package com.tchatcho.constructors {
 	import flash.net.NetStream;
 
 	import flash.events.NetStatusEvent;
-	import org.papervision3d.materials.VideoStreamMaterial;
-
+	import Papervision3D_2_1_920;
+/*	import org.papervision3d.materials.VideoStreamMaterial;
 	import org.papervision3d.objects.primitives.Plane;	
 	import org.papervision3d.objects.DisplayObject3D;
-	import com.tchatcho.constructors.LoadingEZFLAR;
+*/	import com.tchatcho.constructors.LoadingEZFLAR;
 
 	public class FLVconstructor extends Video {
 		private var _ldr:LoadingEZFLAR = new LoadingEZFLAR();

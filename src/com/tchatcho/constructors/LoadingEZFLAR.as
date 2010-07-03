@@ -7,10 +7,11 @@ package com.tchatcho.constructors {
 	import flash.text.TextField;
 	import flash.text.TextFormat;
 	import flash.display.Shape;
-	import org.papervision3d.objects.primitives.Plane;
+	import Papervision3D_2_1_920;
+/*	import org.papervision3d.objects.primitives.Plane;
 	import org.papervision3d.materials.MovieMaterial;
 	import org.papervision3d.objects.DisplayObject3D;
-
+*/
 	public class LoadingEZFLAR extends MovieClip {
 		private var _universe:DisplayObject3D = new DisplayObject3D();
 
