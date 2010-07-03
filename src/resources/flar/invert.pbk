@@ -1,0 +1,21 @@
+<languageVersion : 1.0;>
+
+kernel Invert
+<   namespace : "FLARManager";
+    vendor : "FLARManager";
+    version : 1;
+    description : "invert an image.  for use with inverted (white-bordered) markers.";
+>
+{
+    input image4 src;
+    output pixel4 dst;
+
+    void
+    evaluatePixel()
+    {
+        dst = sampleNearest(src,outCoord());
+        dst.r = 1.0 - dst.r;
+        dst.g = 1.0 - dst.g;
+        dst.b = 1.0 - dst.b;
+    }
+}

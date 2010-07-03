@@ -39,7 +39,6 @@ package {
 			_ezflar.onRemoved(function(marker:FLARMarkerEvent):void {
 				trace(">>>>>>>>>>>>> removed: " + marker.marker.patternId);
 			});
-			
 
 			}
 		}
