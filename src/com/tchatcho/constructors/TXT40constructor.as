@@ -7,11 +7,10 @@ package com.tchatcho.constructors {
 	import flash.text.TextField;
 	import flash.text.TextFormat;
 	import flash.display.Shape;
-	import Papervision3D_2_1_920;
-/*	import org.papervision3d.objects.primitives.Plane;
-	import org.papervision3d.materials.MovieMaterial;
-	import org.papervision3d.objects.DisplayObject3D;
-*/
+	import libs.Papervision3D_2_1_920.objects.primitives.Plane;
+	import libs.Papervision3D_2_1_920.materials.MovieMaterial;
+	import libs.Papervision3D_2_1_920.objects.DisplayObject3D;
+
 	public class TXT40constructor extends MovieClip {
 		private var _universe:DisplayObject3D = new DisplayObject3D();
 

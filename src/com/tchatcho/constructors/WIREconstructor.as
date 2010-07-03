@@ -2,11 +2,11 @@
  * @Author tcha-tcho
  */
 package com.tchatcho.constructors {
-	import Papervision3D_2_1_920;
-/*	import org.papervision3d.objects.primitives.Plane;
-	import org.papervision3d.materials.WireframeMaterial;
-	import org.papervision3d.objects.DisplayObject3D;
-*/
+/*	import libs.Papervision3D_2_1_920.objects.primitives.Plane;*/
+	import libs.Papervision3D_2_1_920.*;
+	import libs.Papervision3D_2_1_920.materials.WireframeMaterial;
+	import libs.Papervision3D_2_1_920.objects.DisplayObject3D;
+
 	public class WIREconstructor extends Plane {
 		private var _ldr:LoadingEZFLAR = new LoadingEZFLAR();
 		private var _universe:DisplayObject3D = new DisplayObject3D();

@@ -6,11 +6,10 @@ package com.tchatcho.constructors {
 	import flash.display.Loader;
 	import flash.net.URLRequest;
 	import flash.events.Event;
-	import Papervision3D_2_1_920;
-/*	import org.papervision3d.objects.primitives.Plane;
-	import org.papervision3d.materials.MovieMaterial;
-	import org.papervision3d.objects.DisplayObject3D;
-*/	import com.tchatcho.constructors.LoadingEZFLAR;
+	import libs.Papervision3D_2_1_920.objects.primitives.Plane;
+	import libs.Papervision3D_2_1_920.materials.MovieMaterial;
+	import libs.Papervision3D_2_1_920.objects.DisplayObject3D;
+	import com.tchatcho.constructors.LoadingEZFLAR;
 
 	public class SWFconstructor extends MovieClip {
 		private var _ldr:LoadingEZFLAR = new LoadingEZFLAR();
