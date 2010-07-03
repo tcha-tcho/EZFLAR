@@ -1,47 +1,11 @@
 K 25
 svn:wc:ra_dav:version-url
-V 94
-/codeshare/!svn/ver/13/FLARManager/deploy/v01_FP9/src/org/libspark/flartoolkit/core/raster/rgb
-END
-NyARRgbRaster_RGB.java
-K 25
-svn:wc:ra_dav:version-url
-V 117
-/codeshare/!svn/ver/13/FLARManager/deploy/v01_FP9/src/org/libspark/flartoolkit/core/raster/rgb/NyARRgbRaster_RGB.java
-END
-PixelReader.as
-K 25
-svn:wc:ra_dav:version-url
-V 109
-/codeshare/!svn/ver/13/FLARManager/deploy/v01_FP9/src/org/libspark/flartoolkit/core/raster/rgb/PixelReader.as
+V 103
+/codeshare/!svn/ver/158/FLARManager/deploy/FLARManager_v07/src/org/libspark/flartoolkit/core/raster/rgb
 END
 FLARRgbRaster_BitmapData.as
 K 25
 svn:wc:ra_dav:version-url
-V 122
-/codeshare/!svn/ver/13/FLARManager/deploy/v01_FP9/src/org/libspark/flartoolkit/core/raster/rgb/FLARRgbRaster_BitmapData.as
-END
-FLARRgbRaster_BasicClass.as
-K 25
-svn:wc:ra_dav:version-url
-V 122
-/codeshare/!svn/ver/13/FLARManager/deploy/v01_FP9/src/org/libspark/flartoolkit/core/raster/rgb/FLARRgbRaster_BasicClass.as
-END
-IFLARRgbRaster.as
-K 25
-svn:wc:ra_dav:version-url
-V 112
-/codeshare/!svn/ver/13/FLARManager/deploy/v01_FP9/src/org/libspark/flartoolkit/core/raster/rgb/IFLARRgbRaster.as
-END
-NyARRgbRaster_Blank.java
-K 25
-svn:wc:ra_dav:version-url
-V 119
-/codeshare/!svn/ver/13/FLARManager/deploy/v01_FP9/src/org/libspark/flartoolkit/core/raster/rgb/NyARRgbRaster_Blank.java
-END
-FLARRgbRaster_BGRA.as
-K 25
-svn:wc:ra_dav:version-url
-V 116
-/codeshare/!svn/ver/13/FLARManager/deploy/v01_FP9/src/org/libspark/flartoolkit/core/raster/rgb/FLARRgbRaster_BGRA.as
+V 131
+/codeshare/!svn/ver/158/FLARManager/deploy/FLARManager_v07/src/org/libspark/flartoolkit/core/raster/rgb/FLARRgbRaster_BitmapData.as
 END

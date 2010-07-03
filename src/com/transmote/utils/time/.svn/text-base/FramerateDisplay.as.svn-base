@@ -20,6 +20,7 @@ package com.transmote.utils.time {
 		
 		public function FramerateDisplay () {
 			this.init();
+			this.mouseChildren = false;
 		}
 		
 		private function init () :void {

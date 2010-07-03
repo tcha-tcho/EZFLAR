@@ -1,14 +1,14 @@
 8
 
 dir
-34
-http://transmote.com/codeshare/FLARManager/deploy/v01_FP9/src/org/libspark/flartoolkit/detector
+212
+http://transmote.com/codeshare/FLARManager/deploy/FLARManager_v07/src/org/libspark/flartoolkit/detector
 http://transmote.com/codeshare
 
 
 
-2009-03-28T22:18:34.221137Z
-13
+2010-04-10T06:18:51.952319Z
+158
 ericsoco
 
 
@@ -32,35 +32,12 @@ file
 
 
 
-2009-05-21T00:05:34.000000Z
-65662d2bf15b47444c195b42e2c7266f
-2009-03-28T22:18:34.221137Z
-13
+2010-07-03T17:47:32.000000Z
+27770029cf569e2bda3017f347b9459f
+2010-04-10T06:18:51.952319Z
+158
 ericsoco
-
-FLARMultiMarkerDetectorResultHolder.as
-file
-
-
-
-
-2009-05-21T00:05:34.000000Z
-bee1817ba4644bd85a570b8c300d5a9f
-2009-03-28T22:18:34.221137Z
-13
-ericsoco
-
-FLARMultiMarkerDetectorResult.as
-file
-
-
-
-
-2009-05-21T00:05:34.000000Z
-b9fa533ac876b2a2048ea224f4ccdb4e
-2009-03-28T22:18:34.221137Z
-13
-ericsoco
+has-props
 
 FLARMultiMarkerDetector.as
 file
@@ -68,9 +45,10 @@ file
 
 
 
-2009-05-21T00:05:34.000000Z
-1e10dfa4394bd43318438686669bc83d
-2009-03-28T22:18:34.221137Z
-13
+2010-07-03T17:47:32.000000Z
+a24acb55233c3c302726a76e7f10465f
+2010-04-10T06:18:51.952319Z
+158
 ericsoco
+has-props
 

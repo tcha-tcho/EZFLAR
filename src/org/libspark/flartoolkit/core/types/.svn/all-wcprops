@@ -1,41 +1,17 @@
 K 25
 svn:wc:ra_dav:version-url
-V 89
-/codeshare/!svn/ver/13/FLARManager/deploy/v01_FP9/src/org/libspark/flartoolkit/core/types
-END
-FLARIntRect.as
-K 25
-svn:wc:ra_dav:version-url
-V 104
-/codeshare/!svn/ver/13/FLARManager/deploy/v01_FP9/src/org/libspark/flartoolkit/core/types/FLARIntRect.as
-END
-FLARDoublePoint2d.as
-K 25
-svn:wc:ra_dav:version-url
-V 110
-/codeshare/!svn/ver/13/FLARManager/deploy/v01_FP9/src/org/libspark/flartoolkit/core/types/FLARDoublePoint2d.as
-END
-FLARLinear.as
-K 25
-svn:wc:ra_dav:version-url
-V 103
-/codeshare/!svn/ver/13/FLARManager/deploy/v01_FP9/src/org/libspark/flartoolkit/core/types/FLARLinear.as
+V 98
+/codeshare/!svn/ver/158/FLARManager/deploy/FLARManager_v07/src/org/libspark/flartoolkit/core/types
 END
 FLARDoublePoint3d.as
 K 25
 svn:wc:ra_dav:version-url
-V 110
-/codeshare/!svn/ver/13/FLARManager/deploy/v01_FP9/src/org/libspark/flartoolkit/core/types/FLARDoublePoint3d.as
-END
-FLARIntPoint.as
-K 25
-svn:wc:ra_dav:version-url
-V 105
-/codeshare/!svn/ver/13/FLARManager/deploy/v01_FP9/src/org/libspark/flartoolkit/core/types/FLARIntPoint.as
+V 119
+/codeshare/!svn/ver/158/FLARManager/deploy/FLARManager_v07/src/org/libspark/flartoolkit/core/types/FLARDoublePoint3d.as
 END
 FLARIntSize.as
 K 25
 svn:wc:ra_dav:version-url
-V 104
-/codeshare/!svn/ver/13/FLARManager/deploy/v01_FP9/src/org/libspark/flartoolkit/core/types/FLARIntSize.as
+V 113
+/codeshare/!svn/ver/158/FLARManager/deploy/FLARManager_v07/src/org/libspark/flartoolkit/core/types/FLARIntSize.as
 END

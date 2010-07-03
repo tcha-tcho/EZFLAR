@@ -1,59 +1,23 @@
 K 25
 svn:wc:ra_dav:version-url
-V 72
-/codeshare/!svn/ver/13/FLARManager/deploy/v01_FP9/src/com/transmote/flar
-END
-FLARCameraSource.as
-K 25
-svn:wc:ra_dav:version-url
-V 92
-/codeshare/!svn/ver/13/FLARManager/deploy/v01_FP9/src/com/transmote/flar/FLARCameraSource.as
-END
-IFLARSource.as
-K 25
-svn:wc:ra_dav:version-url
-V 87
-/codeshare/!svn/ver/13/FLARManager/deploy/v01_FP9/src/com/transmote/flar/IFLARSource.as
+V 81
+/codeshare/!svn/ver/158/FLARManager/deploy/FLARManager_v07/src/com/transmote/flar
 END
 FLARManager.as
 K 25
 svn:wc:ra_dav:version-url
-V 87
-/codeshare/!svn/ver/13/FLARManager/deploy/v01_FP9/src/com/transmote/flar/FLARManager.as
+V 96
+/codeshare/!svn/ver/158/FLARManager/deploy/FLARManager_v07/src/com/transmote/flar/FLARManager.as
 END
-FLARPattern.as
-K 25
-svn:wc:ra_dav:version-url
-V 87
-/codeshare/!svn/ver/13/FLARManager/deploy/v01_FP9/src/com/transmote/flar/FLARPattern.as
-END
-FLARMarker.as
-K 25
-svn:wc:ra_dav:version-url
-V 86
-/codeshare/!svn/ver/13/FLARManager/deploy/v01_FP9/src/com/transmote/flar/FLARMarker.as
-END
-FLARMarkerOutline.as
+COPYING.txt
 K 25
 svn:wc:ra_dav:version-url
 V 93
-/codeshare/!svn/ver/13/FLARManager/deploy/v01_FP9/src/com/transmote/flar/FLARMarkerOutline.as
+/codeshare/!svn/ver/158/FLARManager/deploy/FLARManager_v07/src/com/transmote/flar/COPYING.txt
 END
-FLARMarkerEvent.as
+flarManagerInternal.as
 K 25
 svn:wc:ra_dav:version-url
-V 91
-/codeshare/!svn/ver/13/FLARManager/deploy/v01_FP9/src/com/transmote/flar/FLARMarkerEvent.as
-END
-FLARPatternLoader.as
-K 25
-svn:wc:ra_dav:version-url
-V 93
-/codeshare/!svn/ver/13/FLARManager/deploy/v01_FP9/src/com/transmote/flar/FLARPatternLoader.as
-END
-FLARLoaderSource.as
-K 25
-svn:wc:ra_dav:version-url
-V 92
-/codeshare/!svn/ver/13/FLARManager/deploy/v01_FP9/src/com/transmote/flar/FLARLoaderSource.as
+V 104
+/codeshare/!svn/ver/158/FLARManager/deploy/FLARManager_v07/src/com/transmote/flar/flarManagerInternal.as
 END

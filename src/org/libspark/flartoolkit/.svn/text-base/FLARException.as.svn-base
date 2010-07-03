@@ -28,30 +28,24 @@
  * 
  */
 
-package org.libspark.flartoolkit {
+package org.libspark.flartoolkit
+{
+	import jp.nyatla.nyartoolkit.as3.NyARException;
 
-	public class FLARException extends Error {
-
-//		private static const serialVersionUID:int = 1;
-//
-//		public function FLARException()
-//		{
-//			super();
-//		}
-//	
-//		public function FLARException(e:FLARException) {
-//				super(e);
-//		}
-
-		public function FLARException(m:String = '') {
+	public class FLARException extends NyARException
+	{
+		public function FLARException(m:String = '')
+		{
 			super(m);
 		}
 
-		public static function trap(m:String):void {
+		public static function trap(m:String):void
+		{
 			throw new FLARException("トラップ:" + m);
 		}
 
-		public static function notImplement():void {
+		public static function notImplement():void
+		{
 			throw new FLARException("Not Implement!");
 		}
 	}

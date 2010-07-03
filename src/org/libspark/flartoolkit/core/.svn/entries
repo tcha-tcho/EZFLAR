@@ -1,14 +1,14 @@
 8
 
 dir
-34
-http://transmote.com/codeshare/FLARManager/deploy/v01_FP9/src/org/libspark/flartoolkit/core
+212
+http://transmote.com/codeshare/FLARManager/deploy/FLARManager_v07/src/org/libspark/flartoolkit/core
 http://transmote.com/codeshare
 
 
 
-2009-03-28T22:18:34.221137Z
-13
+2010-04-10T06:18:51.952319Z
+158
 ericsoco
 
 
@@ -26,32 +26,36 @@ svn:special svn:externals svn:needs-lock
 
 7f038713-2549-0410-8939-82037612515d
 
+param
+dir
+
+raster
+dir
+
 FLARCode.as
 file
 
 
 
 
-2009-05-21T00:05:34.000000Z
-b92d1148ad7fd8f594fd615f9a326233
-2009-03-28T22:18:34.221137Z
-13
+2010-07-03T17:47:32.000000Z
+348143ef914ea3a56c99c569e7f8885e
+2010-04-10T06:18:51.952319Z
+158
 ericsoco
+has-props
 
 rasterreader
 dir
 
-FLARVec.as
-file
-
-
-
-
-2009-05-21T00:05:34.000000Z
-5d8b5ca6e81aa5ef098ed662a1b94988
-2009-03-28T22:18:34.221137Z
-13
-ericsoco
+types
+dir
+
+analyzer
+dir
+
+rasterfilter
+dir
 
 FLARMat.as
 file
@@ -59,92 +63,18 @@ file
 
 
 
-2009-05-21T00:05:34.000000Z
-eeb2c2553e20ed7bc66c26387a4c4aaf
-2009-03-28T22:18:34.221137Z
-13
+2010-07-03T17:47:32.000000Z
+d1203b296fc0e1b6ee866e6751ab6058
+2010-04-10T06:18:51.952319Z
+158
 ericsoco
+has-props
+
+squaredetect
+dir
 
 transmat
 dir
-
-pickup
-dir
-
-FLARVersion.as
-file
-
-
-
-
-2009-05-21T00:05:34.000000Z
-7547f86912f66ca86cc68c55ae5171ab
-2009-03-28T22:18:34.221137Z
-13
-ericsoco
-
-match
-dir
-
-FLARSquareStack.as
-file
-
-
-
-
-2009-05-21T00:05:34.000000Z
-db875617e9cf0581e6a56354bc5ff18b
-2009-03-28T22:18:34.221137Z
-13
-ericsoco
-
-param
-dir
-
-raster
-dir
-
-FLARSquareDetector.as
-file
-
-
-
-
-2009-05-21T00:05:34.000000Z
-1e0f718d213d38f848a514949fff4c7b
-2009-03-28T22:18:34.221137Z
-13
-ericsoco
-
-types
-dir
-
-rasterfilter
-dir
-
-FLARSquare.as
-file
-
-
-
-
-2009-05-21T00:05:34.000000Z
-01d2f6549569c264ef1d6518fe694e0f
-2009-03-28T22:18:34.221137Z
-13
-ericsoco
-
-IFLARSquareDetector.as
-file
-
-
-
-
-2009-05-21T00:05:34.000000Z
-cd10eb6dfdb7a887661bd7e5ce6e4d87
-2009-03-28T22:18:34.221137Z
-13
-ericsoco
 
 labeling
 dir

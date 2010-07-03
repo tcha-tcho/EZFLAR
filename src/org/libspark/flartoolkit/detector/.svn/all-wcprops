@@ -1,29 +1,17 @@
 K 25
 svn:wc:ra_dav:version-url
-V 87
-/codeshare/!svn/ver/13/FLARManager/deploy/v01_FP9/src/org/libspark/flartoolkit/detector
+V 96
+/codeshare/!svn/ver/158/FLARManager/deploy/FLARManager_v07/src/org/libspark/flartoolkit/detector
 END
 FLARSingleMarkerDetector.as
 K 25
 svn:wc:ra_dav:version-url
-V 115
-/codeshare/!svn/ver/13/FLARManager/deploy/v01_FP9/src/org/libspark/flartoolkit/detector/FLARSingleMarkerDetector.as
-END
-FLARMultiMarkerDetectorResultHolder.as
-K 25
-svn:wc:ra_dav:version-url
-V 126
-/codeshare/!svn/ver/13/FLARManager/deploy/v01_FP9/src/org/libspark/flartoolkit/detector/FLARMultiMarkerDetectorResultHolder.as
-END
-FLARMultiMarkerDetectorResult.as
-K 25
-svn:wc:ra_dav:version-url
-V 120
-/codeshare/!svn/ver/13/FLARManager/deploy/v01_FP9/src/org/libspark/flartoolkit/detector/FLARMultiMarkerDetectorResult.as
+V 124
+/codeshare/!svn/ver/158/FLARManager/deploy/FLARManager_v07/src/org/libspark/flartoolkit/detector/FLARSingleMarkerDetector.as
 END
 FLARMultiMarkerDetector.as
 K 25
 svn:wc:ra_dav:version-url
-V 114
-/codeshare/!svn/ver/13/FLARManager/deploy/v01_FP9/src/org/libspark/flartoolkit/detector/FLARMultiMarkerDetector.as
+V 123
+/codeshare/!svn/ver/158/FLARManager/deploy/FLARManager_v07/src/org/libspark/flartoolkit/detector/FLARMultiMarkerDetector.as
 END

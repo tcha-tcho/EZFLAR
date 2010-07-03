@@ -1,14 +1,14 @@
 8
 
 dir
-34
-http://transmote.com/codeshare/FLARManager/deploy/v01_FP9/src/org/libspark/flartoolkit/core/rasterfilter/rgb2bin
+212
+http://transmote.com/codeshare/FLARManager/deploy/FLARManager_v07/src/org/libspark/flartoolkit/core/rasterfilter/rgb2bin
 http://transmote.com/codeshare
 
 
 
-2009-03-28T22:18:34.221137Z
-13
+2010-04-10T06:18:51.952319Z
+158
 ericsoco
 
 
@@ -26,39 +26,16 @@ svn:special svn:externals svn:needs-lock
 
 7f038713-2549-0410-8939-82037612515d
 
-FLARRasterFilter_BitmapDataThreshold.as
+FLARRasterFilter_Threshold.as
 file
 
 
 
 
-2009-05-21T00:05:32.000000Z
-63172f29e0a659cfc02dd1a94b89f362
-2009-03-28T22:18:34.221137Z
-13
+2010-07-03T17:47:32.000000Z
+3dbca512ef2558765a2fa61eafedeacb
+2010-04-10T06:18:51.952319Z
+158
 ericsoco
-
-FLARRasterFilter_ARToolkitThreshold.as
-file
-
-
-
-
-2009-05-21T00:05:32.000000Z
-5d3d382f1183e0fed1245bb2832bf26e
-2009-03-28T22:18:34.221137Z
-13
-ericsoco
-
-IFLARRasterFilter_RgbToBin.as
-file
-
-
-
-
-2009-05-21T00:05:32.000000Z
-3dcc65c7835409ba0e44466293c6437c
-2009-03-28T22:18:34.221137Z
-13
-ericsoco
+has-props
 

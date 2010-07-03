@@ -1,14 +1,14 @@
 8
 
 dir
-34
-http://transmote.com/codeshare/FLARManager/deploy/v01_FP9/src/org/libspark/flartoolkit/core/transmat
+212
+http://transmote.com/codeshare/FLARManager/deploy/FLARManager_v07/src/org/libspark/flartoolkit/core/transmat
 http://transmote.com/codeshare
 
 
 
-2009-03-28T22:18:34.221137Z
-13
+2010-04-10T06:18:51.952319Z
+158
 ericsoco
 
 
@@ -32,54 +32,10 @@ file
 
 
 
-2009-05-21T00:05:28.000000Z
-1dac2ba5e3640f6f88e9b14c52e8341b
-2009-03-28T22:18:34.221137Z
-13
+2010-07-03T17:47:32.000000Z
+1ab0e0861ad012a482ca3f3101e28b45
+2010-04-10T06:18:51.952319Z
+158
 ericsoco
-
-optimize
-dir
-
-FLARTransMat.as
-file
-
-
-
-
-2009-05-21T00:05:28.000000Z
-9cdac92e0a75a11576dda9a9fdd7b9b0
-2009-03-28T22:18:34.221137Z
-13
-ericsoco
-
-fitveccalc
-dir
-
-FLARTransOffset.as
-file
-
-
-
-
-2009-05-21T00:05:28.000000Z
-61036414d49964620f6cf3f61ad138a2
-2009-03-28T22:18:34.221137Z
-13
-ericsoco
-
-rotmatrix
-dir
-
-IFLARTransMat.as
-file
-
-
-
-
-2009-05-21T00:05:28.000000Z
-0718e2be1bb660eee2bc4cacafccac3b
-2009-03-28T22:18:34.221137Z
-13
-ericsoco
+has-props
 

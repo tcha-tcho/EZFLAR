@@ -1,0 +1,35 @@
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/codeshare/!svn/ver/158/FLARManager/deploy/FLARManager_v07/src/com/transmote/flar/utils/threshold
+END
+DrunkHistogramThresholdAdapter.as
+K 25
+svn:wc:ra_dav:version-url
+V 131
+/codeshare/!svn/ver/158/FLARManager/deploy/FLARManager_v07/src/com/transmote/flar/utils/threshold/DrunkHistogramThresholdAdapter.as
+END
+DrunkWalkThresholdAdapter.as
+K 25
+svn:wc:ra_dav:version-url
+V 126
+/codeshare/!svn/ver/158/FLARManager/deploy/FLARManager_v07/src/com/transmote/flar/utils/threshold/DrunkWalkThresholdAdapter.as
+END
+IThresholdAdapter.as
+K 25
+svn:wc:ra_dav:version-url
+V 118
+/codeshare/!svn/ver/158/FLARManager/deploy/FLARManager_v07/src/com/transmote/flar/utils/threshold/IThresholdAdapter.as
+END
+IntegralImageThresholdAdapter.as
+K 25
+svn:wc:ra_dav:version-url
+V 130
+/codeshare/!svn/ver/158/FLARManager/deploy/FLARManager_v07/src/com/transmote/flar/utils/threshold/IntegralImageThresholdAdapter.as
+END
+HistogramThresholdAdapter.as
+K 25
+svn:wc:ra_dav:version-url
+V 126
+/codeshare/!svn/ver/158/FLARManager/deploy/FLARManager_v07/src/com/transmote/flar/utils/threshold/HistogramThresholdAdapter.as
+END

@@ -1,14 +1,14 @@
 8
 
 dir
-34
-http://transmote.com/codeshare/FLARManager/deploy/v01_FP9/src/com/transmote/flar
+212
+http://transmote.com/codeshare/FLARManager/deploy/FLARManager_v07/src/com/transmote/flar
 http://transmote.com/codeshare
 
 
 
-2009-03-28T22:18:34.221137Z
-13
+2010-04-10T06:18:51.952319Z
+158
 ericsoco
 
 
@@ -26,29 +26,14 @@ svn:special svn:externals svn:needs-lock
 
 7f038713-2549-0410-8939-82037612515d
 
-FLARCameraSource.as
-file
-
-
-
-
-2009-05-21T00:05:36.000000Z
-3f6a5269d868eb88e0b2603ebd48ef10
-2009-03-28T22:18:34.221137Z
-13
-ericsoco
+source
+dir
 
-IFLARSource.as
-file
-
-
-
-
-2009-05-21T00:05:36.000000Z
-cd2e739d0901c225bcc8598aa6a6d3f2
-2009-03-28T22:18:34.221137Z
-13
-ericsoco
+utils
+dir
+
+marker
+dir
 
 FLARManager.as
 file
@@ -56,81 +41,36 @@ file
 
 
 
-2009-05-21T00:05:36.000000Z
-9bc85b47a76bfbf413673c96b5fa6546
-2009-03-28T22:18:34.221137Z
-13
+2010-07-03T17:47:35.000000Z
+c47c61813225489efd2900da8a867f0e
+2010-04-10T06:18:51.952319Z
+158
 ericsoco
 
-FLARPattern.as
+COPYING.txt
 file
 
 
 
 
-2009-05-21T00:05:36.000000Z
-f9ac437ecd157244ae2ae6a39e0395dc
-2009-03-28T22:18:34.221137Z
-13
+2010-07-03T17:47:35.000000Z
+3c34afdc3adf82d2448f12715a255122
+2010-04-10T06:18:51.952319Z
+158
 ericsoco
 
-FLARMarker.as
+pattern
+dir
+
+flarManagerInternal.as
 file
 
 
 
 
-2009-05-21T00:05:36.000000Z
-09513ef2b2df4aa73526fd74e44b8be8
-2009-03-28T22:18:34.221137Z
-13
-ericsoco
-
-FLARMarkerOutline.as
-file
-
-
-
-
-2009-05-21T00:05:36.000000Z
-3526a207dd5844bf564c082628bb451a
-2009-03-28T22:18:34.221137Z
-13
-ericsoco
-
-FLARMarkerEvent.as
-file
-
-
-
-
-2009-05-21T00:05:36.000000Z
-f8d8e79f77e441e41e66a89ffa92d27a
-2009-03-28T22:18:34.221137Z
-13
-ericsoco
-
-FLARPatternLoader.as
-file
-
-
-
-
-2009-05-21T00:05:36.000000Z
-336265f3b940fda0a361a60f5a32eb99
-2009-03-28T22:18:34.221137Z
-13
-ericsoco
-
-FLARLoaderSource.as
-file
-
-
-
-
-2009-05-21T00:05:36.000000Z
-500344eb3ebcacd22da831af034f24d6
-2009-03-28T22:18:34.221137Z
-13
+2010-07-03T17:47:35.000000Z
+72c06a58c79b9d7c33da8c4619d6bbd3
+2010-04-10T06:18:51.952319Z
+158
 ericsoco
 

@@ -1,21 +1,35 @@
+/**
+ * call a method one time, after a specified delay.
+ * accepts optional parameters.
+ * (wraps a simple Timer implementation.)
+ * all active timeouts can be cleared via a static method. 
+ */
+
 package com.transmote.utils.time {
 	import flash.utils.Timer;
 	import flash.events.TimerEvent;
 	
-	/**
-	 * call a method one time, after a specified delay.
-	 * accepts optional parameters.
-	 * (wraps a simple Timer implementation.)
-	 * 
-	 * @author	Eric Socolofsky
-	 * @url		http://transmote.com/flar
-	 */
 	public class Timeout {
+		private static var activeTimeouts:Array;
+		
 		private var timer:Timer;
 		private var func:Function;
 		private var params:Array;
 		
+		public static function clearAllTimeouts () :void {
+			var i:int = Timeout.activeTimeouts.length;
+			while (i--) {
+				var timeout:Timeout = Timeout(Timeout.activeTimeouts[i]);
+				timeout.cancel();
+			}
+		}
+		
 		public function Timeout (func:Function, delay:Number, ...params:Array) {
+			if (!Timeout.activeTimeouts) {
+				Timeout.activeTimeouts = new Array();
+			}
+			Timeout.activeTimeouts.push(this);
+			
 			this.func = func;
 			this.params = params;
 			
@@ -40,6 +54,7 @@ package com.transmote.utils.time {
 		}
 		
 		private function destroy () :void {
+			Timeout.activeTimeouts.splice(Timeout.activeTimeouts.indexOf(this), 1);
 			this.timer = null;
 			this.func = null;
 			this.params = null;
