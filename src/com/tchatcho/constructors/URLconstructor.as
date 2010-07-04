@@ -5,7 +5,7 @@ package com.tchatcho.constructors {
 	import flash.display.MovieClip;
 	import flash.net.navigateToURL;
     import flash.net.URLRequest;
-	import libs.Papervision3D_2_1_920.objects.DisplayObject3D;
+	import org.papervision3d.objects.DisplayObject3D;
 
 	public class URLconstructor extends MovieClip {
 		private var _url:String;

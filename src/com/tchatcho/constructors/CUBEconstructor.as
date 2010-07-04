@@ -2,11 +2,11 @@
  * @Author tcha-tcho
  */
 package com.tchatcho.constructors {
-	import libs.Papervision3D_2_1_920.objects.primitives.Cube;
-	import libs.Papervision3D_2_1_920.materials.BitmapFileMaterial;
-	import libs.Papervision3D_2_1_920.materials.utils.MaterialsList;
-	import libs.Papervision3D_2_1_920.objects.DisplayObject3D;
-	import libs.Papervision3D_2_1_920.materials.WireframeMaterial;
+	import org.papervision3d.objects.primitives.Cube;
+	import org.papervision3d.materials.BitmapFileMaterial;
+	import org.papervision3d.materials.utils.MaterialsList;
+	import org.papervision3d.objects.DisplayObject3D;
+	import org.papervision3d.materials.WireframeMaterial;
 	
 	import com.tchatcho.constructors.LoadingEZFLAR;
 	

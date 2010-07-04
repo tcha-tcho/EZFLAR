@@ -33,7 +33,7 @@ package com.tchatcho {
 
 	//to handle objects from outside
 	import com.transmote.flar.FLARMarker;
-	import libs.Papervision3D_2_1_920;
+	import org.papervision3d.*;
 	
 	//TODO: Loading all code, loading each model working
 

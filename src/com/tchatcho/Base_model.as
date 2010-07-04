@@ -11,14 +11,13 @@ package com.tchatcho {
 	import org.libspark.flartoolkit.core.param.FLARParam;
 	import org.libspark.flartoolkit.pv3d.FLARCamera3D;
 	
-	import libs.Papervision3D_2_1_920;
 
-/*	import org.papervision3d.lights.PointLight3D;
+	import org.papervision3d.lights.PointLight3D;
 	import org.papervision3d.objects.DisplayObject3D;
 	import org.papervision3d.render.LazyRenderEngine;
 	import org.papervision3d.scenes.Scene3D;
 	import org.papervision3d.view.Viewport3D;
-*/	
+
 	//to construct models
 	import com.tchatcho.constructors.SWFconstructor;
 	import com.tchatcho.constructors.FLVconstructor;
