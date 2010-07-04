@@ -3,7 +3,7 @@
 	*/
 package com.tchatcho {
 	//to flar
-	import com.transmote.flar.FLARMarker;
+	import com.transmote.flar.marker.FLARMarker;
 	import com.transmote.utils.geom.FLARPVGeomUtils;
 	import flash.display.Sprite;
 	import flash.events.Event;

@@ -34,15 +34,18 @@ package org.libspark.flartoolkit.core.raster.rgb
 	import org.libspark.flartoolkit.core.rasterreader.*;
 	import flash.display.BitmapData;
 
-	public class FLARRgbRaster_BitmapData extends NyARRgbRaster_BasicClass
+	public class FLARRgbRaster_BitmapData extends NyARRgbRaster_BasicClass implements INyARRgbRaster
 	{
 		private var _bitmapData:BitmapData;
 		private var _rgb_reader:FLARRgbPixelReader_BitmapData;
-
-		public function FLARRgbRaster_BitmapData(i_width:int,i_height:int)
-		{
-			super(new NyARIntSize(i_width, i_height),NyARBufferType.OBJECT_AS3_BitmapData);
-			this._bitmapData = new BitmapData(i_width,i_height,false);
+		
+		/**
+		 * 
+		 * @deprecated 次バージョンで次のように変更されます。 FLARRgbRaster_BitmapData(i_width:int,i_height:int)
+		 */
+		public function FLARRgbRaster_BitmapData(bitmapData:BitmapData) {
+			super(bitmapData.width, bitmapData.height,NyARBufferType.OBJECT_AS3_BitmapData);
+			this._bitmapData = bitmapData;
 			this._rgb_reader = new FLARRgbPixelReader_BitmapData(this._bitmapData);
 		}
 		public override function getRgbPixelReader():INyARRgbPixelReader

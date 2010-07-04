@@ -37,6 +37,7 @@ package org.libspark.flartoolkit.core.rasterfilter.rgb2bin
 	import jp.nyatla.nyartoolkit.as3.*;
 	import jp.nyatla.as3utils.*;
 	import org.libspark.flartoolkit.core.raster.*;
+	import org.libspark.flartoolkit.core.rasterfilter.rgb2bin.privateClass.IFLdoThFilterImpl;
 
 
 	/**
@@ -46,7 +47,7 @@ package org.libspark.flartoolkit.core.rasterfilter.rgb2bin
 	public class FLARRasterFilter_Threshold implements INyARRasterFilter_Rgb2Bin
 	{
 		private var _threshold:int;
-		private var _do_threshold_impl:IdoThFilterImpl;
+		private var _do_threshold_impl:IFLdoThFilterImpl;
 
 		public function FLARRasterFilter_Threshold(i_threshold:int)
 		{
@@ -69,25 +70,21 @@ package org.libspark.flartoolkit.core.rasterfilter.rgb2bin
 		
 	}
 }
-import flash.display.BitmapData;
-import jp.nyatla.nyartoolkit.as3.core.raster.*;
-import jp.nyatla.nyartoolkit.as3.core.rasterfilter.*;
-import jp.nyatla.nyartoolkit.as3.core.rasterreader.*;
-import jp.nyatla.nyartoolkit.as3.core.types.*;
-/*
- * ここから各ラスタ用のフィルタ実装
- */
-interface IdoThFilterImpl
-{
-	function doThFilter(i_input:INyARRaster,i_output:INyARRaster,i_size:NyARIntSize,i_threshold:int):void;
-}
 
+import flash.display.BitmapData;
 import flash.filters.ColorMatrixFilter;
 import flash.geom.Point;
 import flash.geom.Rectangle;
 import jp.nyatla.as3utils.*;
+import jp.nyatla.nyartoolkit.as3.core.types.NyARBufferType;
+import jp.nyatla.nyartoolkit.as3.core.rasterfilter.*;
+import jp.nyatla.nyartoolkit.as3.core.rasterreader.*;
+import jp.nyatla.nyartoolkit.as3.core.raster.INyARRaster;
+import jp.nyatla.nyartoolkit.as3.core.raster.INyARRaster;
+import jp.nyatla.nyartoolkit.as3.core.types.NyARIntSize;
+import org.libspark.flartoolkit.core.rasterfilter.rgb2bin.privateClass.IFLdoThFilterImpl;
 
-class doThFilterImpl_BUFFERFORMAT_OBJECT_AS3_BitmapData implements IdoThFilterImpl
+class doThFilterImpl_BUFFERFORMAT_OBJECT_AS3_BitmapData implements IFLdoThFilterImpl
 {
 	private static const ZERO_POINT:Point = new Point();
 	private static const ONE_POINT:Point = new Point(1, 1);

@@ -19,7 +19,7 @@ package com.tchatcho {
 	import com.transmote.flar.FLARCameraSource;
 	import com.transmote.flar.FLARLoaderSource;
 	import com.transmote.flar.FLARManager;
-	import com.transmote.flar.FLARMarkerEvent;
+	import com.transmote.flar.marker.FLARMarkerEvent;
 	import com.transmote.flar.FLARPattern;
 	import com.transmote.utils.time.FramerateDisplay;
 

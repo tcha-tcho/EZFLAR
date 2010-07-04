@@ -57,7 +57,6 @@ package org.libspark.flartoolkit.support.away3d_lite {
 		 */
 		public function FLARCamera3D (flarParams:FLARParam, viewportToSourceWidthRatio:Number) :void {
 			super();
-			
 			this.x = 0;
 			this.y = 0;
 			this.z = 0;
@@ -70,15 +69,10 @@ package org.libspark.flartoolkit.support.away3d_lite {
 					0,		0,		0,		0
 				]));
 			
-			// TODO: once Away3DLite main branch is using lenses, uncomment this and remove projectionMatrix3D() override.
-//			lens = new FLARLens(this.flarProjectionMatrix);
 		}
 		
 		/**
-		 * TODO: once Away3DLite main branch is using lenses, remove this override and use FLARLens above instead.
-		 * 
 		 * Returns the 3d matrix representing the camera projection for the view.
-		 * 
 		 * @see away3dlite.containers.View3D#render()
 		 */
 		public override function get projectionMatrix3D () :Matrix3D {

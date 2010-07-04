@@ -1,4 +1,4 @@
-/* 
+﻿/* 
  * PROJECT: FLARToolKit
  * --------------------------------------------------------------------------------
  * This work is based on the NyARToolKit developed by
@@ -28,19 +28,40 @@
  */
 package org.libspark.flartoolkit.core 
 {
-	import jp.nyatla.nyartoolkit.as3.core.*;
+	import jp.nyatla.nyartoolkit.as3.core.NyARCode;
+	
 	public class FLARCode extends NyARCode
 	{
-		
-		public function FLARCode(i_width:int, i_height:int)
+		private var _markerPercentWidth:uint;
+		private var _markerPercentHeight:uint;
+
+		/**
+		 * 
+		 * @param	i_width					幅方向の分割数
+		 * @param	i_height				高さ方向の分割数
+		 * @param	i_markerPercentWidth	マーカ全体(本体＋枠)における、マーカ本体部分の割合(幅)
+		 * @param	i_markerPercentHeight	マーカ全体(本体＋枠)における、マーカ本体部分の割合(高さ)
+		 */
+		public function FLARCode(i_width:int, i_height:int,i_markerPercentWidth:uint = 50,  i_markerPercentHeight:uint = 50)
 		{
-			super(i_width,i_height);
+			super(i_width, i_height);
+			this._markerPercentWidth = i_markerPercentWidth;
+			this._markerPercentHeight = i_markerPercentHeight;
 		}
+		
 		public function loadARPatt(i_stream:String):void
 		{
 			super.loadARPattFromFile(i_stream);
 			return;
-		}		
+		}
+		
+		public function get markerPercentWidth():uint {
+			return _markerPercentWidth;
+		}
+		
+		public function get markerPercentHeight():uint {
+			return _markerPercentHeight;
+		}
 	}
 
 }

@@ -3,7 +3,7 @@
 package {
 	import com.tchatcho.EZflar;//tcha-tcho.com
 	import flash.display.MovieClip;
-	import com.transmote.flar.FLARMarkerEvent;	
+	import com.transmote.flar.marker.FLARMarkerEvent;	
 
 	public class Main extends MovieClip {
 		private var _ezflar:EZflar;

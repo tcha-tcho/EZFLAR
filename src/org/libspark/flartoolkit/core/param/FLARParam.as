@@ -41,7 +41,17 @@ package org.libspark.flartoolkit.core.param
 		
 		public function FLARParam() 
 		{
-			super();
+			this._screen_size.w = 640;
+			this._screen_size.h = 480;
+			var dist:Vector.<Number> = new Vector.<Number>();
+			dist.push(318.5, 263.5, 26.2, 1.0127565206658486);
+			
+			var projection:Vector.<Number> = new Vector.<Number>();
+			projection.push(700.9514702992245, 0, 316.5,
+						      0,               0, 726.0941816535367,
+						    241.5,             0,   0,
+						      0,               1,   0);
+			this.setValue(dist, projection);
 		}
 	}
 
