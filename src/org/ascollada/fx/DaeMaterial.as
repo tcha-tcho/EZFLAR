@@ -23,8 +23,8 @@
  * OTHER DEALINGS IN THE SOFTWARE.
  */
  
-package org.ascollada.fx {
-	import org.ascollada.core.DaeDocument;	
+package org.ascollada.fx
+{
 	import org.ascollada.ASCollada;
 	import org.ascollada.core.DaeAsset;
 	import org.ascollada.core.DaeEntity;
@@ -42,9 +42,9 @@ package org.ascollada.fx {
 		 * @param	node
 		 * @return
 		 */
-		public function DaeMaterial( document:DaeDocument, node:XML = null ):void
+		public function DaeMaterial( node:XML = null ):void
 		{
-			super( document, node );
+			super( node );
 		}
 		
 		/**
@@ -61,13 +61,25 @@ package org.ascollada.fx {
 			var assetNode:XML = getNode(node, ASCollada.DAE_ASSET_ELEMENT);
 			
 			if( assetNode )
-				this.asset = new DaeAsset(this.document, assetNode );
+				this.asset = new DaeAsset( assetNode );
 			
 			// get the one instance_effect
 			var effectRef:XML = getNode( node, ASCollada.DAE_INSTANCE_EFFECT_ELEMENT );
 			this.effect = getAttribute( effectRef, ASCollada.DAE_URL_ATTRIBUTE);
 			
 			Logger.log( " => effect url: " + this.effect );
+			
+			return;
+			// get extra's
+			var extraList:XMLList = getNodeList(node, ASCollada.DAE_EXTRA_ELEMENT);
+			
+			for each( var extra:XML in extraList )
+			{
+				var tec:XML = getNode( node, ASCollada.DAE_TECHNIQUE_ELEMENT );
+				
+				this.extras.push("extra");
+				Logger.log( " => technique " + tec.attribute("profile") );
+			}
 		}
 	}	
 }

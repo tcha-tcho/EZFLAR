@@ -23,10 +23,12 @@
  * OTHER DEALINGS IN THE SOFTWARE.
  */
  
-package org.ascollada.core {
+package org.ascollada.core 
+{
 	import org.ascollada.ASCollada;
-	import org.ascollada.core.DaeEntity;	
-
+	import org.ascollada.core.DaeEntity;
+	import org.ascollada.utils.Logger;
+	
 	public class DaeCamera extends DaeEntity
 	{
 		public static const TYPE_X:uint = 0;
@@ -53,9 +55,9 @@ package org.ascollada.core {
 		 * @param	node
 		 * @return
 		 */
-		public function DaeCamera( document : DaeDocument, node:XML ):void
+		public function DaeCamera( node:XML ):void
 		{
-			super(document, node);
+			super(node);
 		}
 		
 		/**

@@ -23,12 +23,13 @@
  * OTHER DEALINGS IN THE SOFTWARE.
  */
  
-package org.ascollada.fx {
-	import org.ascollada.core.DaeDocument;	
+package org.ascollada.fx 
+{	
 	import org.ascollada.ASCollada;
+	import org.ascollada.core.DaeAsset;
 	import org.ascollada.core.DaeEntity;
-	import org.ascollada.utils.Logger;	
-
+	import org.ascollada.utils.Logger;
+	
 	public class DaeNewParam extends DaeEntity
 	{
 		public var type:String;
@@ -41,9 +42,9 @@ package org.ascollada.fx {
 		 * 
 		 * @param	node
 		 */
-		public function DaeNewParam( document:DaeDocument, node:XML = null )
+		public function DaeNewParam( node:XML = null )
 		{
-			super( document, node );
+			super( node );
 		}
 		
 		/**
@@ -70,12 +71,12 @@ package org.ascollada.fx {
 				{
 					case ASCollada.DAE_FXCMN_SURFACE_ELEMENT:
 						this.type = ASCollada.DAE_FXCMN_SURFACE_ELEMENT;
-						this.surface = new DaeSurface(this.document, child);
+						this.surface = new DaeSurface( child );
 						break;
 						
 					case ASCollada.DAE_FXCMN_SAMPLER2D_ELEMENT:
 						this.type = ASCollada.DAE_FXCMN_SAMPLER2D_ELEMENT;
-						this.sampler2D = new DaeSampler2D(this.document, child);
+						this.sampler2D = new DaeSampler2D( child );
 						break;
 						
 					default:

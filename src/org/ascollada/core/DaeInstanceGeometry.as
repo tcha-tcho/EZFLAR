@@ -23,58 +23,28 @@
  * OTHER DEALINGS IN THE SOFTWARE.
  */
  
-package org.ascollada.core {
-	import org.ascollada.fx.DaeBindMaterial;	
+package org.ascollada.core
+{	
 	import org.ascollada.ASCollada;
-	import org.ascollada.fx.DaeBindVertexInput;
-	import org.ascollada.fx.DaeInstanceMaterial;	
-
+	import org.ascollada.core.DaeEntity;
+	import org.ascollada.fx.DaeInstanceMaterial;
+	import org.ascollada.utils.Logger;
+	
 	/**
 	 * 
 	 */
 	public class DaeInstanceGeometry extends DaeEntity
 	{		
-		/** */
 		public var url:String;
 		
-		/** */
-		public var bindMaterial : DaeBindMaterial;
-
+		public var materials:Array;
+		
 		/**
 		 * 
 		 */
-		public function DaeInstanceGeometry( document:DaeDocument, node:XML = null )
+		public function DaeInstanceGeometry( node:XML = null )
 		{
-			super( document, node );
-		}
-
-		/**
-		 * 
-		 */
-		override public function destroy() : void 
-		{
-			super.destroy();
-			
-			if(this.bindMaterial)
-			{
-				this.bindMaterial.destroy();
-				this.bindMaterial = null;
-			}
-		}
-
-		/**
-		 * 
-		 */ 
-		public function findBindVertexInput( materialId:String, semantic:String ) : DaeBindVertexInput
-		{
-			var material : DaeInstanceMaterial = this.bindMaterial.getInstanceMaterialBySymbol(materialId);
-			
-			if(material)
-			{
-				return material.findBindVertexInput( semantic );
-			}	
-			
-			return null;
+			super( node );
 		}
 		
 		/**
@@ -86,24 +56,59 @@ package org.ascollada.core {
 			super.read( node );
 			
 			this.url = getAttribute( node, ASCollada.DAE_URL_ATTRIBUTE );
-		
+			
+			this.materials = new Array();
+			
 			var children:XMLList = node.children();
 			var numChildren:int = children.length();
 			
 			for( var i:int = 0; i < numChildren; i++ )
 			{
 				var child:XML = children[i];
-
+				var floats:Array;
+				
 				switch( child.localName() )
 				{	
 					case ASCollada.DAE_BINDMATERIAL_ELEMENT:
-						this.bindMaterial = new DaeBindMaterial(this.document, child);
+						this.materials = parseBindMaterial(child);
 						break;
 						
 					default:
 						break;
 				}
 			}
+		}
+		
+		/**
+		 * 
+		 * @param	node
+		 * @return
+		 */
+		private function parseBindMaterial( node:XML ):Array
+		{
+			var instances:Array = new Array();
+			
+			var children:XMLList = node.children();
+			var numChildren:int = children.length();
+			
+			for( var i:int = 0; i < numChildren; i++ )
+			{
+				var child:XML = children[i];
+				var floats:Array;
+				
+				switch( child.localName() )
+				{	
+					case ASCollada.DAE_TECHNIQUE_COMMON_ELEMENT:
+						var materials:XMLList = child.children();
+						for each( var mat:XML in materials )
+							instances.push( new DaeInstanceMaterial(mat) );
+						break;
+						
+					default:
+						break;
+				}
+			}			
+			return instances;
 		}
 	}
 }

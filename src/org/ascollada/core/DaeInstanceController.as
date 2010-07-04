@@ -23,10 +23,11 @@
  * OTHER DEALINGS IN THE SOFTWARE.
  */
  
-package org.ascollada.core {
-	import org.ascollada.fx.DaeBindMaterial;	
+package org.ascollada.core
+{	
 	import org.ascollada.ASCollada;
 	import org.ascollada.core.DaeEntity;
+	import org.ascollada.fx.DaeInstanceMaterial;
 	import org.ascollada.utils.Logger;
 	
 	public class DaeInstanceController extends DaeEntity
@@ -41,33 +42,16 @@ package org.ascollada.core {
 		public var skeletons:Array;
 		
 		/** */
-		public var bindMaterial : DaeBindMaterial;
+		public var materials:Array;
 		
 		/**
 		 * 
 		 */
-		public function DaeInstanceController( document : DaeDocument, node:XML = null )
+		public function DaeInstanceController( node:XML = null )
 		{
-			super( document, node );
+			super( node );
 		}
-
-		/**
-		 * 
-		 */
-		override public function destroy() : void 
-		{
-			super.destroy();
-			
-			if(this.bindMaterial)
-			{
-				this.bindMaterial.destroy();
-				this.bindMaterial = null;
-			}
-			
-			this.skeletons = null;
-			this.skeleton = null;
-		}
-
+		
 		/**
 		 * 
 		 * @param	node
@@ -77,7 +61,9 @@ package org.ascollada.core {
 			super.read( node );
 			
 			this.url = getAttribute( node, ASCollada.DAE_URL_ATTRIBUTE );
-
+			
+			this.materials = new Array();
+			
 			Logger.log( " => " + this.url );
 			
 			this.skeleton = null;
@@ -103,7 +89,7 @@ package org.ascollada.core {
 						break;
 						
 					case ASCollada.DAE_BINDMATERIAL_ELEMENT:
-						this.bindMaterial = new DaeBindMaterial(this.document, child);
+						this.materials = parseBindMaterial(child);
 						break;
 					
 					case ASCollada.DAE_EXTRA_ELEMENT:
@@ -113,6 +99,38 @@ package org.ascollada.core {
 						break;
 				}
 			}
+		}
+		
+		/**
+		 * 
+		 * @param	node
+		 * @return
+		 */
+		private function parseBindMaterial( node:XML ):Array
+		{
+			var instances:Array = new Array();
+			
+			var children:XMLList = node.children();
+			var numChildren:int = children.length();
+			
+			for( var i:int = 0; i < numChildren; i++ )
+			{
+				var child:XML = children[i];
+				var floats:Array;
+				
+				switch( child.localName() )
+				{	
+					case ASCollada.DAE_TECHNIQUE_COMMON_ELEMENT:
+						var materials:XMLList = child.children();
+						for each( var mat:XML in materials )
+							instances.push( new DaeInstanceMaterial(mat) );
+						break;
+						
+					default:
+						break;
+				}
+			}			
+			return instances;
 		}
 	}
 }

@@ -25,112 +25,107 @@
  
 package org.ascollada.types 
 {
+	import org.ascollada.utils.Logger;
+	
 	/**
 	 * @author	Tim Knip 
 	 */
 	public class DaeAddressSyntax 
 	{
-		/** */
 		public var targetID:String;
 		
-		/** */
 		public var targetSID:String;
 		
-		/** */
 		public var member:String;
 		
-		/** */
+		public var arrayMember:Array;
+		
 		public var isArrayAccess:Boolean;
 		
-		/** */
 		public var isDotAccess:Boolean;
 		
-		/** */
 		public var isFullAccess:Boolean;
 		
-		/** */
-		public var arrayIndex0 : int;
-		
-		/** */
-		public var arrayIndex1 : int;
-		
-		/**
-		 * Constructor.
-		 */
-		public function DaeAddressSyntax()
-		{
-			this.isDotAccess = this.isArrayAccess = this.isFullAccess = false;
-			this.arrayIndex0 = -1;
-			this.arrayIndex1 = -1;
-		}
-
 		/**
 		 * 
+		 * @return
 		 */
-		public static function parse(target : String) : DaeAddressSyntax
+		public function DaeAddressSyntax():void
 		{
-			var syntax : DaeAddressSyntax = new DaeAddressSyntax();
 			
-			var pattern : RegExp = /\((\d+)\)\((\d+)\)/;
-			var matches : Array = target.match(pattern);
-			if(!matches)
-			{
-				pattern = /\((\d+)\)/;
-				matches = target.match(pattern);
-			}
+		}
+		
+		public static function parseAnimationTarget( target:String ):DaeAddressSyntax
+		{
+			var parts:Array;
 			
-			if(matches)
+			if( target.indexOf("/") == -1 )
 			{
-				// array access
-				target = target.replace(pattern, "");
-				syntax.isArrayAccess = true;
-				syntax.arrayIndex0 = parseInt(matches[1], 10);
-				if(matches.length > 2)
-				{
-					syntax.arrayIndex1 = parseInt(matches[2], 10);
-				}
+				Logger.error( "[ERROR] invalid animation target attribute!" );
+				throw new Error( "invalid animation target attribute!" );
 			}
 			else
 			{
-				var pos : int = target.lastIndexOf(".");
-				if(pos != -1)
-				{
-					// dot access
-					syntax.member = target.substr(pos+1);
-					syntax.isDotAccess = true;
-					target = target.substr(0, pos);
-				}
-				else
-				{
-					syntax.isFullAccess = true;
-				}
+				parts = target.split("/");
 			}
 			
-			if(target.indexOf("/") != -1)
-			{
-				var parts : Array = target.split("/");	
-				
-				syntax.targetID = String(parts.shift());
-				syntax.targetSID = parts.join("/");
-			} 
-			else
-			{
-				syntax.targetID = target;
-			}
+			var syntax:DaeAddressSyntax = new DaeAddressSyntax();
+			
+			syntax.targetID = parts[0];
+			
+			parseFullMember(syntax, parts[1]);
 			
 			return syntax;
 		}
 		
 		/**
 		 * 
+		 * @param	syntax
+		 * @param	fullMember
+		 * @return
 		 */
+		private static function parseFullMember( syntax:DaeAddressSyntax, fullMember:String ):void
+		{
+			syntax.isArrayAccess = syntax.isDotAccess = syntax.isFullAccess = false;
+			syntax.member = "";
+			syntax.arrayMember = new Array();
+			
+			var arrayPattern:RegExp = /\(\d\)/ig;
+			
+			if( arrayPattern.exec(fullMember) )
+			{
+				syntax.isArrayAccess = true;
+				syntax.targetSID = fullMember.split("(")[0];
+				syntax.arrayMember = fullMember.match(arrayPattern);
+			}
+			else if( fullMember.indexOf(".") != -1 )
+			{
+				syntax.isDotAccess = true;
+				
+				var dotParts:Array = fullMember.split(".");
+				syntax.targetSID = dotParts[0];
+				syntax.member = dotParts[1];
+			}
+			else if( fullMember.length )
+			{
+				syntax.isFullAccess = true;
+				syntax.targetSID = fullMember;
+			}
+			else
+			{
+				Logger.error( "[ERROR] can't find a SID!" );
+				throw new Error( "can't find a SID!" );
+			}
+		}
+		
 		public function toString():String
 		{
-			return "\ntarget: " + targetID + 
-				"\nsid: " + targetSID + 
-				"\nmember: " + member +
-				"\narrayIndex0: " + arrayIndex0 + 
-				"\narrayIndex1: " + arrayIndex1;
+			return "[target:" + targetID + 
+				"\nSID:" + targetSID + 
+				"\nmember:" + member +
+				"\narrayMember:" + arrayMember + 
+				"\n" + isArrayAccess + " " + isDotAccess + " " + isFullAccess
+				"]";  
 		}
 	}	
 }

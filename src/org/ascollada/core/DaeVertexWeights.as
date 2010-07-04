@@ -51,9 +51,9 @@ package org.ascollada.core
 		 * @param	node
 		 * @return
 		 */
-		public function DaeVertexWeights( document:DaeDocument, node:XML = null ):void
+		public function DaeVertexWeights( node:XML = null ):void
 		{
-			super( document, node );
+			super( node );
 		}
 		
 		/**
@@ -82,7 +82,7 @@ package org.ascollada.core
 			// parse <input> elements
 			for( var i:int = 0; i < inputList.length(); i++ )
 			{
-				var input:DaeInput = new DaeInput(this.document, inputList[i]);
+				var input:DaeInput = new DaeInput(inputList[i]);
 				this.inputs.push( input);
 			}
 			

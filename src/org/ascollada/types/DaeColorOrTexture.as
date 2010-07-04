@@ -23,11 +23,13 @@
  * OTHER DEALINGS IN THE SOFTWARE.
  */
  
-package org.ascollada.types {
-	import org.ascollada.core.DaeDocument;	
+package org.ascollada.types 
+{
+	import org.ascollada.ASCollada;
 	import org.ascollada.core.DaeEntity;
-	import org.ascollada.fx.DaeTexture;	
-
+	import org.ascollada.fx.DaeTexture;
+	import org.ascollada.utils.Logger;
+	
 	/**
 	 * 
 	 */
@@ -47,10 +49,10 @@ package org.ascollada.types {
 		 * @param	node
 		 * @return
 		 */
-		public function DaeColorOrTexture( document:DaeDocument, node:XML = null ):void
+		public function DaeColorOrTexture( node:XML = null ):void
 		{
 			this.type = TYPE_COLOR;
-			super( document, node );
+			super( node );
 		}
 		
 		/**
@@ -73,17 +75,17 @@ package org.ascollada.types {
 					case "color":
 						this.type = TYPE_COLOR;
 						this.color = getFloats( child );
-						
+						//Logger.trace( " => " + node.localName() + ": color: " + this.color );
 						return;
 					
 					case "texture":
 						this.type = TYPE_TEXTURE;
-						this.texture = new DaeTexture(this.document, child);
-						
+						this.texture = new DaeTexture( child );
+						//Logger.trace( " => " + node.localName() + ": texture: " + texture.texture + " texcoord:" + texture.texcoord );
 						return;
 						
 					case "param":
-						
+						//Logger.trace( " => " + node.localName() + ": param: " );
 						this.type = TYPE_PARAM;
 						return;
 						

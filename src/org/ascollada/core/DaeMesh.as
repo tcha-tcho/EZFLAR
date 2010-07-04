@@ -24,18 +24,20 @@
  */
  
 package org.ascollada.core {
-	import org.ascollada.ASCollada;	
-
+	
+	import org.ascollada.ASCollada;
+	import org.ascollada.utils.Logger;
+	
 	/**
 	 * 
 	 */
 	public class DaeMesh extends DaeEntity {
 		
-		/** */
-		public var geometry : DaeGeometry;
-		
 		/** vertices */
-		public var vertices : DaeVertices;
+		public var vertices:Array;
+		
+		/** */
+		public var sources:Object;
 		
 		/** */
 		public var primitives:Array;
@@ -44,32 +46,10 @@ package org.ascollada.core {
 		 * 
 		 * @param	node
 		 */
-		public function DaeMesh( document:DaeDocument, geometry:DaeGeometry, node:XML = null ) {
-			super( document, node );
-			this.geometry = geometry;
+		public function DaeMesh( node:XML = null ) {
+			super( node )
 		}
-
-		/**
-		 * 
-		 */
-		override public function destroy() : void {
-			super.destroy();
-			
-			if(this.vertices) {
-				this.vertices.destroy();
-				this.vertices = null;
-			}
-			
-			if(this.primitives) {
-				for each(var primitive : DaePrimitive in this.primitives) {
-					primitive.destroy();
-				}
-				this.primitives = null;
-			}
-			
-			this.geometry = null;
-		}
-
+		
 		/**
 		 * 
 		 * @return
@@ -80,20 +60,27 @@ package org.ascollada.core {
 				
 			super.read( node );
 		
+			this.sources = new Object();
 			this.primitives = new Array();
+			
+			// fetch all <source> elements
+			var sourceList:XMLList = getNodeList( node, ASCollada.DAE_SOURCE_ELEMENT );
+			var sourceNode:XML;
+			var source:DaeSource;
+			
+			for each( sourceNode in sourceList ) {
+				source = new DaeSource( sourceNode );
+				this.sources[ source.id ] = source.values;
+			}
 			
 			// fetch <vertices> element
 			var verticesNode:XML = getNode(node, ASCollada.DAE_VERTICES_ELEMENT);
+			var verticesElement:DaeVertices = new DaeVertices(verticesNode);
 			
-			this.vertices = new DaeVertices(this.document, verticesNode);
-			
-			var inputList:XMLList = getNodeList(verticesNode, ASCollada.DAE_INPUT_ELEMENT);
-			var inputNode:XML;
-			
-			for each(inputNode in inputList) {
-				var input : DaeInput = new DaeInput(this.document, inputNode);
+			for each( var input:DaeInput in verticesElement.inputs ) {
 				if( input.semantic == "POSITION" ) {
-					this.vertices.source = this.document.sources[ input.source ];
+					this.vertices = sources[ input.source ];
+					this.sources[ verticesElement.id ] = sources[ input.source ];
 				}
 			}	
 			
@@ -111,11 +98,7 @@ package org.ascollada.core {
 					case ASCollada.DAE_LINES_ELEMENT:
 					case ASCollada.DAE_POLYGONS_ELEMENT:
 					case ASCollada.DAE_POLYLIST_ELEMENT:
-						var primitive : DaePrimitive = new DaePrimitive(this.document, this, child);
-						if( primitive.count > 0 )
-						{
-							this.primitives.push( primitive );
-						}
+						this.primitives.push( new DaePrimitive(this, child) );
 						break;
 					default:
 						break;

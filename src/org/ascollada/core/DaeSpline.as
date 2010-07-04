@@ -23,12 +23,14 @@
  * OTHER DEALINGS IN THE SOFTWARE.
  */
  
-package org.ascollada.core {
+package org.ascollada.core 
+{
 	import org.ascollada.ASCollada;
 	import org.ascollada.core.DaeEntity;
 	import org.ascollada.core.DaeInput;
-	import org.ascollada.core.DaeSource;	
-
+	import org.ascollada.core.DaeSource;
+	import org.ascollada.utils.Logger;
+	
 	/**
 	 * 
 	 */
@@ -45,9 +47,9 @@ package org.ascollada.core {
 		 * @param	node
 		 * @return
 		 */
-		public function DaeSpline( document:DaeDocument, node:XML ):void
+		public function DaeSpline( node:XML ):void
 		{
-			super( document, node );
+			super( node );
 		}
 		
 		/**
@@ -80,7 +82,7 @@ package org.ascollada.core {
 			
 			for each( inputNode in inputList )
 			{
-				input = new DaeInput(this.document, inputNode );
+				input = new DaeInput( inputNode );
 				
 				switch( input.semantic )
 				{
@@ -89,7 +91,7 @@ package org.ascollada.core {
 						sourceNode = getNodeById( node, ASCollada.DAE_SOURCE_ELEMENT, input.source);
 						if( !sourceNode )
 							throw new Error( "source with id=" + input.source + " not found!" );
-						source = new DaeSource(this.document, sourceNode[0] );
+						source = new DaeSource( sourceNode[0] );
 						this.vertices = source.values;
 						break;
 					

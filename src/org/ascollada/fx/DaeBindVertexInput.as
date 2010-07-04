@@ -23,9 +23,9 @@
  * OTHER DEALINGS IN THE SOFTWARE.
  */
  
-package org.ascollada.fx {
-	import org.ascollada.core.DaeDocument;
-	import org.ascollada.ASCollada;
+package org.ascollada.fx 
+{
+import org.ascollada.ASCollada;
 import org.ascollada.core.DaeEntity;
 
 /**
@@ -39,9 +39,9 @@ public class DaeBindVertexInput extends DaeEntity
 	
 	public var input_set:int;	
 	
-	public function DaeBindVertexInput( document:DaeDocument, node:XML = null ):void
+	public function DaeBindVertexInput( node:XML = null ):void
 	{
-		super(document, node);
+		super(node);
 	}
 
 	/**

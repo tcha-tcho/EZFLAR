@@ -23,11 +23,12 @@
  * OTHER DEALINGS IN THE SOFTWARE.
  */
  
-package org.ascollada.fx {
-	import org.ascollada.core.DaeDocument;	
+package org.ascollada.fx
+{	
 	import org.ascollada.ASCollada;
-	import org.ascollada.core.DaeEntity;	
-
+	import org.ascollada.core.DaeEntity;
+	import org.ascollada.utils.Logger;
+	
 	/**
 	 * 
 	 */
@@ -44,17 +45,9 @@ package org.ascollada.fx {
 		/**
 		 * 
 		 */
-		public function DaeInstanceMaterial( document:DaeDocument, node:XML = null )
+		public function DaeInstanceMaterial( node:XML = null )
 		{
-			super( document, node );
-		}
-		
-		/**
-		 * 
-		 */ 
-		public function get bindVertexInputs() : Array
-		{
-			return _bindVertexInputs;
+			super( node );
 		}
 		
 		/**
@@ -99,7 +92,7 @@ package org.ascollada.fx {
 					case ASCollada.DAE_BIND_ELEMENT:
 						break;
 					case ASCollada.DAE_BIND_VERTEX_INPUT:
-						_bindVertexInputs.push(new DaeBindVertexInput(this.document, child));
+						_bindVertexInputs.push(new DaeBindVertexInput(child));
 						break;
 					case ASCollada.DAE_EXTRA_ELEMENT:
 						break;

@@ -1,0 +1,311 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:TitleWindow   creationComplete="initPanel()"
+	xmlns:mx="http://www.adobe.com/2006/mxml" 
+	width="400" 
+	height="400"
+	minWidth="390"
+	minHeight="380"
+	showCloseButton="true"
+	title="Xray Output" 
+	horizontalAlign="center" 
+	verticalScrollPolicy="off" 
+	horizontalScrollPolicy="off" 
+	autoLayout="true" 
+	layout="vertical"
+	click="endDrag()"
+	close="PopUpManager.removePopUp( this )"
+	mouseUp="endDrag()"
+	mouseDown="doDrag()"
+	doubleClickEnabled="true"
+	doubleClick="changeVisible()"
+	backgroundColor="#003366" backgroundAlpha=".22" color="#ffffff" fontWeight="bold">
+	<!--close="PopUpManager.removePopUp( this )"-->
+		<mx:Script>
+		<![CDATA[
+			import com.blitzagency.xray.logger.XrayLogger;
+			import com.blitzagency.xray.logger.Debug;
+			import com.blitzagency.xray.util.LSOUserPreferences;
+			import flash.display.DisplayObject;
+			import flash.utils.*;
+			import mx.managers.PopUpManager;
+			
+			
+			public var originalHeight:Number = 300;
+			private var scroll:Boolean = false;
+			private var updateSI:Number;
+			
+			private var history:Array = new Array();
+			private var lastSearch:String;
+			private var lastSearchIndex:Number;
+			private var scrolling:Boolean = false;
+			private var searchList:Array;
+			 
+			public function initPanel():void
+			{
+				LSOUserPreferences.load("XrayOutputPrefs");
+				acceptOutput.selected = LSOUserPreferences.getPreference("acceptOutput");
+				var objLocation:Object = LSOUserPreferences.getPreference("outputPanelLocation");
+				var objSize:Object = LSOUserPreferences.getPreference("outputPanelSize");
+				if(objLocation != null)
+				{
+					x = objLocation.x;
+					y = objLocation.y;
+				}
+				
+				if(objSize != null)
+				{
+					width = objSize.width;
+					height = objSize.height;
+				}
+				
+				//if(!LSOUserPreferences.getPreference("outputPanelShow")) hide();
+				
+				// register for debug events
+				Debug.addEventListener("trace", traceHandler);
+				
+				// set radio button positions
+				debug_1.x = (debug_0.x + debug_0.width) + 5;
+				debug_2.x = (debug_1.x + debug_1.width) + 5;
+				debug_3.x = (debug_2.x + debug_2.width) + 5;
+				debug_4.x = (debug_3.x + debug_3.width) + 5;
+				
+				var logLevel:Object = LSOUserPreferences.getPreference("logLevel");
+				this["debug_" + Number(logLevel)].selected = true;
+				XrayLogger.getInstance().setLevel(Number(logLevel));
+			}
+			
+			public function trace(msg:String):void
+			{
+				history.push(msg);
+				output.data = history.join("\n");
+				updateScroll();
+			}
+			
+			public function traceHandler(evtObj:Object):void
+			{
+				if(acceptOutput.selected)trace(evtObj.obj.message);
+			}
+			
+			public function changeVisible():void
+			{
+				if(!validateClickArea())return;
+				if(height == 30) 
+				{
+					show();
+				}else
+				{
+					hide();
+				}
+				endDrag();
+			}
+			
+			public function hide():void
+			{
+				originalHeight = height;
+				height = 30;
+				LSOUserPreferences.setPreference("outputPanelShow", false, true);
+			}
+			
+			public function show():void
+			{
+				height = originalHeight;
+				LSOUserPreferences.setPreference("outputPanelShow", true, true);
+			}
+			
+			private function close():void
+			{
+				PopUpManager.removePopUp( this )
+			}
+			
+			private function doDrag():void
+			{
+				clearInterval(updateSI);
+				if(!scroll) 
+				{
+					if(mouseX >= (width-10) && mouseX <= width && mouseY >= (height-10) && mouseY <= height)
+					{
+						var xdif:Number = Math.abs(mouseX-width);
+						var ydif:Number = Math.abs(mouseY-height);
+						updateSI = setInterval(updateSize, 25, xdif, ydif);
+					}else if(validateClickArea())
+					{
+						this.startDrag();
+					}
+				}
+			}
+			
+			private function validateClickArea():Boolean
+			{
+				if((mouseX >= 0 && mouseX <= 10) || 
+				 (mouseX > (width-10) && mouseX < width) ||
+				 (mouseY >= 0 && mouseY <= 20) || 
+				 (mouseY > (height-10) && mouseY < height)) return true;
+				 return false;
+			}
+			
+			private function updateSize(xdif:Number, ydif:Number):void
+			{
+				if( minWidth < mouseX+xdif )
+					width = mouseX+xdif;
+				if( minHeight < mouseY+xdif )
+					height = mouseY+ydif;
+			}
+			
+			private function endDrag():void
+			{
+				clearInterval(updateSI);
+				LSOUserPreferences.setPreference("outputPanelSize", {width:width, height:height}, true);
+				stopDrag();
+				LSOUserPreferences.setPreference("outputPanelLocation", {x:x, y:y}, true);
+			}
+			
+			private function setAcceptOutput():void
+			{
+				
+				if(!acceptOutput.selected) 
+				{
+					trace("*** You've turned off output.  You're trace statements will not appear. ***");
+				}
+
+				LSOUserPreferences.setPreference("acceptOutput", acceptOutput.selected, true);
+			}
+			
+			private function updateScroll():void
+			{
+				output.setFocus();
+				output.setSelection(output.text.length, output.text.length);
+			}
+			
+			private function clear():void
+			{
+				history = new Array();
+				output.data = history;
+			}
+			
+			public function resetLastSearch():void
+			{
+				lastSearch = "";
+				output.setSelection(0,0);
+			}
+			
+			public function handleSearchKey(key:KeyboardEvent):void
+			{
+				if(key.keyCode != Keyboard.ENTER) return;
+				search();
+			}
+			
+			public function search():Boolean
+			{
+				var search:String = searchPhrase.text;
+				var caseSensitive:Boolean = caseSensitive.selected;
+
+				// clear searchList
+				// put all occurances into the array of the specified search string
+				if(search.length > 0)
+				{
+					if(lastSearch != search)
+					{
+						// reset the search index
+						lastSearchIndex = 0;
+						
+						// reset the last search variable
+						lastSearch = search
+						
+						// set bScrolling to true so that it doesn't move during the search
+						scrolling = true;
+						
+						// initialize search array
+						searchList = new Array();
+						
+						// init toSearch based on whether this is a case sensitive search or not
+						var toSearch:String = caseSensitive ? output.text : output.text.toLowerCase();
+						
+						// if there's nothing to search THROUGH, return false
+						if(toSearch.length <= 0) return false;
+						
+						// reset search based on case search
+						search = caseSensitive ? search : search.toLowerCase();
+						
+						// set while loop flag
+						var continueSearch:Boolean = true;
+						
+						
+						
+						// iIndex is reset in the loop everytime a match is found
+						var index:Number = 0;
+						while(continueSearch)
+						{
+							var i:Number = toSearch.indexOf(search, index);
+							if(i >= 0)
+							{
+								// if you find a match, push into searchList
+								searchList.push(
+								{
+									sBlock: toSearch.substring(0, i+search.length), 
+									iBIndex: i, 
+									iEIndex: i+search.length
+								});
+								index = i+(search.length+1);
+							}else
+							{
+								continueSearch = false;
+							}
+						}
+						if(searchList.length > 0) gotoNextFind();
+					}else
+					{
+						// if the search hasn't changed, just call next highlight
+						if(searchList.length > 0) gotoNextFind();
+					}
+				}
+				
+				return true;
+			}
+			
+			private function gotoNextFind():void
+			{
+				// init object from the searchList
+				var obj:Object = searchList[lastSearchIndex];
+				
+				// reset lastSearchIndex
+				lastSearchIndex = lastSearchIndex + 1 > searchList.length-1 ? 0 : lastSearchIndex+1;
+				
+				// set selection focus to the output window
+				output.setFocus();
+				
+				// set the selection - this HAS to happen before you set the scroll
+				output.setSelection(obj.iBIndex, obj.iEIndex);
+			}
+			
+			private function updateLevel(p_level:Number):void
+			{
+				XrayLogger.getInstance().setLevel(p_level);
+				LSOUserPreferences.setPreference("logLevel", p_level, true);
+			}
+		]]>
+	</mx:Script>
+	
+	<mx:ApplicationControlBar width="100%">
+		<mx:Canvas width="100%" height="26"
+			horizontalScrollPolicy="off">
+			<mx:TextInput x="0" y="0" color="#00356a" id="searchPhrase" height="22" keyUp="handleSearchKey(event);"/>
+			<mx:Button x="168" y="0" label="Search" width="52" click="search();" toolTip="Search the output"/>
+			<mx:CheckBox x="228" y="2" label="caseSenSiTive?" id="caseSensitive" click="resetLastSearch()"/>
+		</mx:Canvas>
+	</mx:ApplicationControlBar>
+	<mx:Canvas width="100%" height="100%">
+		<mx:RadioButton groupName="debugLevel" color="0x66ff99" id="debug_0" label="DEBUG" selected="true" left="5" click="updateLevel(0);" />
+		<mx:RadioButton groupName="debugLevel" color="0xcccccc" id="debug_1" label="INFO" click="updateLevel(1);"/>
+		<mx:RadioButton groupName="debugLevel" color="0xFFFF00" id="debug_2" label="WARN" click="updateLevel(2);"/>
+		<mx:RadioButton groupName="debugLevel" color="0xFF9900" id="debug_3" label="ERROR" click="updateLevel(3);"/>
+		<mx:RadioButton groupName="debugLevel" color="0xFF0000" id="debug_4" label="FATAL" click="updateLevel(4);"/>
+		<mx:TextArea mouseDown="scroll=true" top="20" click="scroll=false" id="output" editable="false" enabled="true" wordWrap="true" change="updateScroll()" width="100%" height="100%" borderStyle="none" fontFamily="Courier New" fontSize="11" color="#00356a" fontWeight="normal" keyUp="handleSearchKey(event);"/>
+	</mx:Canvas>
+	<mx:Canvas width="100%" height="20">
+		<mx:Button label="Clear" height="20" fontSize="9" enabled="true" id="clearOutput" click="clear()" y="0" toolTip="Clear Output Panel" left="5"/>
+		<mx:CheckBox label="Show Output?" id="acceptOutput" y="1" click="setAcceptOutput();" left="60" width="104">
+			<mx:toolTip>Un-check if you don't want to receive trace statements</mx:toolTip>
+		</mx:CheckBox>
+	</mx:Canvas>
+	<mx:TextArea id="searchLineCheck" visible="false" editable="false" enabled="true" wordWrap="true" x="-1000" width="0" height="0" borderStyle="none" />
+</mx:TitleWindow >

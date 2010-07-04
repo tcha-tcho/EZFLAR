@@ -23,8 +23,8 @@
  * OTHER DEALINGS IN THE SOFTWARE.
  */
  
-package org.ascollada.fx {
-	import org.ascollada.core.DaeDocument;	
+package org.ascollada.fx
+{
 	import org.ascollada.ASCollada;
 	import org.ascollada.core.DaeEntity;
 	import org.ascollada.utils.Logger;
@@ -39,9 +39,9 @@ package org.ascollada.fx {
 		 * @param	node
 		 * @return
 		 */
-		public function DaeSampler2D( document:DaeDocument, node:XML ):void
+		public function DaeSampler2D( node:XML ):void
 		{
-			super(document, node);
+			super(node);
 		}
 		
 		/**

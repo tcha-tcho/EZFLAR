@@ -24,12 +24,13 @@
  */
  
  
-package org.ascollada.fx {
-	import org.ascollada.core.DaeDocument;	
+package org.ascollada.fx 
+{
 	import org.ascollada.ASCollada;
 	import org.ascollada.core.DaeEntity;
-	import org.ascollada.types.DaeColorOrTexture;	
-
+	import org.ascollada.types.DaeColorOrTexture;
+	import org.ascollada.utils.Logger;
+	
 	/**
 	 * 
 	 */
@@ -47,9 +48,9 @@ package org.ascollada.fx {
 		 * @param	node
 		 * @return
 		 */
-		public function DaeConstant( document:DaeDocument, node:XML = null ):void
+		public function DaeConstant( node:XML = null ):void
 		{
-			super(document, node);
+			super(node);
 		}
 		
 		/**
@@ -70,11 +71,11 @@ package org.ascollada.fx {
 				switch( child.localName() )
 				{
 					case ASCollada.DAE_EMISSION_MATERIAL_PARAMETER:
-						this.emission = new DaeColorOrTexture(this.document, child);
+						this.emission = new DaeColorOrTexture( child );
 						break;
 						
 					case ASCollada.DAE_REFLECTIVE_MATERIAL_PARAMETER:
-						this.reflective = new DaeColorOrTexture(this.document,  child);
+						this.reflective = new DaeColorOrTexture( child );
 						break;
 						
 					case ASCollada.DAE_REFLECTIVITY_MATERIAL_PARAMETER:
@@ -82,7 +83,7 @@ package org.ascollada.fx {
 						break;
 						
 					case ASCollada.DAE_TRANSPARENT_MATERIAL_PARAMETER:
-						this.transparent = new DaeColorOrTexture(this.document, child);
+						this.transparent = new DaeColorOrTexture( child );
 						break;
 					
 					case ASCollada.DAE_TRANSPARENCY_MATERIAL_PARAMETER:

@@ -53,9 +53,9 @@ package org.ascollada.core
 		 * @param	node
 		 * @return
 		 */
-		public function DaeController( document : DaeDocument, node:XML = null ):void
+		public function DaeController( node:XML = null ):void
 		{
-			super( document, node );
+			super( node );
 		}
 		
 		/**
@@ -75,7 +75,7 @@ package org.ascollada.core
 			var skinNode:XML = getNode(node, ASCollada.DAE_CONTROLLER_SKIN_ELEMENT);			
 			if( skinNode )
 			{
-				this.skin = new DaeSkin(this.document, skinNode );
+				this.skin = new DaeSkin( skinNode );
 				this.type = TYPE_SKIN;
 			}
 			else 
@@ -84,7 +84,7 @@ package org.ascollada.core
 				var morphNode:XML = getNode(node, ASCollada.DAE_CONTROLLER_MORPH_ELEMENT);
 				if( morphNode )
 				{
-					this.morph = new DaeMorph(this.document, morphNode );
+					this.morph = new DaeMorph( morphNode );
 					this.type = TYPE_MORPH;
 				}
 			}

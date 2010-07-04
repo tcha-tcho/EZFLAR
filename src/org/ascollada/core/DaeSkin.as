@@ -23,13 +23,14 @@
  * OTHER DEALINGS IN THE SOFTWARE.
  */
  
-package org.ascollada.core {
+package org.ascollada.core
+{
 	import org.ascollada.ASCollada;
 	import org.ascollada.core.DaeEntity;
 	import org.ascollada.core.DaeSource;
 	import org.ascollada.core.DaeVertexWeights;
-	import org.ascollada.utils.Logger;	
-
+	import org.ascollada.utils.Logger;
+		
 	/**
 	 * 
 	 */
@@ -61,9 +62,9 @@ package org.ascollada.core {
 		 * @param	node
 		 * @return
 		 */
-		public function DaeSkin( document:DaeDocument, node:XML = null ):void
+		public function DaeSkin( node:XML = null ):void
 		{
-			super( document, node );
+			super( node );
 		}
 		
 		/**
@@ -182,22 +183,22 @@ package org.ascollada.core {
 				throw new Error( "need exactly one <vertex_weights> element!" );
 			
 			var jointsList:XMLList = getNodeList(jointsNode, ASCollada.DAE_INPUT_ELEMENT);
-			var weights:DaeVertexWeights = new DaeVertexWeights(this.document, weightsNode );
+			var weights:DaeVertexWeights = new DaeVertexWeights( weightsNode );
 			
 			var srcNode:XML;
 			var input:DaeInput;
 			
 			// fetch sources for <joints>
-			var src:DaeSource;
-			//var sources:Object = new Object();
+			var src:DaeSource
+			var sources:Object = new Object();
 			for each( var inputNode:XML in jointsList )
 			{
-				input = new DaeInput(this.document, inputNode );
+				input = new DaeInput( inputNode );
 				srcNode = getNodeById(node, ASCollada.DAE_SOURCE_ELEMENT, input.source);
 				if( !srcNode )
 					throw new Error( "source not found! (id='" + input.source + "')" );
 				
-				src = new DaeSource(this.document, srcNode);
+				src = new DaeSource( srcNode );
 				
 				switch( input.semantic )
 				{
@@ -229,7 +230,7 @@ package org.ascollada.core {
 				if( !srcNode )
 					throw new Error( "source not found! (id='" + input.source + "')" );
 					
-				src = new DaeSource(this.document, srcNode);
+				src = new DaeSource( srcNode );
 				
 				switch( input.semantic )
 				{	
@@ -242,7 +243,7 @@ package org.ascollada.core {
 						tmpWeights = src.values;
 						weightOffset = input.offset;
 						maxOffset++;
-						
+						//Logger.trace( " => => => vertex_weights: " + tmpWeights );
 						break;
 						
 					default:
@@ -250,6 +251,9 @@ package org.ascollada.core {
 				}
 			}
 			
+			//Logger.trace( " => source: " + this.source );
+			//Logger.trace( " => bind_shape_matrix: " + this.bind_shape_matrix );
+			//Logger.trace( " => max offset: " + maxOffset + " " + jointOffset + " " + weightOffset );
 			var cur:int = 0;
 			
 			for( var i:int = 0; i < weights.vcounts.length; i++ )
@@ -283,13 +287,13 @@ package org.ascollada.core {
 		 * 
 		 * @param	blendWeights	the weights to normalize.
 		 */
-		public function normalizeBlendWeights( blendWeights:Array ):void
+		private function normalizeBlendWeights( blendWeights:Array ):void
 		{
 			var i:int, j:int;
 						
 			for( i = 0; i < blendWeights.length; i++  )
 			{
-				var arr:Array = blendWeights[i];
+				var arr:Array = blendWeights[i]
 				
 				var weightSum:Number = 0;
 				for( j = 0; j < arr.length; j++ )

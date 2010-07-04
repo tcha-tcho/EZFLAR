@@ -73,7 +73,6 @@ package org.ascollada.core
 		 */
 		public function DaeAnimationCurve( keys:Array = null, keyValues:Array = null ):void
 		{			
-			super(null, null);
 			this.keys = keys || new Array();
 			this.keyValues = keyValues || new Array();
 			this.interpolations = new Array();
@@ -126,13 +125,8 @@ package org.ascollada.core
 					case INFINITY_LINEAR: return outputEnd + (dt - inputEnd) * (keyValues[keys.length - 2] - outputEnd) / (keys[keys.length - 2] - inputEnd);
 					case INFINITY_CYCLE: { cycleCount = Math.ceil((dt - inputEnd) / inputSpan); dt -= cycleCount * inputSpan; break; }
 					case INFINITY_CYCLE_RELATIVE: { cycleCount = Math.ceil((dt - inputEnd) / inputSpan); dt -= cycleCount * inputSpan; outputOffset += cycleCount * (outputEnd - outputStart); break; }
-					case INFINITY_OSCILLATE:
-						cycleCount = Math.ceil((dt - inputEnd) / (2.0 * inputSpan)); 
-						dt -= cycleCount * 2.0 * inputSpan; 
-						dt = inputStart + Math.abs(dt - inputStart); 
-						break;
-					case INFINITY_UNKNOWN: default: 
-						return outputEnd;
+					case INFINITY_OSCILLATE: { cycleCount = Math.ceil((dt - inputEnd) / (2.0 * inputSpan)); dt -= cycleCount * 2.0 * inputSpan; dt = inputStart + Math.abs(dt - inputStart); break; }
+					case INFINITY_UNKNOWN: default: return outputEnd;
 				}
 			}
 			

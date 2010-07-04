@@ -23,10 +23,12 @@
  * OTHER DEALINGS IN THE SOFTWARE.
  */
  
-package org.ascollada.core {
+package org.ascollada.core 
+{
 	import org.ascollada.ASCollada;
-	import org.ascollada.core.DaeEntity;	
-
+	import org.ascollada.core.DaeEntity;
+	import org.ascollada.utils.Logger;
+	
 	/**
 	 * 
 	 */
@@ -52,9 +54,9 @@ package org.ascollada.core {
 		 * @param	node
 		 * @return
 		 */
-		public function DaeAccessor( document : DaeDocument, node:XML = null ):void
+		public function DaeAccessor( node:XML = null ):void
 		{
-			super( document, node );
+			super( node );
 		}	
 		
 		/**

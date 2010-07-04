@@ -24,9 +24,10 @@
  */
  
 package org.ascollada.physics {
-	import org.ascollada.core.DaeDocument;	
-	import org.ascollada.core.DaeEntity;	
-
+	
+	import org.ascollada.ASCollada;
+	import org.ascollada.core.DaeEntity;
+	
 	/**
 	 * 
 	 */
@@ -37,8 +38,8 @@ package org.ascollada.physics {
 		 * @param	node
 		 * @return
 		 */
-		public function DaeForceField(document:DaeDocument, node:XML = null):void {
-			super(document, node);
+		public function DaeForceField(node:XML = null):void {
+			super(node);
 		}
 		
 		/**

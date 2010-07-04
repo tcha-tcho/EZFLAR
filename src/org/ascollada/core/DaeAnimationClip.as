@@ -49,13 +49,13 @@ package org.ascollada.core
 		 * 
 		 * @return
 		 */
-		public function DaeAnimationClip( document : DaeDocument, node:XML = null ):void
+		public function DaeAnimationClip( node:XML = null ):void
 		{			
 			this.start = 0.0;
 			this.end = 0.0;
 			this.instance_animation = new Array();
 			
-			super( document, node );
+			super( node );
 		}
 				
 		/**
@@ -72,10 +72,9 @@ package org.ascollada.core
 			
 			Logger.log( "reading animation_clip: " + this.id );
 			
-			this.name = this.name && this.name.length ? this.name : this.id;
 			this.instance_animation = new Array();			
 			this.start = getAttributeAsFloat( node, ASCollada.DAE_START_ATTRIBUTE );
-			this.end = getAttributeAsFloat( node, ASCollada.DAE_END_ATTRIBUTE );
+			this.end = getAttributeAsFloat( node, ASCollada.DAE_START_ATTRIBUTE );
 			
 			var anims:XMLList = getNodeList( node, ASCollada.DAE_INSTANCE_ANIMATION_ELEMENT );
 			

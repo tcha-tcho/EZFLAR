@@ -23,10 +23,12 @@
  * OTHER DEALINGS IN THE SOFTWARE.
  */
  
-package org.ascollada.core {
+package org.ascollada.core
+{
 	import org.ascollada.ASCollada;
-	import org.ascollada.core.DaeEntity;	
-
+	import org.ascollada.core.DaeEntity;
+	import org.ascollada.utils.Logger;
+		
 	/**
 	 * 
 	 */
@@ -57,9 +59,9 @@ package org.ascollada.core {
 		 * @param	node
 		 * @return
 		 */
-		public function DaeAsset( document : DaeDocument, node:XML = null ):void
+		public function DaeAsset( node:XML = null ):void
 		{
-			super( document, node );
+			super( node );
 		}
 		
 		/**
@@ -122,11 +124,11 @@ package org.ascollada.core {
 			this.contributors = new Array();
 			var contribs:XMLList = getNodeList( asset, ASCollada.DAE_CONTRIBUTOR_ASSET_ELEMENT);
 			for each( var contributor:XML in contribs )
-				this.contributors.push( new DaeContributor(this.document, contributor) );
+				this.contributors.push( new DaeContributor(contributor) );
 				
 			if( !this.contributors.length )
 			{
-				var c:DaeContributor = new DaeContributor(this.document);
+				var c:DaeContributor = new DaeContributor();
 				c.author = "Tim Knip";
 				c.authoring_tool = "ASCollada";
 				c.comment = "";

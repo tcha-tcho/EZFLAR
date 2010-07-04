@@ -23,11 +23,17 @@
  * OTHER DEALINGS IN THE SOFTWARE.
  */
  
-package org.ascollada.core {
+package org.ascollada.core 
+{
 	import org.ascollada.ASCollada;
+	import org.ascollada.core.DaeAnimationCurve;
 	import org.ascollada.core.DaeEntity;
-	import org.ascollada.types.DaeAddressSyntax;	
-
+	import org.ascollada.core.DaeInput;
+	import org.ascollada.core.DaeSampler;
+	import org.ascollada.core.DaeSource;
+	import org.ascollada.types.DaeAddressSyntax;
+	import org.ascollada.utils.Logger;
+	
 	/**
 	 * 
 	 */
@@ -43,7 +49,16 @@ package org.ascollada.core {
 		public var syntax:DaeAddressSyntax;
 		
 		/** */
-		public var sampler : DaeSampler;
+		public var input:Array;
+		
+		/** */
+		public var output:Array;
+		
+		/** */
+		public var interpolations:Array;
+		
+		/** */
+		public var curves:Array;
 		
 		/**
 		 * 
@@ -51,9 +66,11 @@ package org.ascollada.core {
 		 *  
 		 * @return
 		 */
-		public function DaeChannel( document : DaeDocument, node:XML ):void
+		public function DaeChannel( node:XML ):void
 		{
-			super( document, node );
+			super( node );
+			
+			this.curves = new Array();
 		}
 		
 		/**
@@ -71,7 +88,20 @@ package org.ascollada.core {
 			this.source = getAttribute(node, ASCollada.DAE_SOURCE_ATTRIBUTE);
 			this.target = getAttribute(node, ASCollada.DAE_TARGET_ATTRIBUTE);
 			
-			this.syntax = DaeAddressSyntax.parse(this.target);
+			this.syntax = DaeAddressSyntax.parseAnimationTarget(this.target);
+		}
+		
+		/**
+		 * 
+		 * @param	dt
+		 */
+		public function update( dt:Number ):Array
+		{
+			if( !this.curves ) return null;
+			var arr:Array = new Array( this.curves.length );
+			for( var i:int = 0; i < this.curves.length; i++ )
+				arr[i] = this.curves[i].evaluate(dt);
+			return arr;
 		}
 	}
 }

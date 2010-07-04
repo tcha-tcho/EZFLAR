@@ -23,10 +23,12 @@
  * OTHER DEALINGS IN THE SOFTWARE.
  */
  
-package org.ascollada.core {
+package org.ascollada.core
+{	
 	import org.ascollada.ASCollada;
-	import org.ascollada.core.DaeEntity;	
-
+	import org.ascollada.core.DaeEntity;
+	import org.ascollada.utils.Logger;
+	
 	/**
 	 * 
 	 */
@@ -37,9 +39,9 @@ package org.ascollada.core {
 		/**
 		 * 
 		 */
-		public function DaeInstanceNode( document:DaeDocument, node:XML = null )
+		public function DaeInstanceNode( node:XML = null )
 		{
-			super( document, node );
+			super( node );
 		}
 		
 		/**

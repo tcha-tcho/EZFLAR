@@ -23,11 +23,12 @@
  * OTHER DEALINGS IN THE SOFTWARE.
  */
  
-package org.ascollada.fx {
-	import org.ascollada.core.DaeDocument;	
+package org.ascollada.fx
+{	
 	import org.ascollada.ASCollada;
-	import org.ascollada.core.DaeEntity;	
-
+	import org.ascollada.core.DaeEntity;
+	import org.ascollada.utils.Logger;
+	
 	public class DaeTexture extends DaeEntity
 	{
 		/** */
@@ -39,9 +40,9 @@ package org.ascollada.fx {
 		/**
 		 * 
 		 */
-		public function DaeTexture( document:DaeDocument, node:XML = null ):void
+		public function DaeTexture( node:XML = null ):void
 		{
-			super( document, node );
+			super( node );
 		}
 		
 		/**

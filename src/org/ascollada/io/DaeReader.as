@@ -23,35 +23,29 @@
  * OTHER DEALINGS IN THE SOFTWARE.
  */
  
-package org.ascollada.io {
-	import org.ascollada.core.DaeDocument;
-	import org.ascollada.namespaces.collada;
-	import org.ascollada.utils.Logger;
-	
+package org.ascollada.io
+{
+	import flash.errors.ScriptTimeoutError;
 	import flash.events.Event;
-	import flash.events.EventDispatcher;
+	import flash.events.EventDispatcher
 	import flash.events.IOErrorEvent;
 	import flash.events.ProgressEvent;
 	import flash.events.TimerEvent;
 	import flash.net.URLLoader;
 	import flash.net.URLRequest;
 	import flash.utils.Timer;
-
+	
+	import org.ascollada.core.DaeDocument;
+	import org.ascollada.utils.Logger;
+	
 	/**
-	 * @author Tim Knip
 	 * 
 	 */
 	public class DaeReader extends EventDispatcher
 	{
-		use namespace collada;
-		
 		public var document:DaeDocument;
 		
 		public var async:Boolean;
-		
-		public var parseMessage : String;
-		
-		public var baseUrl : String;
 		
 		/**
 		 * 
@@ -60,64 +54,77 @@ package org.ascollada.io {
 		{
 			this.async = async;
 			
-			_sourceTimer = new Timer(1);
-			_sourceTimer.addEventListener( TimerEvent.TIMER, loadNextSource );
+			_animTimer = new Timer(100);
+			_animTimer.addEventListener( TimerEvent.TIMER, loadNextAnimation );
+			_geomTimer = new Timer(100);
+			_geomTimer.addEventListener( TimerEvent.TIMER, loadNextGeometry );
 		}
 		
 		/**
 		 * 
 		 * @param	filename
 		 */
-		public function read( filename:String, fileSearchPaths : Array=null ):void
+		public function read( filename:String ):void
 		{
-			baseUrl = filename;
+			Logger.log( "reading: " + filename );
 			
-			if(filename.indexOf("/") != -1)
-			{
-				var parts : Array = filename.split("/");
-				parts.pop();
-				baseUrl = parts.join("/");
-			}
-			
-			Logger.log( "reading: " + baseUrl );
-			
-			this.parseMessage = "reading COLLADA";
-			
-			_fileSearchPaths = fileSearchPaths;
-			
-			if( _sourceTimer.running )
-				_sourceTimer.stop();
+			if( _animTimer.running )
+				_animTimer.stop();
 				
 			var loader:URLLoader = new URLLoader();
-			addListenersToLoader(loader);
+			loader.addEventListener( Event.COMPLETE, completeHandler,false, 0, true );
+			loader.addEventListener( ProgressEvent.PROGRESS, progressHandler,false, 0, true );
+			loader.addEventListener( IOErrorEvent.IO_ERROR, handleIOError,false, 0, true );
 			loader.load( new URLRequest(filename) );
 		}
 		
-		
 		/**
-		 * Loads the COLLADA document.
-		 * 
-		 * @param	data
-		 * @param fileSearchPaths
 		 * 
 		 * @return
 		 */
-		public function loadDocument( data:*, fileSearchPaths : Array=null ):DaeDocument
+		public function readAnimations():void
+		{
+			if( this.document.numQueuedAnimations > 0 )
+			{
+				Logger.log( "START READING #" +this.document.numQueuedAnimations+" ANIMATIONS" );
+				_animTimer.repeatCount = this.document.numQueuedAnimations + 1;
+				_animTimer.delay = 100;
+				_animTimer.start();
+			}
+			else
+				Logger.log( "NO ANIMATIONS" );
+		}
+		
+		/**
+		 * 
+		 * @return
+		 */
+		public function readGeometries():void
+		{
+			if( this.document.numQueuedGeometries > 0 )
+			{
+				Logger.log( "START READING #" +this.document.numQueuedGeometries+" GEOMETRIES" );
+				_geomTimer.repeatCount = this.document.numQueuedGeometries + 1;
+				_geomTimer.delay = 100;
+				_geomTimer.start();
+			}
+			else
+				Logger.log( "NO GEOMETRIES" );
+		}
+		
+		/**
+		 * 
+		 * @param	data
+		 * @return
+		 */
+		public function loadDocument( data:* ):DaeDocument
 		{
 			this.document = new DaeDocument( data, this.async );
-			this.document.baseUrl = this.baseUrl;
 			
-			if(fileSearchPaths && fileSearchPaths.length)
-			{
-				for(var i : int = 0; i < fileSearchPaths.length; i++)
-				{
-					this.document.addFileSearchPath(fileSearchPaths[i]);
-				}	
-			}
+			_numAnimations = this.document.numQueuedAnimations;
+			_numGeometries = this.document.numQueuedGeometries;
 			
-			this.parseMessage = "reading data sources";
-			
-			_sourceTimer.start();
+			dispatchEvent( new Event(Event.COMPLETE) );	
 			
 			return this.document;
 		}
@@ -132,79 +139,65 @@ package org.ascollada.io {
 			var loader:URLLoader = event.target as URLLoader;
 			
 			Logger.log( "complete!" );
-			removeListenersFromLoader(loader);
 
-			loadDocument( loader.data, _fileSearchPaths);
+			loadDocument( loader.data );
 		}
 		
 		private function progressHandler( event:ProgressEvent ):void
 		{
-			if(hasEventListener(ProgressEvent.PROGRESS))
-			{
-				dispatchEvent(event);
-			}
+			dispatchEvent(event);
 		}
 		
 		private function handleIOError( event:IOErrorEvent ):void
 		{
-			removeListenersFromLoader(URLLoader(event.target));
 			dispatchEvent(event);
 		}
 		
-		private function loadNextSource( event:TimerEvent ):void
+		/**
+		 * 
+		 * @param	event
+		 * @return
+		 */
+		private function loadNextAnimation( event:TimerEvent ):void
 		{
-			var num : int = this.document.waitingSources ? this.document.waitingSources.length : 0;
-			
-			if(this.document.readNextSource()) 
-			{
-				dispatchEvent(new ProgressEvent(ProgressEvent.PROGRESS, false, false, this.document.numSources-num, this.document.numSources));
+			if( !this.document.readNextAnimation() )
+			{				
+				_animTimer.stop();
+				dispatchEvent( new Event(Event.COMPLETE) );
 			}
-			else 
+			else
 			{
-				_sourceTimer.stop();
-				if(_sourceTimer.hasEventListener(TimerEvent.TIMER_COMPLETE))
-				{
-					_sourceTimer.removeEventListener(TimerEvent.TIMER_COMPLETE, loadNextSource);
-				}
-				
-				this.document.addEventListener(Event.COMPLETE, onImagesComplete);
-			
-				this.parseMessage = "reading images";
-				this.document.readNextImage();	
+				dispatchEvent( new ProgressEvent(ProgressEvent.PROGRESS, false, false, _numAnimations - this.document.numQueuedAnimations, _numAnimations) );
 			}
 		}
 		
 		/**
 		 * 
+		 * @param	event
+		 * @return
 		 */
-		private function onImagesComplete(event : Event) : void
+		private function loadNextGeometry( event:TimerEvent ):void
 		{
-			this.document.readAfterSources();
-			
-			if(this.document.hasEventListener(Event.COMPLETE))
+			if( !this.document.readNextGeometry() )
 			{
-				this.document.removeEventListener(Event.COMPLETE, onImagesComplete);
+				Logger.log( "geometries complete" );
+				
+				_geomTimer.stop();
+				dispatchEvent( new Event(Event.COMPLETE) );
 			}
-			
-			dispatchEvent( new Event(Event.COMPLETE) );	
+			else
+			{
+				Logger.log( "reading next geometry" );
+				dispatchEvent( new ProgressEvent(ProgressEvent.PROGRESS, false, false, _numGeometries - this.document.numQueuedGeometries, _numGeometries) );
+			}
 		}
 		
-		// added by harveysimon
-		private function addListenersToLoader(loader:URLLoader):void
-		{
-			loader.addEventListener( Event.COMPLETE, completeHandler );
-			loader.addEventListener( ProgressEvent.PROGRESS, progressHandler );
-			loader.addEventListener( IOErrorEvent.IO_ERROR, handleIOError );
-		}
+		private var _numAnimations:uint; 
 		
-		private function removeListenersFromLoader(loader:URLLoader):void
-		{
-			loader.removeEventListener( Event.COMPLETE, completeHandler );
-			loader.removeEventListener( ProgressEvent.PROGRESS, progressHandler );
-			loader.removeEventListener( IOErrorEvent.IO_ERROR, handleIOError );
-		}
+		private var _numGeometries:uint;
 		
-		private var _sourceTimer : Timer; 
-		private var _fileSearchPaths : Array;
+		private var _animTimer:Timer; 
+		
+		private var _geomTimer:Timer; 
 	}	
 }

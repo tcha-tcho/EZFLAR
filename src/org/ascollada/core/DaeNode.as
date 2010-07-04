@@ -23,14 +23,16 @@
  * OTHER DEALINGS IN THE SOFTWARE.
  */
  
-package org.ascollada.core {
+package org.ascollada.core 
+{
 	import org.ascollada.ASCollada;
 	import org.ascollada.core.DaeDocument;
 	import org.ascollada.core.DaeEntity;
 	import org.ascollada.core.DaeInstanceController;
 	import org.ascollada.core.DaeInstanceGeometry;
-	import org.ascollada.types.DaeTransform;	
-
+	import org.ascollada.types.DaeTransform;
+	import org.ascollada.utils.Logger;
+	
 	/**
 	 * 
 	 */
@@ -63,12 +65,6 @@ package org.ascollada.core {
 		/** */
 		public var channels:Array;
 		
-		/** */
-		public var hasMorphController : Boolean;
-		
-		/** */
-		public var hasSkinController : Boolean;
-		
 		private var _yUp:uint;
 		
 		/**
@@ -76,11 +72,11 @@ package org.ascollada.core {
 		 * @param	node
 		 * @return
 		 */
-		public function DaeNode( document:DaeDocument, node:XML = null, yUp:uint = 1 ):void
+		public function DaeNode( node:XML = null, yUp:uint = 1 ):void
 		{
 			_yUp = yUp;
 			
-			super( document, node );
+			super( node );
 		}
 
 		/**
@@ -126,18 +122,15 @@ package org.ascollada.core {
 			this.instance_nodes = new Array();
 			this.instance_cameras = new Array();
 			this.transforms = new Array();
-			this.hasMorphController = this.hasSkinController = false;
 			
 			if( node.localName() != ASCollada.DAE_NODE_ELEMENT )
 				throw new Error( "expected a '" + ASCollada.DAE_NODE_ELEMENT + "' element" );
 				
 			super.read( node );
-						
-			this.name = this.name && this.name.length ? this.name : this.id;
-					
+								
 			this.type = getAttribute(node, ASCollada.DAE_TYPE_ATTRIBUTE) == "JOINT" ? TYPE_JOINT : TYPE_NODE;
 
-			//var yUp:Boolean = (this._yUp == DaeDocument.Y_UP);
+			var yUp:Boolean = (this._yUp == DaeDocument.Y_UP);
 			var children:XMLList = node.children();
 			var num:int = children.length();
 			
@@ -186,7 +179,7 @@ package org.ascollada.core {
 						break;
 						
 					case ASCollada.DAE_NODE_ELEMENT:
-						this.nodes.push( new DaeNode(this.document, child, _yUp) );
+						this.nodes.push( new DaeNode(child, _yUp) );
 						break;
 					
 					case ASCollada.DAE_INSTANCE_CAMERA_ELEMENT:
@@ -194,18 +187,18 @@ package org.ascollada.core {
 						break;
 						
 					case ASCollada.DAE_INSTANCE_CONTROLLER_ELEMENT:
-						this.controllers.push( new DaeInstanceController( this.document, child ) );
+						this.controllers.push( new DaeInstanceController( child ) );
 						break;
 					
 					case ASCollada.DAE_INSTANCE_GEOMETRY_ELEMENT:
-						this.geometries.push( new DaeInstanceGeometry( this.document, child ) );
+						this.geometries.push( new DaeInstanceGeometry( child ) );
 						break;
 					
 					case ASCollada.DAE_INSTANCE_LIGHT_ELEMENT:
 						break;
 						
 					case ASCollada.DAE_INSTANCE_NODE_ELEMENT:
-						this.instance_nodes.push( new DaeInstanceNode(this.document, child));
+						this.instance_nodes.push( new DaeInstanceNode(child) );
 						break;
 						
 					case ASCollada.DAE_EXTRA_ELEMENT:
@@ -213,19 +206,6 @@ package org.ascollada.core {
 						
 					default:
 						break;
-				}
-			}
-			
-			for each(var controllerInstance:DaeInstanceController in this.controllers)
-			{
-				var controller : DaeController = this.document.controllers[ controllerInstance.url ];
-				if(controller && controller.morph) 
-				{
-					this.hasMorphController = true;
-				}
-				else if(controller && controller.skin)
-				{
-					this.hasSkinController = true;	
 				}
 			}
 		}

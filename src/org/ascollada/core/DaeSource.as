@@ -23,12 +23,14 @@
  * OTHER DEALINGS IN THE SOFTWARE.
  */
  
-package org.ascollada.core {
+package org.ascollada.core
+{
 	import org.ascollada.ASCollada;
 	import org.ascollada.core.DaeAccessor;
 	import org.ascollada.core.DaeEntity;
-	import org.ascollada.types.DaeArray;	
-
+	import org.ascollada.types.DaeArray;
+	import org.ascollada.utils.Logger;
+	
 	/**
  	 * 
 	 */
@@ -47,27 +49,11 @@ package org.ascollada.core {
 		 * 
 		 * @return
 		 */
-		public function DaeSource( document:DaeDocument, node:XML ):void
+		public function DaeSource( node:XML ):void
 		{
-			super( document, node );
+			super( node );
 		}
-
-		override public function destroy() : void 
-		{
-			super.destroy();
-			
-			if(this.accessor)
-			{
-				this.accessor.destroy();
-				this.accessor = null;
-			}
-			
-			if(this.values)
-			{
-				this.values = null;
-			}
-		}
-
+		
 		/**
 		 * 
 		 * @param	node
@@ -83,7 +69,7 @@ package org.ascollada.core {
 				
 			super.read( node );
 			
-			var data:DaeArray = new DaeArray(this.document, node);
+			var data:DaeArray = new DaeArray( node );
 			
 			var technique_common:XML = getNode( node, ASCollada.DAE_TECHNIQUE_COMMON_ELEMENT);
 			if( !technique_common )
@@ -97,7 +83,7 @@ package org.ascollada.core {
 			if( !acc )	
 				throw new Error("As a child of <source>, this element must contain exactly one <accessor> element.");
 				
-			this.accessor = new DaeAccessor(this.document, acc);
+			this.accessor = new DaeAccessor( acc );
 			
 			for( var i:int = 0; i < data.count; i += this.accessor.stride )
 			{
