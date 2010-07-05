@@ -30,14 +30,26 @@
  */
 package jp.nyatla.nyartoolkit.as3.core.types.stack 
 {
-	import jp.nyatla.nyartoolkit.as3.core.types.*;
-	public class NyARIntRectStack extends NyARObjectStack
+	import jp.nyatla.as3utils.NyAS3Utils;
+	import jp.nyatla.nyartoolkit.as3.NyARException;
+	import jp.nyatla.nyartoolkit.as3.core.types.NyARIntRect;
+//	import jp.nyatla.nyartoolkit.as3.core.types.*;
+
+	public class NyARIntRectStack // extends NyARObjectStack
 	{
+		protected var _items:Vector.<int>;
+		
+		protected var _length:int;
+		
 		public function NyARIntRectStack(i_length:int)
 		{
-			super(i_length);
+			//領域確保
+			this._items = createArray(i_length);
+			//使用中個数をリセット
+			this._length = 0;
+			return;
 		}
-		protected override function createArray(i_length:int):Vector.<*>
+		protected function createArray(i_length:int):Vector.<int>
 		{
 			var ret:Vector.<NyARIntRect>= new Vector.<NyARIntRect>(i_length);
 			for (var i:int =0; i < i_length; i++){
@@ -45,7 +57,93 @@ package jp.nyatla.nyartoolkit.as3.core.types.stack
 			}
 			return Vector.<int>(ret);
 		}
+		/**
+		 * 新しい領域を予約します。
+		 * @return
+		 * 失敗するとnull
+		 * @throws NyARException
+		 */
+		public function prePush():*
+		{
+			// 必要に応じてアロケート
+			if (this._length >= this._items.length){
+				return null;
+			}
+			// 使用領域を+1して、予約した領域を返す。
+			var ret:* = this._items[this._length];
+			this._length++;
+			return ret;
+		}
 		
+		/**
+		 * スタックを初期化します。
+		 * @param i_reserv_length
+		 * 使用済みにするサイズ
+		 * @return
+		 */
+		public function init(i_reserv_length:int):void
+		{
+			// 必要に応じてアロケート
+			if (i_reserv_length >= this._items.length){
+				throw new NyARException();
+			}
+			this._length=i_reserv_length;
+		}	
+		
+		/** 
+		 * 見かけ上の要素数を1減らして、そのオブジェクトを返します。
+		 * 返却したオブジェクトの内容は、次回のpushまで有効です。
+		 * @return
+		 */
+		public function pop():int
+		{
+			NyAS3Utils.assert(this._length>=1);
+			this._length--;
+			return this._items[this._length];
+		}
+		
+		/**
+		 * 見かけ上の要素数をi_count個減らします。
+		 * @param i_count
+		 * @return
+		 */
+		public function pops(i_count:int):void
+		{
+			NyAS3Utils.assert(this._length>=i_count);
+			this._length-=i_count;
+			return;
+		}
+		
+		/**
+		 * 配列を返します。
+		 * 
+		 * @return
+		 */
+		public function getArray():Vector.<int>
+		{
+			return this._items;
+		}
+		
+		public function getItem(i_index:int):int
+		{
+			return this._items[i_index];
+		}
+		
+		/**
+		 * 配列の見かけ上の要素数を返却します。
+		 * @return
+		 */
+		public function getLength():int
+		{
+			return this._length;
+		}
+		
+		/**
+		 * 見かけ上の要素数をリセットします。
+		 */
+		public function clear():void
+		{
+			this._length = 0;
+		}
 	}
-
 }

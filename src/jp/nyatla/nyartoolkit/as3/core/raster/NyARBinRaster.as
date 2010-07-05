@@ -56,12 +56,15 @@ package jp.nyatla.nyartoolkit.as3.core.raster
 				}
 				break;
 			case 2:
+				//(int,int)
 				override_NyARBinRaster2(int(args[0]), int(args[1]));
 				break;
 			case 3:
+				//(int,int,bool)
 				override_NyARBinRaster3(int(args[0]), int(args[1]),Boolean(args[2]));
 				break;
 			case 4:
+				//(int,int,int,bool)
 				override_NyARBinRaster4(int(args[0]), int(args[1]),int(args[2]),Boolean(args[3]));
 				break;
 			default:
@@ -80,21 +83,21 @@ package jp.nyatla.nyartoolkit.as3.core.raster
 		 */
 		protected function override_NyARBinRaster4(i_width:int, i_height:int, i_raster_type:int, i_is_alloc:Boolean):void
 		{
-			super.overload_NyARRaster_BasicClass(new NyARIntSize(i_width,i_height),i_raster_type);
+			super.overload_NyARRaster_BasicClass(i_width,i_height,i_raster_type);
 			if(!initInstance(this._size,i_raster_type,i_is_alloc)){
 				throw new NyARException();
 			}
 		}
 		protected function override_NyARBinRaster3(i_width:int, i_height:int, i_is_alloc:Boolean):void
 		{
-			super.overload_NyARRaster_BasicClass(new NyARIntSize(i_width,i_height),NyARBufferType.INT1D_BIN_8);
+			super.overload_NyARRaster_BasicClass(i_width,i_height,NyARBufferType.INT1D_BIN_8);
 			if(!initInstance(this._size,NyARBufferType.INT1D_BIN_8,i_is_alloc)){
 				throw new NyARException();
 			}
 		}
 		protected function override_NyARBinRaster2(i_width:int, i_height:int):void
 		{
-			super.overload_NyARRaster_BasicClass(new NyARIntSize(i_width,i_height),NyARBufferType.INT1D_BIN_8);
+			super.overload_NyARRaster_BasicClass(i_width,i_height,NyARBufferType.INT1D_BIN_8);
 			if(!initInstance(this._size,NyARBufferType.INT1D_BIN_8,true)){
 				throw new NyARException();
 			}

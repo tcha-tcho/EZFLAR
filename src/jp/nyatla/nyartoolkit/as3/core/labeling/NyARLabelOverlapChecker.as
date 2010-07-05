@@ -32,7 +32,7 @@ package jp.nyatla.nyartoolkit.as3.core.labeling
 {
 	public class NyARLabelOverlapChecker
 	{
-		private var _labels:Vector.<*>;
+		private var _labels:Vector.<NyARLabelInfo>;
 		private var _length:int;
 		/*
 		*/
@@ -40,7 +40,7 @@ package jp.nyatla.nyartoolkit.as3.core.labeling
 		{
 			this._labels = createArray(i_max_label);
 		}
-		protected function createArray(i_length:int):Vector.<*>
+		protected function createArray(i_length:int):Vector.<NyARLabelInfo>
 		{
 			return new Vector.<NyARLabelInfo>(i_length);
 		}
@@ -65,7 +65,7 @@ package jp.nyatla.nyartoolkit.as3.core.labeling
 		public function check(i_label:NyARLabelInfo):Boolean
 		{
 			// 重なり処理かな？
-			var label_pt:Vector.<*>  = this._labels;
+			var label_pt:Vector.<NyARLabelInfo>  = this._labels;
 			var px1:int = (int)(i_label.pos_x);
 			var py1:int = (int)(i_label.pos_y);
 			for (var i:int = this._length - 1; i >= 0; i--) {

@@ -38,13 +38,13 @@ package jp.nyatla.nyartoolkit.as3.core.squaredetect
 		{
 			super(i_length);
 		}
-		protected override function createArray(i_length:int):Vector.<*>
+		protected override function createArray(i_length:int):Vector.<Object>
 		{
 			var ret:Vector.<NyARSquare>= new Vector.<NyARSquare>(i_length);
 			for (var i:int =0; i < i_length; i++){
 				this._items[i] = new NyARSquare();
 			}
-			return Vector.<*>(ret);
+			return Vector.<Object>(ret);
 		}
 	}
 

@@ -22,18 +22,19 @@ package jp.nyatla.nyartoolkit.as3.core.raster.rgb {
 					//blank
 				}
 				break;
-			case 2:
-				if (args[0] is NyARIntSize && args[1] is int){
-					overload_NyARRgbRaster_BasicClass(NyARIntSize(args[0]),int(args[1]));
+			case 3:
+				//(int,int,int)
+				if ((args[0] is int)&& (args[1] is int)&& (args[2] is int)){
+					overload_NyARRgbRaster_BasicClass(int(args[0]),int(args[1]),int(args[2]));
 				}
 				break;
 			default:
 				throw new NyARException();
 			}
 		}
-		protected function overload_NyARRgbRaster_BasicClass(i_size:NyARIntSize,i_buffer_type:int):void
+		protected function overload_NyARRgbRaster_BasicClass(i_width:int,i_height:int,i_buffer_type:int):void
 		{
-			this._size= i_size;
+			this._size= new NyARIntSize(i_width,i_height);
 			this._buffer_type=i_buffer_type;
 		}
 		final public function getWidth():int

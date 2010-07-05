@@ -54,12 +54,15 @@ package jp.nyatla.nyartoolkit.as3.core.raster
 				}
 				break;
 			case 2:
+				//(int,int)
 				overload_NyARGrayscaleRaster2(int(args[0]), int(args[1]));
 				break;
 			case 3:
+				//(int,int,boolean)
 				overload_NyARGrayscaleRaster3(int(args[0]), int(args[1]),Boolean(args[2]));
 				break;
 			case 4:
+				//(int,int,int,boolean)
 				overload_NyARGrayscaleRaster4(int(args[0]), int(args[1]),int(args[2]),Boolean(args[3]));
 				break;
 			default:
@@ -69,14 +72,14 @@ package jp.nyatla.nyartoolkit.as3.core.raster
 
 		protected function overload_NyARGrayscaleRaster2(i_width:int,i_height:int):void
 		{
-			super.overload_NyARRaster_BasicClass(new NyARIntSize(i_width,i_height),NyARBufferType.INT1D_GRAY_8);
+			super.overload_NyARRaster_BasicClass(i_width,i_height,NyARBufferType.INT1D_GRAY_8);
 			if(!initInstance(this._size,NyARBufferType.INT1D_GRAY_8,true)){
 				throw new NyARException();
 			}
 		}	
 		protected function overload_NyARGrayscaleRaster3(i_width:int,i_height:int,i_is_alloc:Boolean):void
 		{
-			super.overload_NyARRaster_BasicClass(new NyARIntSize(i_width,i_height),NyARBufferType.INT1D_GRAY_8);
+			super.overload_NyARRaster_BasicClass(i_width,i_height,NyARBufferType.INT1D_GRAY_8);
 			if(!initInstance(this._size,NyARBufferType.INT1D_GRAY_8,i_is_alloc)){
 				throw new NyARException();
 			}
@@ -91,7 +94,7 @@ package jp.nyatla.nyartoolkit.as3.core.raster
 		 */
 		protected function overload_NyARGrayscaleRaster4(i_width:int, i_height:int, i_raster_type:int, i_is_alloc:Boolean):void
 		{
-			super.overload_NyARRaster_BasicClass(new NyARIntSize(i_width,i_height),i_raster_type);
+			super.overload_NyARRaster_BasicClass(i_width,i_height,i_raster_type);
 			if(!initInstance(this._size,i_raster_type,i_is_alloc)){
 				throw new NyARException();
 			}

@@ -391,13 +391,13 @@ final class RleInfoStack extends NyARObjectStack
 		super(i_length);
 		return;
 	}
-	protected override function createArray(i_length:int):Vector.<*>
+	protected override function createArray(i_length:int):Vector.<Object>
 	{
 		var ret:Vector.<RleInfo>= new Vector.<RleInfo>(i_length);
 		for (var i:int =0; i < i_length; i++){
 			ret[i] = new RleInfo();
 		}
-		return Vector.<*>(ret);
+		return Vector.<Object>(ret);
 	}
 }
 

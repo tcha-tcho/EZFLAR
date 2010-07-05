@@ -30,23 +30,31 @@
  */
 package jp.nyatla.nyartoolkit.as3.core.types.stack
 {	
-	import jp.nyatla.as3utils.*;
-	import jp.nyatla.nyartoolkit.as3.*;
+	import jp.nyatla.as3utils.NyAS3Utils;
+	import jp.nyatla.nyartoolkit.as3.NyARException;
+	
 	/**
 	 * スタック型の可変長配列。
 	 * 配列には実体を格納します。
+	 * 
+	 * 注意事項
+	 * JavaのGenericsの制限突破を狙ったものの、Vector.<*>では、不具合が多いため、Vector.<Object>に変更
+	 * いくつかの場所でエラーがでる場合がありますが、コンパイルオプションなどで、
+	 * strict = false を設定して回避してください。
+	 * 根本修正は次バージョン以降で対応する予定です。
 	 */
 	public class NyARObjectStack
 	{
-		protected var _items:Vector.<*>;
+		protected var _items:Vector.<Object>;
+		
 		protected var _length:int;
 
 		/**
 		 * 最大ARRAY_MAX個の動的割り当てバッファを準備する。
 		 * 
+		 * 
 		 * @param i_array
 		 * @param i_element_type
-		 * JavaのGenedicsの制限突破
 		 */
 		public function NyARObjectStack(i_length:int)
 		{
@@ -56,11 +64,17 @@ package jp.nyatla.nyartoolkit.as3.core.types.stack
 			this._length = 0;
 			return;
 		}
-		//この関数を上書きしてください。
-		protected function createArray(i_length:int):Vector.<*>
+		
+		/**
+		 * どのような配列(Vector)を格納するかを決める場所。
+		 * この関数を上書きしてください。
+		 * 
+		 */
+		protected function createArray(i_length:int):Vector.<Object>
 		{
 			throw new NyARException();
-		}		
+		}
+		
 		/**
 		 * 新しい領域を予約します。
 		 * @return
@@ -78,6 +92,7 @@ package jp.nyatla.nyartoolkit.as3.core.types.stack
 			this._length++;
 			return ret;
 		}
+		
 		/**
 		 * スタックを初期化します。
 		 * @param i_reserv_length
@@ -104,6 +119,7 @@ package jp.nyatla.nyartoolkit.as3.core.types.stack
 			this._length--;
 			return this._items[this._length];
 		}
+		
 		/**
 		 * 見かけ上の要素数をi_count個減らします。
 		 * @param i_count
@@ -114,20 +130,23 @@ package jp.nyatla.nyartoolkit.as3.core.types.stack
 			NyAS3Utils.assert(this._length>=i_count);
 			this._length-=i_count;
 			return;
-		}	
+		}
+		
 		/**
 		 * 配列を返します。
 		 * 
 		 * @return
 		 */
-		public function getArray():Vector.<*>
+		public function getArray():Vector.<Object>
 		{
 			return this._items;
 		}
+		
 		public function getItem(i_index:int):*
 		{
 			return this._items[i_index];
 		}
+		
 		/**
 		 * 配列の見かけ上の要素数を返却します。
 		 * @return
@@ -136,6 +155,7 @@ package jp.nyatla.nyartoolkit.as3.core.types.stack
 		{
 			return this._length;
 		}
+		
 		/**
 		 * 見かけ上の要素数をリセットします。
 		 */

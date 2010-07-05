@@ -41,7 +41,7 @@ package jp.nyatla.nyartoolkit.as3.core.raster
 		protected var _size:NyARIntSize;
 		private var _buffer_type:int;
 		/*
-		 * public function NyARRaster_BasicClass(i_size:NyARIntSize,i_buffer_type:int)
+		 * public function NyARRaster_BasicClass(int i_width,int i_height,int i_buffer_type)
 		 */
 		public function NyARRaster_BasicClass(...args:Array)
 		{
@@ -51,18 +51,18 @@ package jp.nyatla.nyartoolkit.as3.core.raster
 					//blank
 				}
 				break;
-			case 2:
-				if (args[0] is NyARIntSize && args[1] is int){
-					overload_NyARRaster_BasicClass(NyARIntSize(args[0]),int(args[1]));
+			case 3:
+				if (args[0] is int && args[1] is int && args[2] is int){
+					overload_NyARRaster_BasicClass(int(args[0]),int(args[1]),int(args[2]));
 				}
 				break;
 			default:
 				throw new NyARException();
 			}
 		}
-		protected function overload_NyARRaster_BasicClass(i_size:NyARIntSize,i_buffer_type:int):void
+		protected function overload_NyARRaster_BasicClass(i_width:int ,i_height:int,i_buffer_type:int):void
 		{
-			this._size= i_size;
+			this._size = new NyARIntSize(i_width, i_height);
 			this._buffer_type=i_buffer_type;
 		}
 

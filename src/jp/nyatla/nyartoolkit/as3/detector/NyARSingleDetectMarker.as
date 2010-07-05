@@ -95,7 +95,7 @@ public class NyARSingleDetectMarker extends NyARCustomSingleDetectMarker
 		switch(i_profile_id){
 		case PF_NYARTOOLKIT://default
 			patt_inst=new NyARColorPatt_Perspective_O2(i_ref_code.getWidth(), i_ref_code.getHeight(),4,25);
-			sqdetect_inst=new NyARSquareContourDetector_Rle(i_ref_param.getDistortionFactor(),i_ref_param.getScreenSize());
+			sqdetect_inst=new NyARSquareContourDetector_Rle(i_ref_param.getScreenSize());
 			transmat_inst=new NyARTransMat(i_ref_param);
 			break;
 		default:

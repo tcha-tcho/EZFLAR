@@ -28,55 +28,15 @@
  *	<airmail(at)ebony.plala.or.jp> or <nyatla(at)nyatla.jp>
  * 
  */
-package jp.nyatla.nyartoolkit.as3.core.types.matrix 
+package jp.nyatla.nyartoolkit.as3.detector
 {
-	public class NyARDoubleMatrix22 implements INyARDoubleMatrix
+	import jp.nyatla.nyartoolkit.as3.core.squaredetect.NyARSquare;
+	
+	internal class NyARDetectMarkerResult
 	{
-		public var m00:Number;
-		public var m01:Number;
-		public var m10:Number;
-		public var m11:Number;
-		/**
-		 * 遅いからあんまり使わないでね。
-		 */
-		public function setValue(i_value:Vector.<Number>):void
-		{
-			this.m00=i_value[0];
-			this.m01=i_value[1];
-			this.m10=i_value[3];
-			this.m11=i_value[4];
-			return;
-		}
-		/**
-		 * 遅いからあんまり使わないでね。
-		 */
-		public function getValue(o_value:Vector.<Number>):void
-		{
-			o_value[0]=this.m00;
-			o_value[1]=this.m01;
-			o_value[3]=this.m10;
-			o_value[4]=this.m11;
-			return;
-		}
-		public function inverse(i_src:NyARDoubleMatrix22):Boolean
-		{
-			var a11:Number,a12:Number,a21:Number,a22:Number;
-			a11=i_src.m00;
-			a12=i_src.m01;
-			a21=i_src.m10;
-			a22=i_src.m11;
-			var det:Number=a11*a22-a12*a21;
-			if(det==0){
-				return false;
-			}
-			det=1/det;
-			this.m00=a22*det;
-			this.m01=-a12*det;
-			this.m10=-a21*det;
-			this.m11=a11*det;
-			return true;
-		}	
+		public var arcode_id:int;
+		public var confidence:Number;
+	
+		public var square:NyARSquare=new NyARSquare();
 	}
-
-
 }

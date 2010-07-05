@@ -44,6 +44,18 @@ package jp.nyatla.nyartoolkit.as3.core
 		private var _width:int;
 		private var _height:int;
 		
+		public function NyARCode(i_width:int, i_height:int)
+		{
+			this._width = i_width;
+			this._height = i_height;
+			//空のラスタを4個作成
+			for(var i:int=0;i<4;i++){
+				this._color_pat[i]=new NyARMatchPattDeviationColorData(i_width,i_height);
+				this._bw_pat[i]=new NyARMatchPattDeviationBlackWhiteData(i_width,i_height);
+			}
+			return;
+		}
+		
 		public function getColorData(i_index:int):NyARMatchPattDeviationColorData
 		{
 			return this._color_pat[i_index];
@@ -61,17 +73,7 @@ package jp.nyatla.nyartoolkit.as3.core
 		{
 			return _height;
 		}
-		public function NyARCode(i_width:int, i_height:int)
-		{
-			this._width = i_width;
-			this._height = i_height;
-			//空のラスタを4個作成
-			for(var i:int=0;i<4;i++){
-				this._color_pat[i]=new NyARMatchPattDeviationColorData(i_width,i_height);
-				this._bw_pat[i]=new NyARMatchPattDeviationBlackWhiteData(i_width,i_height);
-			}
-			return;
-		}
+		
 		public function loadARPattFromFile(i_stream:String):void
 		{
 			NyARCodeFileReader.loadFromARToolKitFormFile(i_stream,this);
@@ -96,7 +98,7 @@ import jp.nyatla.nyartoolkit.as3.core.raster.*;
 import jp.nyatla.nyartoolkit.as3.core.rasterreader.*;
 import jp.nyatla.nyartoolkit.as3.core.types.*;
 	
-class NyARCodeFileReader
+internal class NyARCodeFileReader
 {
 	/**
 	 * ARコードファイルからデータを読み込んでo_codeに格納します。

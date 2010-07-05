@@ -97,7 +97,7 @@ package jp.nyatla.nyartoolkit.as3.processor
 			
 			var scr_size:NyARIntSize = i_param.getScreenSize();
 			// 解析オブジェクトを作る
-			this._square_detect = new NyARSquareContourDetector_Rle(i_param.getDistortionFactor(), scr_size);
+			this._square_detect = new NyARSquareContourDetector_Rle(scr_size);
 			this._transmat = new NyARTransMat(i_param);
 			this._tobin_filter=new NyARRasterFilter_ARToolkitThreshold(110,i_raster_type);
 

@@ -38,13 +38,13 @@ package jp.nyatla.nyartoolkit.as3.core.labeling.rlelabeling
 			super(i_length);
 			return;
 		}
-		protected override function createArray(i_length:int):Vector.<*>
+		protected override function createArray(i_length:int):Vector.<NyARLabelInfo>
 		{
 			var ret:Vector.<NyARRleLabelFragmentInfo>= new Vector.<NyARRleLabelFragmentInfo>(i_length);
 			for (var i:int =0; i < i_length; i++){
 				ret[i] = new NyARRleLabelFragmentInfo();
 			}
-			return Vector.<*>(ret);
+			return Vector.<NyARLabelInfo>(ret);
 		}	
 	}
 }

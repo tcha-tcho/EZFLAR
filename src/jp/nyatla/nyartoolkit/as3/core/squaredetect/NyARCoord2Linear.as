@@ -85,10 +85,10 @@ package jp.nyatla.nyartoolkit.as3.core.squaredetect
 				ed = (int) (i_ed - w1);
 			}else{
 				//頂点[i]から頂点[i+1]までの輪郭が、2区間に分かれているとき
-				w1 = (Number) (i_ed+i_cood_num-i_st+1)%i_cood_num * 0.05 + 0.5;
+				w1 = (Number) ((i_ed+i_cood_num-i_st+1)%i_cood_num) * 0.05 + 0.5;
 				//探索区間の決定
-				st = (int) (i_st+w1)%i_cood_num;
-				ed = (int) (i_ed+i_cood_num-w1)%i_cood_num;
+				st = ((int) (i_st+w1))%i_cood_num;
+				ed = ((int) (i_ed+i_cood_num-w1))%i_cood_num;
 			}
 			//探索区間数を確認
 			if(st<=ed){

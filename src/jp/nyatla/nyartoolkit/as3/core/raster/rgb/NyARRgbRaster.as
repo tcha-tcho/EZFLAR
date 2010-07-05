@@ -46,7 +46,7 @@ package jp.nyatla.nyartoolkit.as3.core.raster.rgb
 		 */
 		protected function overload_NyARRgbRaster4(i_width:int,i_height:int,i_raster_type:int,i_is_alloc:Boolean):void
 		{
-			super.overload_NyARRgbRaster_BasicClass(new NyARIntSize(i_width,i_height),i_raster_type);
+			super.overload_NyARRgbRaster_BasicClass(i_width,i_height,i_raster_type);
 			if(!initInstance(this._size,i_raster_type,i_is_alloc)){
 				throw new NyARException();
 			}
@@ -61,7 +61,7 @@ package jp.nyatla.nyartoolkit.as3.core.raster.rgb
 		 */
 		protected function overload_NyARRgbRaster3(i_width:int, i_height:int, i_raster_type:int):void
 		{
-			super.overload_NyARRgbRaster_BasicClass(new NyARIntSize(i_width,i_height),i_raster_type);
+			super.overload_NyARRgbRaster_BasicClass(i_width,i_height,i_raster_type);
 			if(!initInstance(this._size,i_raster_type,true)){
 				throw new NyARException();
 			}
