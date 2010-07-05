@@ -691,7 +691,8 @@ package com.transmote.flar {
 			try {
 				// ensure this.flarRaster has been initialized
 				if (this.flarRaster == null) {
-					this.flarRaster = new FLARRgbRaster_BitmapData(this.flarSource.sourceSize.width, this.flarSource.sourceSize.height);
+					//this.flarRaster = new FLARRgbRaster_BitmapData(this.flarSource.sourceSize.width, this.flarSource.sourceSize.height);
+					this.flarRaster = new FLARRgbRaster_BitmapData(this.thresholdSourceBitmap.bitmapData);
 					this.flarSource.source = BitmapData(this.flarRaster.getBuffer());
 				}
 			} catch (e:Error) {
@@ -1081,7 +1082,8 @@ package com.transmote.flar {
 			}
 			
 			try {
-				this.flarRaster = new FLARRgbRaster_BitmapData(this.flarSource.sourceSize.width, this.flarSource.sourceSize.height);
+				//this.flarRaster = new FLARRgbRaster_BitmapData(this.flarSource.sourceSize.width, this.flarSource.sourceSize.height);
+				this.flarRaster = new FLARRgbRaster_BitmapData(this.thresholdSourceBitmap.bitmapData);
 				this.flarSource.source = BitmapData(this.flarRaster.getBuffer());
 			} catch (e:Error) {
 				// this.flarSource not yet fully initialized

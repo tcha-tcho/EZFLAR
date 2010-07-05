@@ -19,7 +19,8 @@ package com.tchatcho.constructors {
 
 			startLoader();
 
-			this._mCollada = new DAE( true, "dae", true);//last true is the loop in the constructor
+/*			this._mCollada = new DAE( true, "dae", true);//last true is the loop in the constructor*/
+			this._mCollada = new DAE( true, "dae");//last true is the loop in the constructor
 			if (url2 != null){
 				var materialDAE:BitmapFileMaterial = new BitmapFileMaterial(url2, true); 
 				materialDAE.doubleSided = true;
