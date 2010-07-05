@@ -16,11 +16,11 @@
  * 
  */
 package com.tchatcho {
-	import com.transmote.flar.FLARCameraSource;
-	import com.transmote.flar.FLARLoaderSource;
+	import com.transmote.flar.source.FLARCameraSource;
+	import com.transmote.flar.source.FLARLoaderSource;
 	import com.transmote.flar.FLARManager;
 	import com.transmote.flar.marker.FLARMarkerEvent;
-	import com.transmote.flar.FLARPattern;
+	import com.transmote.flar.pattern.FLARPattern;
 	import com.transmote.utils.time.FramerateDisplay;
 
 	import flash.display.Sprite;
@@ -32,7 +32,7 @@ package com.tchatcho {
     import com.tchatcho.NoCamera;
 
 	//to handle objects from outside
-	import com.transmote.flar.FLARMarker;
+	import com.transmote.flar.marker.FLARMarker;
 	import org.papervision3d.*;
 	
 	//TODO: Loading all code, loading each model working
