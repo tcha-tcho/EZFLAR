@@ -27,14 +27,18 @@ package {
 				trace(">>>>>>>>>>>>> added: " + marker.marker.patternId);
 			});
 			_ezflar.onUpdated(function(marker:FLARMarkerEvent):void {
-				trace("["+ marker.marker.patternId+"]>>" +
-					  "X:" + marker.x() + " || " +
-					  "Y:" + marker.y() + " || " +
-					  "Z:" + marker.z() + " || " +
-					  "RX:" + marker.rotationX() + " || " +
-					  "RY:" + marker.rotationY() + " || " +
-					  "RZ:" + marker.rotationZ() + " || "
-				);	
+				/*
+					FIXME handle xyz and rotation outside accessing
+				*/
+				/*trace("["+ marker.marker.patternId+"]>>" +
+									  "X:" + marker.x() + " || " +
+									  "Y:" + marker.y() + " || " +
+									  "Z:" + marker.z() + " || " +
+									  "RX:" + marker.rotationX() + " || " +
+									  "RY:" + marker.rotationY() + " || " +
+									  "RZ:" + marker.rotationZ() + " || "
+								);	
+				*/
 			});
 			_ezflar.onRemoved(function(marker:FLARMarkerEvent):void {
 				trace(">>>>>>>>>>>>> removed: " + marker.marker.patternId);

@@ -112,11 +112,18 @@ package org.libspark.flartoolkit.support.pv3d {
 					q[i][2] * trans[2][3] +
 					q[i][3];
 			}
+			/*
+				FIXME the useProjectionMatrix do not exist in Camera3D, this cannot stay commented
+			*/
+			//this.useProjectionMatrix = true;
 			
-			this.useProjectionMatrix = true;
 			// 巣の GreatWhite のままだと _projection が Camera3D の private プロパティなのでエラる。
 			// ので protected とかにしてください。無理やり。害はない。つーかまーそれ以外に方法がない。
-			this._projection = new Matrix3D(m_projection);
+			
+			/*
+				FIXME again this _projection cannot be commented
+			*/
+			//this._projection = new Matrix3D(m_projection);
 		}
 		
 		override public function transformView(transform:Matrix3D=null):void {
@@ -124,7 +131,10 @@ package org.libspark.flartoolkit.support.pv3d {
 			// ただし CameraObject3D の transformView は必要なのでそこでやってる処理をここに移植。
 			this.eye.calculateMultiply(this.transform, _flipY);
 			this.eye.invert(); 
-			this.eye.calculateMultiply4x4(this._projection, this.eye);
+			/*
+				FIXME strange _projection internal variable accessor not exists in CAMERA3D
+			*/
+			//this.eye.calculateMultiply4x4(this._projection, this.eye);
 		}
 		
 		// これも Camera3D の private になってるのでここにコピー。Camera3D のんを protected とかに変更でもいいけど。

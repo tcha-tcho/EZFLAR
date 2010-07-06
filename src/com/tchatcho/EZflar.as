@@ -103,7 +103,7 @@ package com.tchatcho {
 				this.flarManager = new FLARManager(this._pathToResources+"flar/flarConfig.xml");
 				this.addChild(FLARCameraSource(this.flarManager.flarSource));
 
-				// begin listening for FLARMarkerEvents
+				// begin listening for FLARMarkerEvents 
 				this.flarManager.addEventListener(FLARMarkerEvent.MARKER_ADDED, this.onMarkerAdded);
 				this.flarManager.addEventListener(FLARMarkerEvent.MARKER_UPDATED, this.onMarkerUpdated);
 				this.flarManager.addEventListener(FLARMarkerEvent.MARKER_REMOVED, this.onMarkerRemoved);
