@@ -1,5 +1,5 @@
 /* 
- * EZFLAR v. 0.1 (beta)
+ * EZFLAR v. 0.2 (beta)
  * http://www.ezflar.com
  * Copyright 2009, tcha-tcho
  * --------------------------------------------------------------------------------
@@ -12,7 +12,7 @@
  * Bla bla bla bla this is under GPL... bla bla
  *
  *	http://www.tcha-tcho.com
- *  hey! fork this at http://www.github.com/
+ *  hey! fork this at http://github.com/tcha-tcho/EZFLAR
  * 
  */
 package com.tchatcho {
@@ -85,7 +85,7 @@ package com.tchatcho {
 			theStage.addChild(this);
 		};
 		private function init () :void {
-			trace("EZFLAR 0.2 (beta) is running!  :)\n keep calm and look busy!\n");
+			trace("EZFLAR 0.2 (CS4 version) is running!  :)\n keep calm and look crazy!\n");
 			if(Camera.names.length > 0) {
 				
 				//_camSource = new FLARCameraSource(_width, _height, _frameRate, _downSampleRatio)
@@ -101,7 +101,8 @@ package com.tchatcho {
 				// use Camera (default)
 				//this.flarManager = new FLARManager(_pathToResources + CAMERA_PARAMS_PATH, patterns,_camSource);
 				this.flarManager = new FLARManager(this._pathToResources+"flar/flarConfig.xml");
-				this.addChild(FLARCameraSource(this.flarManager.flarSource));
+				//this.addChild(FLARCameraSource(this.flarManager.flarSource));
+				this.addChild(Sprite(this.flarManager.flarSource));
 
 				// begin listening for FLARMarkerEvents 
 				this.flarManager.addEventListener(FLARMarkerEvent.MARKER_ADDED, this.onMarkerAdded);

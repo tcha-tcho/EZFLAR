@@ -104,10 +104,7 @@ package com.tchatcho {
 			private function updateModels () :void {
 				// update all Models containers according to the transformation matrix in their associated FLARMarkers
 				for (var i:int = 0; i < this._markersByPatternId.length; i++){
-					/*
-						FIXME all the update system has been changed... this have to be fixed
-					*/
-					//this._markersByPatternId[i][2].transform = FLARPVGeomUtils.translateFLARMatrixToPVMatrix(this._markersByPatternId[i][1].transformMatrix);
+					this._markersByPatternId[i][2].transform = FLARPVGeomUtils.convertFLARMatrixToPVMatrix(this._markersByPatternId[i][1].transformMatrix);
 				}
 			}
 			private function init () :void {

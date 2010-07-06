@@ -383,7 +383,7 @@ package com.transmote.flar.source {
 			this.camera.setMode(captureWidth, captureHeight, fps);
 			this.camera.addEventListener(ActivityEvent.ACTIVITY, this.onCameraActivity);
 			this.camera.addEventListener(StatusEvent.STATUS, this.onCameraStatus);
-			trace("[FLARManager] Initing camera '"+ this.camera.name +"'.");
+			trace("[EZFLAR::FM] Initing camera '"+ this.camera.name +"'.");
 			
 			if (this.video) {
 				// this is not the first attempt to create the camera,
@@ -420,7 +420,7 @@ package com.transmote.flar.source {
 			this.camera.removeEventListener(StatusEvent.STATUS, this.onCameraStatus);
 			this.cameraValidationTimeout.cancel();
 			
-			trace("[FLARManager] Initial camera validation complete...");
+			trace("[EZFLAR::FM] Initial camera validation complete...");
 			
 			this.cameraValidationBmpData = new BitmapData(this.displayBmpData.width, this.displayBmpData.height);
 			this.cameraValidationBmpData.draw(this.displayBmpData);
@@ -448,10 +448,10 @@ package com.transmote.flar.source {
 			currentCameraBmpData.dispose();
 			
 			if (difference < VALID_CAMERA_MIN_FRAME_DIFFERENCE) {
-				trace("[FLARManager] Secondary camera validation failed for camera '"+ this.camera.name +"'.  Reiniting camera.");
+				trace("[EZFLAR::FM] Secondary camera validation failed for camera '"+ this.camera.name +"'.  Reiniting camera.");
 				this.initCamera(this.camera.width, this.camera.height, this.camera.fps);
 			} else {
-				trace("[FLARManager] Validated camera '"+ this.camera.name +"'.");
+				trace("[EZFLAR::FM] Validated camera '"+ this.camera.name +"'.");
 			}
 		}
 		

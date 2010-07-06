@@ -9,7 +9,7 @@
 		sourceHeight="240"
 		displayWidth="640"
 		displayHeight="480"
-		framerate="30"
+		framerate="100"
 		downsampleRatio="1" />
 
 	<!-- miscellaneous FLARManager settings -->

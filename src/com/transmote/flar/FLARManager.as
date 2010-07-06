@@ -235,7 +235,7 @@ package com.transmote.flar {
 		}
 		public function set threshold (val:int) :void {
 			if (this.bVerbose && !this.thresholdAdapter) {
-				trace("[FLARManager] threshold: "+ val);
+				trace("[EZFLAR::FM] threshold: "+ val);
 			}
 			this._threshold = val;
 		}
@@ -260,7 +260,7 @@ package com.transmote.flar {
 		}
 		public function set thresholdAdapter (val:IThresholdAdapter) :void {
 			if (this.bVerbose) {
-				trace("[FLARManager] threshold adapter: "+ flash.utils.getQualifiedClassName(val));
+				trace("[EZFLAR::FM] threshold adapter: "+ flash.utils.getQualifiedClassName(val));
 			}
 			this._thresholdAdapter = val;
 		}
@@ -289,7 +289,7 @@ package com.transmote.flar {
 			this._sampleBlurring = val;
 			
 			if (this.bVerbose) {
-				trace("[FLARManager] sample blurring: "+ val);
+				trace("[EZFLAR::FM] sample blurring: "+ val);
 			}
 		}
 		
@@ -312,7 +312,7 @@ package com.transmote.flar {
 			}
 			
 			if (this.bVerbose) {
-				trace("[FLARManager] inverted: "+ val);
+				trace("[EZFLAR::FM] inverted: "+ val);
 			}
 			this._inverted = val;
 		}
@@ -328,7 +328,7 @@ package com.transmote.flar {
 		}
 		public function set mirrorDisplay (val:Boolean) :void {
 			if (this.bVerbose) {
-				trace("[FLARManager] mirror display: "+ val);
+				trace("[EZFLAR::FM] mirror display: "+ val);
 			}
 			
 			this._mirrorDisplay = val;
@@ -354,7 +354,7 @@ package com.transmote.flar {
 		public function set minimumLabelSize (val:Number) :void {
 			/*
 			if (this.bVerbose) {
-				trace("[FLARManager] minimum label size: "+ val);
+				trace("[EZFLAR::FM] minimum label size: "+ val);
 			}
 			FLARLabeling_BitmapData.minimumLabelSize = val;
 			*/
@@ -372,7 +372,7 @@ package com.transmote.flar {
 		}
 		public function set markerUpdateThreshold (val:Number) :void {
 			if (this.bVerbose) {
-				trace("[FLARManager] marker update threshold: "+ val);
+				trace("[EZFLAR::FM] marker update threshold: "+ val);
 			}
 			this._markerUpdateThreshold = val;
 		}
@@ -390,7 +390,7 @@ package com.transmote.flar {
 		}
 		public function set markerRemovalDelay (val:int) :void {
 			if (this.bVerbose) {
-				trace("[FLARManager] marker removal delay: "+ val);
+				trace("[EZFLAR::FM] marker removal delay: "+ val);
 			}
 			this._markerRemovalDelay = val;
 		}
@@ -405,7 +405,7 @@ package com.transmote.flar {
 		}
 		public function set markerExtrapolation (val:Boolean) :void {
 			if (this.bVerbose) {
-				trace("[FLARManager] marker extrapolation: "+ (val ? "ON" : "OFF"));
+				trace("[EZFLAR::FM] marker extrapolation: "+ (val ? "ON" : "OFF"));
 			}
 			this._markerExtrapolation = val;
 		}
@@ -422,7 +422,7 @@ package com.transmote.flar {
 		}
 		public function set smoothing (val:int) :void {
 			if (this.bVerbose) {
-				trace("[FLARManager] smoothing: "+ val);
+				trace("[EZFLAR::FM] smoothing: "+ val);
 			}
 			this._smoothing = val;
 		}
@@ -435,7 +435,7 @@ package com.transmote.flar {
 		}
 		public function set smoother (val:IFLARMatrixSmoother) :void {
 			if (this.bVerbose) {
-				trace("[FLARManager] smoother "+ flash.utils.getQualifiedClassName(val));
+				trace("[EZFLAR::FM] smoother "+ flash.utils.getQualifiedClassName(val));
 			}
 			this._smoother = val;
 		}
@@ -453,7 +453,7 @@ package com.transmote.flar {
 		}
 		public function set adaptiveSmoothingCenter (val:Number) :void {
 			if (this.bVerbose) {
-				trace("[FLARManager] adaptive smoothing center: "+ val);
+				trace("[EZFLAR::FM] adaptive smoothing center: "+ val);
 			}
 			this._adaptiveSmoothingCenter = val;
 		}
@@ -467,7 +467,7 @@ package com.transmote.flar {
 		}
 		public function set thresholdSourceDisplay (val:Boolean) :void {
 			if (this.bVerbose) {
-				trace("[FLARManager] threshold source display: "+ val);
+				trace("[EZFLAR::FM] threshold source display: "+ val);
 			}
 			
 			this._thresholdSourceDisplay = val;
@@ -535,7 +535,7 @@ package com.transmote.flar {
 			return this.bActive;
 		}
 		public function set isActive (val:Boolean) :void {
-			trace("[FLARManager] "+ (val ? "activated" : "deactivated"));
+			trace("[EZFLAR::FM] "+ (val ? "activated" : "deactivated"));
 			
 			if (val) {
 				this.activate();
@@ -552,7 +552,7 @@ package com.transmote.flar {
 		}
 		public function set verbose (val:Boolean) :void {
 			this.bVerbose = val;
-			trace("[FLARManager] verbosity "+ (val ? "ON" : "OFF"));
+			trace("[EZFLAR::FM] verbosity "+ (val ? "ON" : "OFF"));
 		}
 		//-----<END OTHER ACCESSORS>---------------------------------//
 		
@@ -940,7 +940,7 @@ package com.transmote.flar {
 		
 		private function onConfigLoaded (evt:Event) :void {
 			if (this.bVerbose) {
-				trace("[FLARManager] config file loaded.");
+				trace("[EZFLAR::FM] config file loaded.");
 			}
 		}
 		
@@ -950,7 +950,7 @@ package com.transmote.flar {
 		
 		private function onConfigParsed (evt:Event) :void {
 			if (this.bVerbose) {
-				trace("[FLARManager] config file parsed.");
+				trace("[EZFLAR::FM] config file parsed.");
 			}
 			
 			this.configLoader.harvestConfig(this);
