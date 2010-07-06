@@ -4,12 +4,12 @@
 package com.tchatcho {
 	//to flar
 	import com.transmote.flar.marker.FLARMarker;
-	import com.transmote.utils.geom.FLARPVGeomUtils;
+	import com.transmote.flar.utils.geom.FLARPVGeomUtils;
 	import flash.display.Sprite;
 	import flash.events.Event;
 
 	import org.libspark.flartoolkit.core.param.FLARParam;
-	import org.libspark.flartoolkit.pv3d.FLARCamera3D;
+	import org.libspark.flartoolkit.support.pv3d.FLARCamera3D;
 	
 
 	import org.papervision3d.lights.PointLight3D;
@@ -104,7 +104,7 @@ package com.tchatcho {
 			private function updateModels () :void {
 				// update all Models containers according to the transformation matrix in their associated FLARMarkers
 				for (var i:int = 0; i < this._markersByPatternId.length; i++){
-					this._markersByPatternId[i][2].transform = FLARPVGeomUtils.translateFLARMatrixToPVMatrix(this._markersByPatternId[i][1].transformMatrix);
+					//this._markersByPatternId[i][2].transform = FLARPVGeomUtils.translateFLARMatrixToPVMatrix(this._markersByPatternId[i][1].transformMatrix);
 				}
 			}
 			private function init () :void {

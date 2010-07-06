@@ -85,9 +85,11 @@ package com.tchatcho {
 			theStage.addChild(this);
 		};
 		private function init () :void {
-			trace("EZFLAR 0.1(beta) is running!  :)\n keep calm and look busy!\n");
+			trace("EZFLAR 0.2 (beta) is running!  :)\n keep calm and look busy!\n");
 			if(Camera.names.length > 0) {
-				_camSource = new FLARCameraSource(_width, _height, _frameRate, _downSampleRatio)
+				
+				//_camSource = new FLARCameraSource(_width, _height, _frameRate, _downSampleRatio)
+				
 				// build list of FLARPatterns for FLARToolkit to detect
 				this.patterns = new Array();
 				for (var i:int = 0; i < _objects.length; i++) {
@@ -97,7 +99,8 @@ package com.tchatcho {
 				}
 
 				// use Camera (default)
-				this.flarManager = new FLARManager(_pathToResources + CAMERA_PARAMS_PATH, patterns,_camSource);
+				//this.flarManager = new FLARManager(_pathToResources + CAMERA_PARAMS_PATH, patterns,_camSource);
+				this.flarManager = new FLARManager(this._pathToResources+"flar/flarConfig.xml");
 				this.addChild(FLARCameraSource(this.flarManager.flarSource));
 
 				// begin listening for FLARMarkerEvents
