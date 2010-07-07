@@ -101,8 +101,7 @@ package com.tchatcho {
 				// use Camera (default)
 				//this.flarManager = new FLARManager(_pathToResources + CAMERA_PARAMS_PATH, patterns,_camSource);
 				this.flarManager = new FLARManager(this._pathToResources+"flar/flarConfig.xml");
-				//this.addChild(FLARCameraSource(this.flarManager.flarSource));
-				this.addChild(Sprite(this.flarManager.flarSource));
+				this.addChild(FLARCameraSource(this.flarManager.flarSource));
 
 				// begin listening for FLARMarkerEvents 
 				this.flarManager.addEventListener(FLARMarkerEvent.MARKER_ADDED, this.onMarkerAdded);

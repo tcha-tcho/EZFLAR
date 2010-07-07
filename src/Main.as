@@ -16,16 +16,21 @@ package {
 			_symbols.push([["EZFLAR3.pat", "Example_GIF.gif"],["mygif"]]);// 0
 			_symbols.push([["EZFLAR4.pat", "url", "http://www.google.com.br"],["mygoogle"]]);// 0
 			_ezflar = new EZflar(_symbols);
-			_ezflar.mirror();
 			_ezflar.initializer(stage);
+			_ezflar.mirror();
+			_ezflar.viewFrameRate();
+
 			_ezflar.onStarted(function():void {
-				_ezflar.addModelTo([0,"Example_FLV.flv"], ["myflv"]);
-				_ezflar.addModelTo([0,"twitter", "ezflar"], ["mytwitter"]);
-				});
+				trace(">>>>>>>>>> started ");
+				//_ezflar.addModelTo([0,"Example_FLV.flv"], ["myflv"]);
+				//_ezflar.addModelTo([0,"twitter", "ezflar"], ["mytwitter"]);
+			});
+
 			_ezflar.onAdded(function(marker:FLARMarkerEvent):void {
 				_ezflar.getObject(0,"mygif").rotationX = 90;
 				trace(">>>>>>>>>>>>> added: " + marker.marker.patternId);
 			});
+
 			_ezflar.onUpdated(function(marker:FLARMarkerEvent):void {
 				/*
 					FIXME handle xyz and rotation outside accessing

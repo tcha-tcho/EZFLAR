@@ -25,7 +25,7 @@
 	
 	<!-- list of file paths of patterns for FLARToolkit to detect. -->
 	<!-- @resolution specifies the resolution at which the patterns were generated. -->
-	<patterns resolution="8" patternToBorderRatio="50" minConfidence="0.5">
+	<patterns resolution="16" patternToBorderRatio="50" minConfidence="0.5">
 		<pattern path="./resources/flar/patterns/EZFLAR0.pat" />
 		<pattern path="./resources/flar/patterns/EZFLAR1.pat" />
 		<pattern path="./resources/flar/patterns/EZFLAR2.pat" />
