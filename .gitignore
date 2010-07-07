@@ -1,5 +1,5 @@
 .DS_Store
-./src/EZFLAR.swf
+src/EZFLAR.swf
 
 #examples
 # Can ignore specific files
