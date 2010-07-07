@@ -193,6 +193,9 @@ package com.transmote.flar {
 			
 			this.initConfigLoader();
 			this.configLoader.cameraParamsPath = cameraParamsPath;
+			/*
+				FIXME this is not good: Vectors are 62% slower than Arrays :{  |  http://www.mikechambers.com/blog/2008/09/24/actioscript-3-vector-array-performance-comparison/
+			*/
 			this.configLoader.patterns = patterns;
 			this.init();
 		}

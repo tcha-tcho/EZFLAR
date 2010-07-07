@@ -274,7 +274,6 @@ package com.transmote.flar.utils {
 			for each (var pattern:XML in patternsXML.pattern) {
 				patternSize = NaN;
 				if (pattern.@size != "") { patternSize = parseFloat(pattern.@size); }
-				
 				this.patterns.push(new FLARPattern(pattern.@path, resolution, patternToBorderRatio, patternSize, minConfidence));
 			}
 		}

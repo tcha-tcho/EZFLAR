@@ -45,7 +45,7 @@ package com.tchatcho {
 		private static const PATTERN_PATH:String = "flar/patterns/";
 		private static const PATTERN_RESOLUTION:uint = 16;
 
-		private var patterns:Array;
+		private var patterns:Vector.<FLARPattern>;//arg! :( Arrays are quicker than vectors
 		private var flarManager:FLARManager;
 		private var flarLoader:FLARLoaderSource;
 		private var base_model:Base_model;
@@ -91,7 +91,7 @@ package com.tchatcho {
 				//_camSource = new FLARCameraSource(_width, _height, _frameRate, _downSampleRatio)
 				
 				// build list of FLARPatterns for FLARToolkit to detect
-				this.patterns = new Array();
+				this.patterns = new Vector.<FLARPattern>();
 				for (var i:int = 0; i < _objects.length; i++) {
 					if(_objects[i][0][2] == undefined){_objects[i][0][2] = null}
 					if(_objects[i][1] == undefined){_objects[i][1] = null}
@@ -99,8 +99,12 @@ package com.tchatcho {
 				}
 
 				// use Camera (default)
-				//this.flarManager = new FLARManager(_pathToResources + CAMERA_PARAMS_PATH, patterns,_camSource);
-				this.flarManager = new FLARManager(this._pathToResources+"flar/flarConfig.xml");
+				this.flarManager = new FLARManager();
+
+				//this.flarManager.initManual(_pathToResources + CAMERA_PARAMS_PATH, patterns,_camSource);
+				//this.flarManager = new FLARManager(this._pathToResources+"flar/flarConfig.xml");
+				this.flarManager.initManual(_pathToResources + CAMERA_PARAMS_PATH, this.patterns);
+
 				this.addChild(FLARCameraSource(this.flarManager.flarSource));
 
 				// begin listening for FLARMarkerEvents 
