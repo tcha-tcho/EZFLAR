@@ -233,7 +233,7 @@ package com.transmote.flar.source {
 			this.sampleBitmap.height = this.displayHeight;
 			
 			// uncomment to view downsampled video sent to FLARToolkit
-//			this.addChild(this.sampleBitmap);
+/*			this.addChild(this.sampleBitmap);*/
 		}
 		
 		/**

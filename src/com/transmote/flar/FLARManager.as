@@ -747,6 +747,7 @@ package com.transmote.flar {
 		}
 		
 		private function detectMarkers () :void {
+			trace("detectMarkers");
 			var numFoundMarkers:int = 0;
 			try {
 				// detect marker(s)

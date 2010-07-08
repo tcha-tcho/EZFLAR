@@ -10,11 +10,12 @@ package {
 		private var _symbols:Array = new Array();
 
 		public function Main() {
-			_symbols.push([["EZFLAR0.pat", "text", "1234567890123456789012345678901234567890"],["mytext"]]);// 0
-			_symbols.push([["EZFLAR1.pat", "Example_PNG.png"],["mypng"]]);// 0
-			_symbols.push([["EZFLAR2.pat", "Example_JPG.jpg"],["myjpg"]]);// 0
-			_symbols.push([["EZFLAR3.pat", "Example_GIF.gif"],["mygif"]]);// 0
-			_symbols.push([["EZFLAR4.pat", "url", "http://www.google.com.br"],["mygoogle"]]);// 0
+			_symbols.push([["EZFLAR0.pat", "cube"]]);// 0
+			//_symbols.push([["EZFLAR0.pat", "text", "1234567890123456789012345678901234567890"],["mytext"]]);// 0
+			//_symbols.push([["EZFLAR1.pat", "Example_PNG.png"],["mypng"]]);// 0
+			//_symbols.push([["EZFLAR2.pat", "Example_JPG.jpg"],["myjpg"]]);// 0
+			//_symbols.push([["EZFLAR3.pat", "Example_GIF.gif"],["mygif"]]);// 0
+			//_symbols.push([["EZFLAR4.pat", "url", "http://www.google.com.br"],["mygoogle"]]);// 0
 			_ezflar = new EZflar(_symbols);
 			_ezflar.initializer(stage);
 			_ezflar.mirror();
@@ -27,7 +28,7 @@ package {
 			});
 
 			_ezflar.onAdded(function(marker:FLARMarkerEvent):void {
-				_ezflar.getObject(0,"mygif").rotationX = 90;
+				//_ezflar.getObject(0,"mygif").rotationX = 90;
 				trace(">>>>>>>>>>>>> added: " + marker.marker.patternId);
 			});
 

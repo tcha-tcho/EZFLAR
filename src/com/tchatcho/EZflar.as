@@ -166,6 +166,7 @@ package com.tchatcho {
 			}
 		}
 		private function onMarkerAdded (evt:FLARMarkerEvent) :void {
+			trace("marker added");
 			this.base_model.addMarker(evt.marker);
 			if (_funcAdded != null){
 				_funcAdded(evt);
@@ -173,12 +174,14 @@ package com.tchatcho {
 		}
 
 		private function onMarkerUpdated (evt:FLARMarkerEvent) :void {
+			trace("marker updated");
 			if (_funcUpdated != null){
 				_funcUpdated(evt);
 			}
 		}
 
 		private function onMarkerRemoved (evt:FLARMarkerEvent) :void {
+			trace("marker removed");
 			this.base_model.removeMarker(evt.marker);
 			if (_funcRemoved != null){
 				_funcRemoved(evt);
@@ -190,6 +193,7 @@ package com.tchatcho {
 		}
 
 		public function onAdded(func:Function):void{
+			trace("marker added");
 			_funcAdded = func;
 		}
 
@@ -197,6 +201,7 @@ package com.tchatcho {
 			_funcUpdated = func;
 		}
 		public function onRemoved(func:Function):void{
+			trace("marker removed");
 			_funcRemoved = func;
 		}
 		public function addModelTo(set1:Array, set2:Array = null):void{
