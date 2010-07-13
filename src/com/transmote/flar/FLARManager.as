@@ -681,6 +681,9 @@ package com.transmote.flar {
 		
 		//-----<MARKER DETECTION>----------------------------//
 		private function onEnterFrame (evt:Event) :void {
+			/*
+				FIXME updateSource() test is not passing... this will not fire detection
+			*/
 			if (!this.updateSource()) { return; }
 			
 			if (!this.bActive) { return; }
@@ -694,9 +697,12 @@ package com.transmote.flar {
 			try {
 				// ensure this.flarRaster has been initialized
 				if (this.flarRaster == null) {
+					/*
+						FIXME flarRaster is not working ... is getting a error ... someone here is null
+					*/
 					//this.flarRaster = new FLARRgbRaster_BitmapData(this.flarSource.sourceSize.width, this.flarSource.sourceSize.height);
 					this.flarRaster = new FLARRgbRaster_BitmapData(this.thresholdSourceBitmap.bitmapData);
-					this.flarSource.source = BitmapData(this.flarRaster.getBuffer());
+					//this.flarSource.source = BitmapData(this.flarRaster.getBuffer());
 				}
 			} catch (e:Error) {
 				// this.flarSource not yet fully initialized
